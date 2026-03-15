@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Replace with real Google Apps Script URL
+// Google Apps Script URL for form submissions
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbydW60qra8EUNSgcWa0MRmKmWqrhZtYn8phv92__w5ARwKuWpXRzppRgz0f9Hjo4SMChw/exec";
 
 export async function POST(request: Request) {
