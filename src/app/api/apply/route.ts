@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Replace with real Google Apps Script URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/a/macros/a1media.info/s/AKfycbxeFd_hlBlES7tuxeRak8mSQZ7m0MQ2ykiVMFCCkSZxCf2P40ZbR-DYo6XPuJBrNyuuSw/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbydW60qra8EUNSgcWa0MRmKmWqrhZtYn8phv92__w5ARwKuWpXRzppRgz0f9Hjo4SMChw/exec";
 
 export async function POST(request: Request) {
   try {

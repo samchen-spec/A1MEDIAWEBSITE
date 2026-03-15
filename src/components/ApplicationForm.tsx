@@ -10,7 +10,7 @@ const incomeOptions = ["$0 – $1k", "$1k – $3k", "$3k – $5k", "$5k – $10k
 const hoursOptions = ["10 – 20", "20 – 30", "30 – 40", "40+"];
 
 interface FormData {
-  fullName: string;
+  name: string;
   email: string;
   phone: string;
   role: string;
@@ -18,12 +18,12 @@ interface FormData {
   experience: string;
   portfolio: string;
   income: string;
-  hours: string;
-  whyJoin: string;
+  availability: string;
+  whyA1: string;
 }
 
 const initialData: FormData = {
-  fullName: "",
+  name: "",
   email: "",
   phone: "",
   role: "",
@@ -31,8 +31,8 @@ const initialData: FormData = {
   experience: "",
   portfolio: "",
   income: "",
-  hours: "",
-  whyJoin: "",
+  availability: "",
+  whyA1: "",
 };
 
 export default function ApplicationForm({ preselectedRole }: { preselectedRole?: string }) {
@@ -54,7 +54,7 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
 
   const validate = useCallback((): boolean => {
     switch (step) {
-      case 0: if (!data.fullName.trim()) { setError("Please enter your name."); return false; } break;
+      case 0: if (!data.name.trim()) { setError("Please enter your name."); return false; } break;
       case 1: if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { setError("Please enter a valid email."); return false; } break;
       case 2: if (!data.phone.trim()) { setError("Please enter your phone number."); return false; } break;
       case 3: if (!data.role) { setError("Please select a role."); return false; } break;
@@ -62,8 +62,8 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
       case 5: if (!data.experience.trim()) { setError("Please tell us about your experience."); return false; } break;
       case 6: if (!data.portfolio.trim()) { setError("Please enter a link or type N/A."); return false; } break;
       case 7: if (!data.income) { setError("Please select an option."); return false; } break;
-      case 8: if (!data.hours) { setError("Please select an option."); return false; } break;
-      case 9: if (!data.whyJoin.trim()) { setError("Please answer this question."); return false; } break;
+      case 8: if (!data.availability) { setError("Please select an option."); return false; } break;
+      case 9: if (!data.whyA1.trim()) { setError("Please answer this question."); return false; } break;
     }
     setError("");
     return true;
@@ -81,7 +81,20 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
   const submit = async () => {
     setSubmitting(true);
     try {
-      const res = await fetch("/api/apply", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      const payload = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        role: data.role,
+        location: data.location,
+        experience: data.experience,
+        portfolio: data.portfolio,
+        income: data.income,
+        availability: data.availability,
+        whyA1: data.whyA1,
+      };
+      console.log("📋 Application payload:", JSON.stringify(payload, null, 2));
+      const res = await fetch("/api/apply", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       if (!res.ok) throw new Error("Failed to submit");
       setSubmitted(true);
     } catch {
@@ -131,9 +144,9 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
 
     if (step === TOTAL_STEPS) {
       const fields = [
-        ["Name", data.fullName], ["Email", data.email], ["Phone", data.phone], ["Role", data.role],
+        ["Name", data.name], ["Email", data.email], ["Phone", data.phone], ["Role", data.role],
         ["Location", data.location], ["Experience", data.experience], ["Portfolio", data.portfolio],
-        ["Monthly Income", data.income], ["Hours/Week", data.hours], ["Why A1 Media", data.whyJoin],
+        ["Monthly Income", data.income], ["Availability", data.availability], ["Why A1 Media", data.whyA1],
       ];
       return (
         <motion.div key="review" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3, ease: "easeInOut" }}>
@@ -158,7 +171,7 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
     }
 
     const questions: { label: string; sub?: string; field: keyof FormData; type: "text" | "email" | "tel" | "textarea" | "select" | "url"; options?: string[] }[] = [
-      { label: "What's your full name?", field: "fullName", type: "text" },
+      { label: "What's your full name?", field: "name", type: "text" },
       { label: "What's your email address?", field: "email", type: "email" },
       { label: "What's your phone number?", sub: "WhatsApp preferred", field: "phone", type: "tel" },
       { label: "Which role are you applying for?", field: "role", type: "select", options: roleOptions },
@@ -166,8 +179,8 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
       { label: "Tell us about your relevant experience", field: "experience", type: "textarea" },
       { label: "Link to your portfolio or past work", sub: "Loom, website, etc. Type N/A if you don't have one", field: "portfolio", type: "url" },
       { label: "What's your current monthly income?", field: "income", type: "select", options: incomeOptions },
-      { label: "How many hours per week are you available?", field: "hours", type: "select", options: hoursOptions },
-      { label: "Why do you want to work with A1 Media?", field: "whyJoin", type: "textarea" },
+      { label: "How many hours per week are you available?", field: "availability", type: "select", options: hoursOptions },
+      { label: "Why do you want to work with A1 Media?", field: "whyA1", type: "textarea" },
     ];
 
     const q = questions[step];
