@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --accent: #D4A853;
+  --accent-glow: #E5BD6A;
+  --accent-light: #F0D998;
+  --accent-rgb: 212, 168, 83;
+  --blue: #3B82F6;
+  --blue-rgb: 59, 130, 246;
+  --bg-primary: #000000;
+  --bg-secondary: #0A0A0A;
+  --bg-card: #111111;
+  --bg-card-hover: #161616;
+  --text-primary: #FFFFFF;
+  --text-body: #9CA3AF;
+  --text-muted: #6B7280;
+  --border: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', serif;
+}
+
+@layer utilities {
+  .text-body { color: var(--text-body); }
+  .text-muted { color: var(--text-muted); }
+  .text-secondary { color: var(--text-body); }
+  .border-custom { border-color: var(--border); }
+}
+
+/* Gold glow pulse for CTAs */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0px rgba(var(--accent-rgb), 0); }
+  50% { box-shadow: 0 0 24px rgba(var(--accent-rgb), 0.4); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Card hover with glow — enhanced */
+.card-dark {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.card-dark:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(var(--blue-rgb), 0.25);
+  box-shadow: 0 0 40px rgba(var(--blue-rgb), 0.1), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Blue glow card — enhanced */
+@keyframes border-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(var(--blue-rgb), 0.04); }
+  50% { box-shadow: 0 0 30px rgba(var(--blue-rgb), 0.08); }
+}
+.card-blue-glow {
+  background: var(--bg-card);
+  border: 1px solid rgba(var(--blue-rgb), 0.12);
+  border-radius: 20px;
+  animation: border-glow-pulse 4s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.card-blue-glow:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(var(--blue-rgb), 0.3);
+  box-shadow: 0 0 50px rgba(var(--blue-rgb), 0.12), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Silk animated background */
+@keyframes silk {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.silk-bg {
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #0a0a0a 20%,
+    #0d0d12 40%,
+    #08080f 60%,
+    #0a0a0a 80%,
+    #000000 100%
+  );
+  background-size: 400% 400%;
+  animation: silk 15s ease infinite;
+}
+
+/* Ticker */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 35s linear infinite;
+  will-change: transform;
+}
+
+.card-hover {
+  transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+}
+.card-hover:hover {
+  transform: scale(1.02);
+  border-color: rgba(var(--accent-rgb), 0.2);
+}
