@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "A1 Media — Creator Partnerships",
+  title: "A1 Media — We Help, Fund & Launch Creators",
   description:
-    "We turn your audience into a 7-figure business. You just create content. $0 upfront, revenue share only.",
+    "We craft established creators a high-ticket offer from start to finish — then we pay for the ad spend ourselves to scale it. No retainers. Revenue share only.",
 };
 
 export default function RootLayout({

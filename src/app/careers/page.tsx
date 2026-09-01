@@ -133,10 +133,10 @@ const roles = [
 ];
 
 const tagColors: Record<string, string> = {
-  Content: "#3B82F6",
-  Sales: "#D4A853",
-  Marketing: "#A78BFA",
-  Operations: "#4ADE80",
+  Content: "#E3C08D",
+  Sales: "#FFD84D",
+  Marketing: "#FFE894",
+  Operations: "#C9A227",
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -153,11 +153,11 @@ function scrollToForm() {
 function GlowCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
     <div className="card-blue-glow p-10 h-full min-h-[240px]">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#3B82F6]/10 text-[#3B82F6] mb-7">
+      <div className="flex h-12 w-12 items-center justify-center border border-accent/30 text-accent mb-7">
         {icon}
       </div>
-      <h3 className="font-serif text-xl font-bold leading-snug text-white">{title}</h3>
-      <p className="mt-4 text-[15px] leading-relaxed text-[#9CA3AF]">{description}</p>
+      <h3 className="font-serif text-[24px] leading-snug text-[#FAFAFA]">{title}</h3>
+      <p className="mt-4 text-[16px] leading-[1.7] text-[#B5B1AC] font-light">{description}</p>
     </div>
   );
 }
@@ -173,22 +173,22 @@ export default function CareersPage() {
   };
 
   return (
-    <main className="bg-black text-white">
+    <main className="bg-[#0A0A0A] text-white">
 
       {/* ══ HERO ══════════════════════════════════════════════════════════ */}
       <section className="silk-bg pt-32 pb-20 md:pb-28">
         <div className="mx-auto max-w-[800px] px-6 text-center">
           <AnimatedSection>
-            <SectionLabel>CAREERS AT A1 MEDIA</SectionLabel>
+            <SectionLabel>Careers at A1 Media</SectionLabel>
           </AnimatedSection>
           <AnimatedSection>
-            <h1 className="mt-6 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-hero">
+            <h1 className="mt-6 font-serif font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-hero">
               Build the Machine Behind the{" "}
               <span className="text-accent">Creator Economy</span>
             </h1>
           </AnimatedSection>
           <AnimatedSection>
-            <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-[#9CA3AF]">
+            <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-[#B5B1AC]">
               We&apos;re hiring operators, closers, creatives, and builders who want to work at the intersection of content, sales, and scale.
             </p>
           </AnimatedSection>
@@ -196,7 +196,7 @@ export default function CareersPage() {
             <div className="mt-10">
               <button
                 onClick={scrollToRoles}
-                className="inline-block bg-accent text-black font-semibold px-8 py-4 rounded-full hover:bg-accent-glow transition-all duration-200 text-sm tracking-wide animate-glow-pulse"
+                className="inline-block bg-accent text-black font-medium px-8 py-4 rounded-full hover:bg-accent-glow transition-all duration-200 text-[13px] uppercase tracking-[0.18em]"
               >
                 See Open Roles
               </button>
@@ -206,14 +206,14 @@ export default function CareersPage() {
       </section>
 
       {/* ══ WHY A1 MEDIA ═════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 bg-[#0A0A0A]">
+      <section className="py-20 md:py-28 px-6 bg-[#0D0C0B]">
         <div className="max-w-[950px] mx-auto">
           <AnimatedSection className="text-center">
-            <SectionLabel>WHY A1 MEDIA?</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-hero">
+            <SectionLabel>The upside</SectionLabel>
+            <h2 className="mt-5 font-serif font-normal text-3xl md:text-4xl lg:text-5xl tracking-hero">
               Why A1 Media?
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#9CA3AF]">
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#B5B1AC]">
               Join a team that&apos;s building the future of creator monetisation.
             </p>
           </AnimatedSection>
@@ -232,11 +232,11 @@ export default function CareersPage() {
       <section className="py-20 md:py-28 px-6">
         <div className="max-w-[950px] mx-auto">
           <AnimatedSection className="text-center">
-            <SectionLabel>CORE VALUES</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-hero">
+            <SectionLabel>How we work</SectionLabel>
+            <h2 className="mt-5 font-serif font-normal text-3xl md:text-4xl lg:text-5xl tracking-hero">
               Our Core Values
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#9CA3AF]">
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#B5B1AC]">
               These aren&apos;t just words on a wall. They drive every decision we make.
             </p>
           </AnimatedSection>
@@ -252,18 +252,18 @@ export default function CareersPage() {
       </section>
 
       {/* ══ OPEN ROLES ═══════════════════════════════════════════════════ */}
-      <section id="open-roles" className="py-20 md:py-28 px-6 bg-[#0A0A0A]">
+      <section id="open-roles" className="py-20 md:py-28 px-6 bg-[#0D0C0B]">
         <div className="max-w-[1000px] mx-auto">
           <AnimatedSection className="text-center">
-            <SectionLabel>OPEN ROLES</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-hero">
+            <SectionLabel>Open roles</SectionLabel>
+            <h2 className="mt-5 font-serif font-normal text-3xl md:text-4xl lg:text-5xl tracking-hero">
               Find Your Role
             </h2>
           </AnimatedSection>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {roles.map((role, i) => {
-              const color = tagColors[role.tag] || "#3B82F6";
+              const color = tagColors[role.tag] || "#E3C08D";
               return (
                 <AnimatedSection key={role.title} delay={i * 0.05}>
                   <div className="card-dark p-7 h-full flex flex-col">
@@ -275,21 +275,21 @@ export default function CareersPage() {
                         {role.tag}
                       </span>
                     </div>
-                    <h3 className="font-serif text-xl font-bold text-white">{role.title}</h3>
-                    <p className="mt-2 text-sm font-medium text-[#6B7280]">{role.meta}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-[#9CA3AF]">{role.description}</p>
+                    <h3 className="font-serif font-normal text-xl text-white">{role.title}</h3>
+                    <p className="mt-2 text-sm font-medium text-[#7A756D]">{role.meta}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-[#B5B1AC]">{role.description}</p>
                     <ul className="mt-5 space-y-2.5 flex-1">
                       {role.requirements.map((req) => (
                         <li key={req} className="flex items-start gap-2.5">
                           <span className="mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
-                          <span className="text-sm leading-relaxed text-[#6B7280]">{req}</span>
+                          <span className="text-sm leading-relaxed text-[#7A756D]">{req}</span>
                         </li>
                       ))}
                     </ul>
                     <div className="mt-6 pt-2">
                       <button
                         onClick={() => handleApply(role.title)}
-                        className="inline-flex items-center gap-2 bg-accent text-black px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:bg-accent-glow"
+                        className="inline-flex items-center gap-2 bg-accent text-black px-6 py-3 rounded-full text-[12px] uppercase tracking-[0.16em] font-medium transition-all duration-200 hover:bg-accent-glow"
                       >
                         Apply Now
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -309,11 +309,11 @@ export default function CareersPage() {
       <section id="apply-form" className="py-20 md:py-28 px-6">
         <div className="mx-auto max-w-[700px]">
           <AnimatedSection className="text-center">
-            <SectionLabel>APPLY</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-hero">
+            <SectionLabel>Apply</SectionLabel>
+            <h2 className="mt-5 font-serif font-normal text-3xl md:text-4xl lg:text-5xl tracking-hero">
               Start Your Application
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#9CA3AF]">
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#B5B1AC]">
               Takes about 2 minutes. One question at a time.
             </p>
           </AnimatedSection>
@@ -328,12 +328,12 @@ export default function CareersPage() {
       <section className="silk-bg py-24 md:py-32 px-6">
         <div className="max-w-[700px] mx-auto text-center">
           <AnimatedSection className="flex flex-col items-center gap-7">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold leading-[1.08] tracking-hero">
+            <h2 className="font-serif font-normal text-3xl md:text-5xl leading-[1.08] tracking-hero">
               Ready to Build Something That Actually Matters?
             </h2>
             <button
               onClick={scrollToForm}
-              className="inline-block bg-accent text-black font-semibold px-10 py-4 rounded-full hover:bg-accent-glow transition-all duration-200 text-sm tracking-wide animate-glow-pulse"
+              className="inline-block bg-accent text-black font-medium px-10 py-4 rounded-full hover:bg-accent-glow transition-all duration-200 text-[13px] uppercase tracking-[0.18em]"
             >
               Apply Now
             </button>

@@ -28,3 +28,7 @@ npm-debug.log*
 
 # claude
 .claude/
+tsconfig.tsbuildinfo
+
+# source assets (cropped versions live in public/)
+client photos/

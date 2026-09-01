@@ -125,17 +125,17 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
     exit: (d: number) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
   };
 
-  const inputClass = "w-full bg-[#111] border border-white/6 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-[#3B82F6]/50 transition-colors font-sans";
+  const inputClass = "w-full bg-[#121110] border border-white/6 rounded-sm px-5 py-4 text-[#FAFAFA] text-base placeholder:text-white/25 focus:outline-none focus:border-[#E3C08D]/50 transition-colors font-sans";
 
   const renderStep = () => {
     if (submitted) {
       return (
         <motion.div key="done" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold mb-6 bg-accent/15 text-accent">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full text-2xl mb-6 bg-accent/15 text-accent">
             ✓
           </div>
-          <h3 className="font-serif text-2xl md:text-3xl font-bold">Thanks for Applying!</h3>
-          <p className="mt-4 text-base leading-relaxed text-[#9CA3AF]">
+          <h3 className="font-serif font-normal text-2xl md:text-3xl">Thanks for Applying!</h3>
+          <p className="mt-4 text-base leading-relaxed text-[#B5B1AC]">
             We&apos;ll review your application and get back to you within 48 hours.
           </p>
         </motion.div>
@@ -150,7 +150,7 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
       ];
       return (
         <motion.div key="review" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3, ease: "easeInOut" }}>
-          <h3 className="font-serif text-xl md:text-2xl font-bold mb-6">Review Your Application</h3>
+          <h3 className="font-serif font-normal text-xl md:text-2xl mb-6">Review Your Application</h3>
           <div className="space-y-4">
             {fields.map(([label, value]) => (
               <div key={label} className="flex flex-col gap-1">
@@ -188,8 +188,8 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
     return (
       <motion.div key={step} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3, ease: "easeInOut" }}>
         <p className="text-xs font-semibold uppercase tracking-wider mb-2 text-accent">{step + 1} of {TOTAL_STEPS}</p>
-        <h3 className="font-serif text-xl md:text-2xl font-bold leading-snug">{q.label}</h3>
-        {q.sub && <p className="mt-1 text-sm text-[#6B7280]">{q.sub}</p>}
+        <h3 className="font-serif font-normal text-xl md:text-2xl leading-snug">{q.label}</h3>
+        {q.sub && <p className="mt-1 text-sm text-[#7A756D]">{q.sub}</p>}
 
         <div className="mt-6">
           {q.type === "select" && q.options ? (
@@ -200,8 +200,8 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
                   onClick={() => updateField(q.field, opt)}
                   className={`text-left px-5 py-4 rounded-xl border transition-all duration-200 text-sm font-medium ${
                     data[q.field] === opt
-                      ? "border-[#3B82F6]/40 bg-[#3B82F6]/10 text-[#3B82F6]"
-                      : "border-white/6 bg-[#111] text-white/60 hover:border-white/15"
+                      ? "border-[#E3C08D]/40 bg-[#E3C08D]/10 text-[#E3C08D]"
+                      : "border-white/6 bg-[#121110] text-white/60 hover:border-white/15"
                   }`}
                 >
                   {opt}
@@ -226,8 +226,8 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
           </button>
         </div>
 
-        <p className="mt-4 text-xs hidden md:block text-[#4B5563]">
-          Press <span className="font-semibold text-[#6B7280]">Enter ↵</span> to continue
+        <p className="mt-4 text-xs hidden md:block text-[#5F5A53]">
+          Press <span className="font-semibold text-[#7A756D]">Enter ↵</span> to continue
         </p>
       </motion.div>
     );
@@ -236,7 +236,7 @@ export default function ApplicationForm({ preselectedRole }: { preselectedRole?:
   const progress = submitted ? 100 : ((step + 1) / (TOTAL_STEPS + 1)) * 100;
 
   return (
-    <div className="rounded-2xl overflow-hidden bg-[#0A0A0A]" style={{ border: "1px solid rgba(255,255,255,0.06)" }}>
+    <div className="rounded-2xl overflow-hidden bg-[#0D0C0B]" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
       <div className="h-1 w-full bg-white/5">
         <div className="h-full transition-all duration-500 ease-out bg-accent" style={{ width: `${progress}%` }} />
       </div>

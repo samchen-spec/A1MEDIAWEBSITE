@@ -1,143 +1,130 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionLabel from "@/components/SectionLabel";
 import CTAButton from "@/components/CTAButton";
 import AnimatedSection from "@/components/AnimatedSection";
+import ScheduleCall from "@/components/ScheduleCall";
+import SectionCTA from "@/components/SectionCTA";
+import VSL from "@/components/VSL";
+import FounderPhoto from "@/components/FounderPhoto";
+import { SystemDiagram, FundingFlow, CeilingChart, WeekArc } from "@/components/Infographics";
 
-// ─── CountUp ────────────────────────────────────────────────────────────────────
+// ─── Clients ────────────────────────────────────────────────────────────────────
 
-function CountUp({ target, prefix = "", suffix = "" }: { target: number; prefix?: string; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v));
-  const [displayVal, setDisplayVal] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, target, { duration: 2, ease: "easeOut" });
-      return controls.stop;
-    }
-  }, [isInView, count, target]);
-
-  useEffect(() => {
-    const unsubscribe = rounded.on("change", (v) => setDisplayVal(v));
-    return unsubscribe;
-  }, [rounded]);
-
-  return <span ref={ref}>{prefix}{displayVal}{suffix}</span>;
-}
-
-// ─── Data ───────────────────────────────────────────────────────────────────────
-
-const stats = [
-  { label: "Revenue Generated", value: 500, prefix: "$", suffix: "K+" },
-  { label: "Active Partners", value: 6, prefix: "", suffix: "+" },
-  { label: "Niches Dominated", value: 3, prefix: "", suffix: "" },
-  { label: "Revenue-Share Aligned", value: 100, prefix: "", suffix: "%" },
+const clients = [
+  { name: "Angus Jobson", role: "Testosterone Coach", image: "/clients/angus-jobson.jpg" },
+  { name: "Zaki Abanifi", role: "Dating Coach", image: "/clients/zaki-abanifi.jpg" },
+  { name: "David James Seed", role: "Lust Coach", image: "/clients/david-james-seed.jpg" },
 ];
 
-const services = [
+// ─── Founders ───────────────────────────────────────────────────────────────────
+// Drop the headshots at these paths and they appear automatically; until then
+// each card falls back to a monogram.
+const founders = [
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-      </svg>
-    ),
-    title: "Offer Creation",
-    desc: "We research your market and build an offer so good your audience would feel stupid saying no.",
+    name: "Sam Chen",
+    title: "Co-Founder & CMO | Head Of Marketing",
+    image: "/founders/sam-chen.jpg",
+    points: [
+      "Been in the info space for 2+ years",
+      "Generated $1,000,000 in client revenue in the past 12 months",
+      "Currently based in Northern Ireland",
+    ],
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
-      </svg>
-    ),
-    title: "Funnel Building",
-    desc: "Landing pages, sales pages, checkout flows, upsell sequences — the entire machine, built by us.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" />
-      </svg>
-    ),
-    title: "Paid Advertising",
-    desc: "We manage all paid acquisition — creatives, targeting, split testing, and scaling at 3–10x ROAS.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-      </svg>
-    ),
-    title: "Sales Infrastructure",
-    desc: "A trained team of closers integrated into your business. They handle the calls so you don't have to.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-2.625 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5" />
-      </svg>
-    ),
-    title: "Content Strategy",
-    desc: "We help you create content that converts — not just entertains. Strategy aligned with monetisation.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
-      </svg>
-    ),
-    title: "Automation & Tech",
-    desc: "CRM, pipeline tracking, appointment scheduling, reporting dashboards — the backend that scales.",
+    name: "Wiktor Domasat",
+    title: "Co-Founder & CSO | Head Of Sales",
+    image: "/founders/wiktor-domasat.jpg",
+    points: [
+      "Cash collected $2,500,000 as a closer",
+      "Now managing our portfolio's sales teams",
+      "Currently based in Ireland",
+    ],
   },
 ];
 
-const doingItYourself = [
-  "You spend months guessing what offer to build",
-  "You try to learn funnels, email sequences, and ad strategy on top of creating content",
-  "You hire freelancers who don't understand your audience",
-  "Your ad spend comes out of your own pocket with no guarantee",
-  "Your organic audience sits there unmonetised",
+// ─── How it works ───────────────────────────────────────────────────────────────
+
+const howItWorks = [
+  { num: "01", title: "We craft the high-ticket offer", desc: "Research, positioning, price, promise and delivery. One premium offer built end to end that makes sense coming from you specifically — not a rebrand of what you're already selling." },
+  { num: "02", title: "We market it and design the funnel", desc: "Landing pages, sales pages, VSL scripts, email and DM sequences, checkout and CRM. The whole path from attention to payment, built and owned by us, running under your brand." },
+  { num: "03", title: "Organic coaching and strategy", desc: "We work with you on the content that actually drives buyers — what to post, what to say, and how to move an audience from watching to booking without turning your feed into an advert." },
+  { num: "04", title: "Done-for-you long-form scripting", desc: "Our team writes the long-form: hooks, angles, scripts and ideation calendars. You show up and deliver it. The content engine stops depending on you having a good idea that week." },
+  { num: "05", title: "We scale with ads — with our own money", desc: "Once the offer converts organically, our capital goes into the ad account. Creative, testing, media buying, scaling. Not your budget. Ours." },
+  { num: "06", title: "We staff setters, closers and support", desc: "Hired from our own network of trained sales talent and placed into your business. They take the calls, handle the objections and close, so selling never becomes your job." },
+  { num: "07", title: "Access to our private financing", desc: "Partners get access to financing options we've built relationships for — the kind of facility an individual creator can't get on their own, used to push spend further." },
 ];
 
-const theA1Way = [
-  "We research your market and build a no-brainer offer for you",
-  "We build every funnel, sequence, and sales system from scratch",
-  "We integrate a sales team of A-players who close on your behalf",
-  "We manage all paid acquisition and scale your campaigns",
-  "We monetise your organic audience first so cash flow starts immediately",
+// ─── The traditional model ──────────────────────────────────────────────────────
+
+const traditionalModel = [
+  { label: "Brand deals", body: "You get paid once for renting your audience to somebody else's business. They keep the customer, the data and the equity. Next month you start from zero and negotiate again." },
+  { label: "Affiliate offers", body: "You send your best buyers to someone else's asset for a slice of the sale. The list, the repeat revenue and the backend all sit with the person who owns the offer. You're their acquisition channel." },
+  { label: "Low-ticket ebooks & digital products", body: "A $27 product needs enormous volume to matter, and the margin can't fund ads or a sales team. So it stays capped at whatever your organic reach happens to be that month." },
+  { label: "Low-ticket communities", body: "A $49/month community means churn, endless support and a business that punishes you for growing. You end up running a community full time instead of running a company." },
 ];
+
+// ─── Launch roadmap ─────────────────────────────────────────────────────────────
+
+const roadmap = [
+  { day: "Day 1", title: "Audit and offer architecture", desc: "We go through your audience, numbers and current products, then lock the offer: promise, price, delivery model and guarantee." },
+  { day: "Day 2", title: "Messaging and sales assets", desc: "Positioning, VSL script, sales page copy and the objection map your closers will work from." },
+  { day: "Day 3", title: "Funnel built", desc: "Landing page, sales page, booking flow, checkout and email sequences live and tested end to end." },
+  { day: "Day 4", title: "Sales team placed", desc: "Setters and closers pulled from our network, onboarded onto your offer and trained on your audience." },
+  { day: "Day 5", title: "Systems and tracking", desc: "CRM, pipeline, reporting and attribution wired up so every call and every dollar is accounted for." },
+  { day: "Day 6", title: "Content and organic plan", desc: "Launch content scripted and scheduled, with the ideation calendar that carries the first 30 days." },
+  { day: "Day 7", title: "Launch — and we fund the ads", desc: "The offer goes live to your organic audience. Once the numbers hold, our capital goes into the ad account." },
+];
+
+// ─── Qualifier ──────────────────────────────────────────────────────────────────
+
+const notForYou = [
+  "You're starting from zero, or the audience is still small",
+  "You want a course that teaches you to do this yourself",
+  "You want a brand-deal agent, not a business",
+  "You'd rather keep selling a low-ticket product on volume",
+  "You don't want your name on a premium offer",
+];
+
+const forYou = [
+  "You have an established organic brand and real reach",
+  "You're selling a community, a low-ticket course, or taking brand deals",
+  "You know what you've built is bigger than what it's returning",
+  "You want one premium offer instead of five small ones",
+  "You'll keep making content and let us run everything behind it",
+];
+
+// ─── FAQ ────────────────────────────────────────────────────────────────────────
 
 const faqItems = [
-  { question: "What's the catch?", answer: "There's no catch. We make money when you make money — a percentage of backend revenue. If we don't generate results, we don't get paid. We take this approach because we're confident in our systems and because it aligns our incentives perfectly with yours." },
-  { question: "What kind of creators do you work with?", answer: "We work with influencers and creators across a range of niches — we've had the most success in health, trading, and info products. The common thread is that our partners have an engaged audience and either want to monetise it properly for the first time or want to scale an existing offer well beyond where it is now." },
-  { question: "What if I don't have an offer yet?", answer: "That's fine. Most of our partners don't come to us with a polished offer. We handle the full offer creation process — market research, positioning, pricing, and packaging. We build you something your audience actually wants to buy." },
-  { question: "How long does it take to see results?", answer: "We start with monetising your organic audience, so you can see revenue coming in within the first few weeks. Paid scaling typically begins once the organic systems are generating consistent cash flow and the offer is proven." },
-  { question: "How do you get paid exactly?", answer: "We take a percentage of backend revenue generated through the systems we build and the ad campaigns we run. If the partnership doesn't generate revenue, we make nothing." },
-  { question: "What's my involvement day to day?", answer: "Your primary job is creating content and providing content assets when needed. We handle everything else — offer creation, funnel building, ad management, sales team, backend automation." },
-  { question: "How selective are you with partnerships?", answer: "Very. We invest our own time and resources into every partnership, so we only work with creators where we see a clear path to 7 figures. If we don't think we can deliver, we'll tell you upfront." },
+  { question: "How is all of this free?", answer: "There's no retainer, no setup fee and no ad budget from you. We're paid a percentage of the revenue the offer produces, so we earn after you do. The marketing, sales, operations and backend cost you nothing upfront because we're betting on the outcome rather than billing for the work." },
+  { question: "You actually pay for the ad spend?", answer: "Yes. Once the offer is proven with your organic audience, we fund the paid campaigns out of our own pocket — creative, testing and scaling. We're not asking you to risk your own money to find out whether this works." },
+  { question: "What counts as an established brand?", answer: "An audience that already knows you, watches you and responds to you — built organically over time, not bought. If you're monetising with a community, a low-ticket product or brand deals and you feel capped by it, that's the profile. If you're still building the audience, we're not the right partner yet." },
+  { question: "What if I don't have an offer yet?", answer: "Most partners don't. That's the work. We handle research, positioning, pricing, packaging and delivery, and build the offer from scratch. You bring the audience and the credibility; we build the thing they buy." },
+  { question: "Do I have to stop taking brand deals?", answer: "No. Most partners keep them. The difference is that brand deals become the smaller line on the invoice instead of the whole business, because the offer produces revenue every month whether or not a sponsor turns up." },
+  { question: "How much of my time does this take?", answer: "You keep making content and show up for the assets we need — a handful of filming sessions and sign-off on the offer. Everything else, from funnels to closers to ad management, sits with us." },
+  { question: "How selective are you?", answer: "Very, because we're spending our own capital on every partnership. We take a small number of creators at a time, and if we can't see a clear path to seven figures we'll tell you on the call rather than take you on." },
 ];
 
 // ─── Accordion ──────────────────────────────────────────────────────────────────
 
 function AccordionItem({ question, answer, isOpen, onToggle }: { question: string; answer: string; isOpen: boolean; onToggle: () => void }) {
   return (
-    <div className="border-b border-white/5">
-      <button onClick={onToggle} className="w-full flex items-center justify-between gap-4 py-6 text-left">
-        <span className="text-white font-medium text-base">{question}</span>
-        <svg
-          width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className="shrink-0 text-accent transition-transform duration-300"
-          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+    <div className="border-b border-white/[0.08]">
+      <button onClick={onToggle} className="group flex w-full items-center justify-between gap-6 py-7 text-left">
+        <span className="font-serif text-[22px] text-[#FAFAFA] transition-colors duration-200 group-hover:text-accent md:text-[27px]">
+          {question}
+        </span>
+        <span
+          className="shrink-0 text-2xl leading-none text-accent transition-transform duration-300"
+          style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
+          aria-hidden
         >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
+          +
+        </span>
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
@@ -148,7 +135,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: { question: strin
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-sm leading-relaxed text-[#9CA3AF]">{answer}</p>
+            <p className="pb-8 pr-10 text-[17px] font-light leading-[1.8] text-[#B5B1AC]">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -162,194 +149,365 @@ export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="bg-[#0A0A0A] text-[#FAFAFA]">
 
-      {/* ══ HERO ══════════════════════════════════════════════════════════ */}
-      <section className="silk-bg min-h-screen flex flex-col items-center justify-center text-center px-6 py-28">
-        <div className="w-full max-w-[900px] mx-auto flex flex-col items-center">
-          <AnimatedSection className="flex flex-col items-center gap-7">
-            <SectionLabel>FOR CREATORS & INFLUENCERS WHO WANT TO SCALE</SectionLabel>
+      {/* ══ 1. HERO + VSL + APPLICATION ═══════════════════════════════════ */}
+      <section className="silk-bg px-6 pb-24 pt-[132px] md:pb-28 md:pt-[184px]">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
+          <AnimatedSection className="flex flex-col items-center">
+            <SectionLabel>For influencers with an established brand</SectionLabel>
 
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-hero">
-              We Scale Creators to 7 Figures.{" "}
-              <span className="text-accent">They Just Create Content.</span>
+            <h1 className="mt-7 max-w-[920px] font-serif text-[28px] leading-[1.2] tracking-hero text-balance sm:text-[34px] md:text-[40px] lg:text-[46px]">
+              We&apos;ll build <span className="mark-underline">every system</span> for{" "}
+              <span className="mark-box">100% FREE</span> so you can monetise your audience, then
+              put <span className="italic text-gold">our own money</span> into ads to scale it
             </h1>
 
-            <p className="text-base md:text-lg max-w-[620px] leading-relaxed text-[#9CA3AF]">
-              A1 Media is the growth engine behind high-ticket influencers and coaches. We build the offer, the funnel, the ads, and the sales team — and we only get paid when you get paid.
-            </p>
+            <div className="rule-accent mt-11" />
+          </AnimatedSection>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
-              <CTAButton href="/how-it-works" variant="secondary">
-                See How It Works
-              </CTAButton>
-              <CTAButton href="https://cal.com/sam-chen-veeqlv/discovery" external variant="primary">
-                Apply to Partner
-              </CTAButton>
+          <AnimatedSection className="vsl-wrap mt-[72px]">
+            <VSL />
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-11">
+            <CTAButton href="#schedule">Schedule My Call</CTAButton>
+          </AnimatedSection>
+
+          {/* Application sits directly under the video */}
+          <div id="schedule" className="mt-16 w-full scroll-mt-28 md:mt-24">
+            <AnimatedSection>
+              <h2 className="font-serif text-[32px] leading-[1.14] tracking-hero md:text-[46px]">
+                Schedule A Call
+              </h2>
+            </AnimatedSection>
+
+            <AnimatedSection className="mt-10">
+              <ScheduleCall />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 2. CLIENTS ════════════════════════════════════════════════════ */}
+      <section id="clients" className="scroll-mt-24 border-y border-white/[0.08] bg-[#0D0C0B] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1100px]">
+          <AnimatedSection className="text-center">
+            <h2 className="font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              Some of our current clients
+            </h2>
+          </AnimatedSection>
+
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+            {clients.map((c, i) => (
+              <AnimatedSection key={c.name} delay={i * 0.1}>
+                <figure className="group">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121110]">
+                    <Image
+                      src={c.image}
+                      alt={c.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, 340px"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{ background: "linear-gradient(180deg, transparent 55%, rgba(10,10,10,0.85) 100%)" }}
+                      aria-hidden
+                    />
+                  </div>
+                  <figcaption className="mt-5 text-center">
+                    <p className="font-serif text-[26px] leading-tight text-[#FAFAFA]">{c.name}</p>
+                    <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-accent">{c.role}</p>
+                  </figcaption>
+                </figure>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <SectionCTA />
+        </div>
+      </section>
+
+      {/* ══ 3. ABOUT THE FOUNDERS ═════════════════════════════════════════ */}
+      <section id="founders" className="scroll-mt-24 px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
+          <AnimatedSection className="text-center">
+            <SectionLabel>About the founders</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              Who you&apos;re actually working with
+            </h2>
+          </AnimatedSection>
+
+          <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-8">
+            {founders.map((f, i) => (
+              <AnimatedSection key={f.name} delay={i * 0.1}>
+                <div className="panel h-full p-8 md:p-10">
+                  <FounderPhoto src={f.image} name={f.name} />
+
+                  <h3 className="mt-7 font-serif text-[30px] leading-tight text-[#FAFAFA] md:text-[34px]">
+                    {f.name}
+                  </h3>
+                  <p className="mt-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-accent">
+                    {f.title}
+                  </p>
+
+                  <ul className="mt-7 flex flex-col gap-4">
+                    {f.points.map((point) => (
+                      <li key={point} className="flex items-start gap-4">
+                        <span className="mt-[10px] h-px w-4 shrink-0 bg-accent" aria-hidden />
+                        <span className="text-[16px] leading-[1.6] text-[#B5B1AC] md:text-[17px]">
+                          {point}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <SectionCTA />
+        </div>
+      </section>
+
+      {/* ══ 4. HOW IT WORKS ═══════════════════════════════════════════════ */}
+      <section id="how-it-works" className="scroll-mt-24 px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
+          <AnimatedSection className="text-center">
+            <SectionLabel>How it works</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              Everything behind the brand, handled
+            </h2>
+            <p className="mx-auto mt-6 max-w-[620px] text-[17px] font-light leading-[1.7] text-[#B5B1AC] md:text-[19px]">
+              You keep making content. This is the list of what stops being your problem.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-14">
+            <div className="panel px-6 py-10 md:px-12">
+              <SystemDiagram />
             </div>
           </AnimatedSection>
-        </div>
-      </section>
 
-      {/* ══ STATS BAR ═════════════════════════════════════════════════════ */}
-      <section className="border-y border-white/5 bg-[#0A0A0A]">
-        <div className="max-w-content mx-auto px-6 py-12 md:py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
-            {stats.map((stat, i) => (
-              <AnimatedSection key={stat.label} delay={i * 0.1}>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    <CountUp target={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+          <div className="mt-14">
+            {howItWorks.map((step, i) => (
+              <AnimatedSection key={step.num} delay={i * 0.04}>
+                <div className="grid gap-6 border-t border-white/[0.08] py-9 last:border-b md:grid-cols-[100px_1fr] md:gap-12">
+                  <span className="font-serif text-[44px] leading-none text-accent/35 md:text-[52px]">
+                    {step.num}
+                  </span>
+                  <div>
+                    <h3 className="font-serif text-[26px] leading-tight text-[#FAFAFA] md:text-[32px]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-4 max-w-[680px] text-[17px] font-light leading-[1.8] text-[#B5B1AC] md:text-[18px]">
+                      {step.desc}
+                    </p>
                   </div>
-                  <div className="mt-2 w-8 h-[2px] bg-accent mx-auto" />
-                  <p className="mt-3 text-sm text-[#6B7280]">{stat.label}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
+
+          <SectionCTA />
         </div>
       </section>
 
-      {/* ══ WHY WE BUILT A1 MEDIA ═════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6">
-        <div className="max-w-content mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <AnimatedSection>
-              <div className="relative aspect-square max-w-[420px] mx-auto md:mx-0 rounded-2xl overflow-hidden bg-[#111]">
-                <Image
-                  src="/founder.jpg"
-                  alt="Sam Chen, Founder"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 420px"
-                />
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection>
-              <SectionLabel>WHY WE BUILT A1 MEDIA</SectionLabel>
-              <h2 className="mt-5 font-serif text-3xl md:text-4xl font-bold leading-tight tracking-hero">
-                The Best Creators In the World Were Leaving Millions on the Table.
-              </h2>
-              <div className="mt-6 flex flex-col gap-5 text-[#9CA3AF] text-base leading-relaxed">
-                <p>We saw that the most talented creators and influencers in the world were sitting on massive audiences — audiences that trusted them and were ready to buy — but they had no systems to capture that revenue.</p>
-                <p>They were either not monetising at all, or trying to piece it together themselves with a patchwork of freelancers, half-built funnels, and offers that didn&apos;t convert.</p>
-                <p>A1 Media was built to fix that. We partner directly with creators, build the entire business infrastructure, and scale revenue to 7 figures — while the creator focuses on creating content.</p>
-              </div>
-              <p className="mt-8 font-serif text-2xl italic text-accent">Sam Chen</p>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* ══ WHAT YOU GET ══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 bg-[#0A0A0A]">
-        <div className="max-w-content mx-auto">
+      {/* ══ 5. WHY IT'S FREE ══════════════════════════════════════════════ */}
+      <section className="border-y border-white/[0.08] bg-[#0D0C0B] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
           <AnimatedSection className="text-center">
-            <SectionLabel>WHAT YOU GET</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-5xl font-bold leading-tight tracking-hero">
-              What You Get
+            <SectionLabel>Where the money comes from</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              We only get paid <span className="text-gold italic">after you do</span>
             </h2>
+            <p className="mx-auto mt-6 max-w-[640px] text-[17px] font-light leading-[1.7] text-[#B5B1AC] md:text-[19px]">
+              No retainer, no setup fee, no media budget. Our capital goes into the ad account and
+              we take a share of what comes back out.
+            </p>
           </AnimatedSection>
 
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {services.map((svc, i) => (
-              <AnimatedSection key={svc.title} delay={i * 0.1}>
-                <div className="card-blue-glow p-10 h-full flex flex-col min-h-[280px]">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#3B82F6]/10 text-[#3B82F6] mb-7">
-                    {svc.icon}
-                  </div>
-                  <h3 className="font-serif text-xl font-bold">{svc.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-[#9CA3AF] flex-1">{svc.desc}</p>
+          <AnimatedSection className="mt-14">
+            <div className="panel px-6 py-10 md:px-12">
+              <FundingFlow />
+            </div>
+          </AnimatedSection>
+
+          <SectionCTA />
+        </div>
+      </section>
+
+      {/* ══ 6. WHY THE TRADITIONAL MODEL DOESN'T WORK ═════════════════════ */}
+      <section id="the-maths" className="scroll-mt-24 px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
+          <AnimatedSection className="text-center">
+            <SectionLabel>The maths</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              Why the traditional model doesn&apos;t work
+            </h2>
+            <p className="mx-auto mt-6 max-w-[640px] text-[17px] font-light leading-[1.7] text-[#B5B1AC] md:text-[19px]">
+              Every way creators are told to monetise has the same flaw: it caps out long before it
+              pays you what the audience is worth.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-14">
+            <div className="panel px-6 py-10 md:px-12">
+              <CeilingChart />
+            </div>
+          </AnimatedSection>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {traditionalModel.map((item, i) => (
+              <AnimatedSection key={item.label} delay={i * 0.08}>
+                <div className="panel h-full p-9 md:p-10">
+                  <h3 className="font-serif text-[26px] leading-tight text-[#7A756D]">{item.label}</h3>
+                  <p className="mt-5 text-[17px] font-light leading-[1.8] text-[#B5B1AC]">{item.body}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
+
+          {/* High-ticket maths */}
+          <AnimatedSection>
+            <div className="mt-10 rounded-2xl border border-accent/25 bg-[#0D0C0B] px-8 py-14 text-center md:px-16">
+              <span className="eyebrow">Now do the high-ticket maths</span>
+
+              <div className="mt-10 flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10">
+                <div>
+                  <p className="font-serif text-[52px] leading-none text-[#FAFAFA] md:text-[64px]">$5,000</p>
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-[#7A756D]">High-ticket offer</p>
+                </div>
+                <span className="font-serif text-[32px] leading-none text-accent md:text-[40px]" aria-hidden>×</span>
+                <div>
+                  <p className="font-serif text-[52px] leading-none text-[#FAFAFA] md:text-[64px]">50</p>
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-[#7A756D]">Conversions / mo</p>
+                </div>
+                <span className="font-serif text-[32px] leading-none text-accent md:text-[40px]" aria-hidden>=</span>
+                <div>
+                  <p className="font-serif text-[52px] leading-none text-gold md:text-[72px]">$250,000</p>
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-[#7A756D]">Revenue per month</p>
+                </div>
+              </div>
+
+              <p className="mx-auto mt-12 max-w-[640px] text-[17px] font-light leading-[1.8] text-[#B5B1AC] md:text-[19px]">
+                Fifty buyers. That&apos;s the whole ask. A $49 community needs five thousand people
+                and a support team to get anywhere near it, and a brand deal pays once and
+                disappears. One premium offer, sold properly, changes the size of the business.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <SectionCTA />
         </div>
       </section>
 
-      {/* ══ COMPARISON ═══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6">
-        <div className="max-w-[1000px] mx-auto">
+      {/* ══ 7. LAUNCH ROADMAP ═════════════════════════════════════════════ */}
+      <section id="roadmap" className="scroll-mt-24 border-y border-white/[0.08] bg-[#0D0C0B] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
           <AnimatedSection className="text-center">
-            <SectionLabel>THE DIFFERENCE</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-5xl font-bold leading-tight tracking-hero">
-              Stop Trying to Figure It Out Alone.
+            <SectionLabel>Launch roadmap</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              Live in <span className="text-gold italic">seven days</span>
             </h2>
+            <p className="mx-auto mt-6 max-w-[620px] text-[17px] font-light leading-[1.7] text-[#B5B1AC] md:text-[19px]">
+              Offer locked, funnel built, sales team placed. This is what the first week looks like
+              once we sign.
+            </p>
           </AnimatedSection>
 
-          <div className="mt-14 grid md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="rounded-2xl p-8 flex flex-col gap-6"
-              style={{
-                background: "linear-gradient(135deg, rgba(220,38,38,0.06) 0%, rgba(220,38,38,0.02) 100%)",
-                border: "1px solid rgba(220,38,38,0.15)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </div>
-                <h3 className="font-serif text-xl font-bold text-white/60">This isn&apos;t for you if...</h3>
-              </div>
-              <ul className="flex flex-col gap-4">
-                {doingItYourself.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg className="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                    <span className="text-sm leading-relaxed text-[#6B7280]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <AnimatedSection className="mt-14">
+            <div className="panel hidden px-6 py-10 md:block md:px-12">
+              <WeekArc />
+            </div>
+          </AnimatedSection>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-2xl p-8 flex flex-col gap-6"
-              style={{
-                background: "linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0.02) 100%)",
-                border: "1px solid rgba(59,130,246,0.2)",
-                boxShadow: "0 0 40px rgba(59,130,246,0.06)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#3B82F6]/10 flex items-center justify-center">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                </div>
-                <h3 className="font-serif text-xl font-bold text-white">This is for you if...</h3>
-              </div>
-              <ul className="flex flex-col gap-4">
-                {theA1Way.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg className="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                    <span className="text-sm leading-relaxed text-white/70">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <div className="relative mt-12">
+            <div className="absolute bottom-2 left-[7px] top-2 hidden w-px bg-white/[0.08] md:block" aria-hidden />
+            <div className="flex flex-col gap-10 md:gap-12">
+              {roadmap.map((item, i) => (
+                <AnimatedSection key={item.day} delay={i * 0.05}>
+                  <div className="grid gap-4 md:grid-cols-[16px_120px_1fr] md:gap-8">
+                    <span className="mt-2 hidden h-[15px] w-[15px] rounded-full border border-accent bg-[#0D0C0B] md:block" aria-hidden />
+                    <span className="text-[12px] uppercase tracking-[0.22em] text-accent md:mt-3">{item.day}</span>
+                    <div>
+                      <h3 className="font-serif text-[24px] leading-tight text-[#FAFAFA] md:text-[30px]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 max-w-[640px] text-[17px] font-light leading-[1.8] text-[#B5B1AC]">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
+
+          <SectionCTA />
         </div>
       </section>
 
-      {/* ══ FAQ ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 bg-[#0A0A0A]">
-        <div className="max-w-[720px] mx-auto">
+      {/* ══ 8. WHO THIS IS FOR ════════════════════════════════════════════ */}
+      <section className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1000px]">
           <AnimatedSection className="text-center">
-            <SectionLabel>QUESTIONS</SectionLabel>
-            <h2 className="mt-5 font-serif text-3xl md:text-5xl font-bold leading-tight tracking-hero">
-              Frequently Asked Questions
+            <SectionLabel>Who this is for</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero text-balance md:text-[46px]">
+              We&apos;d rather turn you away than waste the launch
+            </h2>
+            <p className="mx-auto mt-6 max-w-[600px] text-[17px] font-light leading-[1.7] text-[#B5B1AC] md:text-[19px]">
+              We only take a handful of partners at a time, and we&apos;re funding each one. That
+              makes us honest about fit.
+            </p>
+          </AnimatedSection>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            <AnimatedSection>
+              <div className="panel h-full p-10 md:p-12">
+                <h3 className="font-serif text-[27px] text-[#7A756D]">Who we don&apos;t work with</h3>
+                <ul className="mt-8 flex flex-col gap-5">
+                  {notForYou.map((item) => (
+                    <li key={item} className="flex items-start gap-4">
+                      <span className="mt-[11px] h-px w-4 shrink-0 bg-[#3F3B36]" aria-hidden />
+                      <span className="text-[17px] font-light leading-[1.6] text-[#7A756D]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.1}>
+              <div className="panel h-full p-10 md:p-12" style={{ borderColor: "rgba(227,192,141,0.28)" }}>
+                <h3 className="font-serif text-[27px] text-gold">Who we do</h3>
+                <ul className="mt-8 flex flex-col gap-5">
+                  {forYou.map((item) => (
+                    <li key={item} className="flex items-start gap-4">
+                      <span className="mt-[11px] h-px w-4 shrink-0 bg-accent" aria-hidden />
+                      <span className="text-[17px] font-light leading-[1.6] text-[#FAFAFA]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          <SectionCTA />
+        </div>
+      </section>
+
+      {/* ══ 9. FAQ ════════════════════════════════════════════════════════ */}
+      <section id="faq" className="scroll-mt-24 px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[820px]">
+          <AnimatedSection className="text-center">
+            <SectionLabel>Questions</SectionLabel>
+            <h2 className="mt-7 font-serif text-[32px] leading-[1.14] tracking-hero md:text-[46px]">
+              Before you apply
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 border-t border-white/5">
+          <div className="mt-14 border-t border-white/[0.08]">
             {faqItems.map((item, i) => (
               <AccordionItem
                 key={i}
@@ -360,23 +518,24 @@ export default function HomePage() {
               />
             ))}
           </div>
+
+          <SectionCTA />
         </div>
       </section>
 
-      {/* ══ FINAL CTA ════════════════════════════════════════════════════ */}
-      <section className="silk-bg py-24 md:py-32 px-6">
-        <div className="max-w-[700px] mx-auto text-center">
-          <AnimatedSection className="flex flex-col items-center gap-7">
-            <SectionLabel>APPLY TO PARTNER</SectionLabel>
-            <h2 className="font-serif text-4xl md:text-6xl font-bold leading-[1.08] tracking-hero">
-              Ready to Scale?
+      {/* ══ 10. FINAL CTA ═════════════════════════════════════════════════ */}
+      <section className="silk-bg border-t border-white/[0.08] px-6 py-28 md:py-40">
+        <div className="mx-auto max-w-[780px] text-center">
+          <AnimatedSection className="flex flex-col items-center gap-8">
+            <h2 className="font-serif text-[36px] leading-[1.1] tracking-hero text-balance md:text-[54px]">
+              Let&apos;s find out what your audience is{" "}
+              <span className="text-gold italic">really</span> worth
             </h2>
-            <p className="text-[#9CA3AF] text-base max-w-md">
-              Limited partnerships available. We only take on creators we can scale.
+            <p className="max-w-[520px] text-[18px] font-light leading-[1.6] text-[#B5B1AC] md:text-[20px]">
+              One call. We&apos;ll tell you what we&apos;d build, what we&apos;d fund, and whether
+              we think it works — before anyone commits to anything.
             </p>
-            <CTAButton href="https://cal.com/sam-chen-veeqlv/discovery" external variant="primary" className="px-10 py-4">
-              Apply to Partner
-            </CTAButton>
+            <CTAButton href="#schedule">Schedule My Call</CTAButton>
           </AnimatedSection>
         </div>
       </section>

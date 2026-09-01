@@ -36,15 +36,15 @@ export default function ApplyPage() {
   }
 
   return (
-    <main className="bg-[#08090E] min-h-screen text-white">
+    <main className="bg-[#000000] min-h-screen text-white">
       {/* ── Hero ── */}
       <section className="pt-32 py-[120px] max-w-[800px] mx-auto px-6 text-center">
         <AnimatedSection>
           <SectionLabel>APPLY TO PARTNER</SectionLabel>
-          <h1 className="mt-5 text-4xl md:text-6xl font-bold leading-tight tracking-hero">
+          <h1 className="mt-5 text-4xl md:text-6xl leading-tight tracking-hero">
             Let&apos;s See If We&apos;re a Fit.
           </h1>
-          <p className="mt-5 text-base md:text-lg max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.55)" }}>
+          <p className="mt-5 text-base md:text-lg max-w-xl mx-auto" style={{ color: "#B5B1AC" }}>
             We only take on a limited number of partnerships at a time. Fill out the application below and our team will be in touch within 48 hours.
           </p>
         </AnimatedSection>
@@ -55,10 +55,10 @@ export default function ApplyPage() {
         <AnimatedSection>
           <div className="max-w-2xl mx-auto">
             {submitted ? (
-              <div className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-2xl px-8 py-16 text-center">
-                <div className="w-14 h-14 rounded-full bg-[#2D7AFF]/20 flex items-center justify-center mx-auto mb-5">
+              <div className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-2xl px-8 py-16 text-center">
+                <div className="w-14 h-14 rounded-full bg-[#E3C08D]/20 flex items-center justify-center mx-auto mb-5">
                   <svg
-                    className="w-7 h-7 text-[#2D7AFF]"
+                    className="w-7 h-7 text-[#E3C08D]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -67,8 +67,8 @@ export default function ApplyPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold mb-3">Application Submitted</h2>
-                <p style={{ color: "rgba(255,255,255,0.55)" }}>
+                <h2 className="text-2xl mb-3">Application Submitted</h2>
+                <p style={{ color: "#B5B1AC" }}>
                   Thanks for applying. We review every submission and will be in touch if we&apos;re a
                   good match.
                 </p>
@@ -76,7 +76,7 @@ export default function ApplyPage() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-2xl px-8 py-10 space-y-6"
+                className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-2xl px-8 py-10 space-y-6"
               >
                 {/* Name */}
                 <div>
@@ -87,7 +87,7 @@ export default function ApplyPage() {
                     type="text"
                     required
                     placeholder="Jane Smith"
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#2D7AFF] transition-colors w-full"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#E3C08D] transition-colors w-full"
                   />
                 </div>
 
@@ -100,7 +100,7 @@ export default function ApplyPage() {
                     type="email"
                     required
                     placeholder="jane@yourbrand.com"
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#2D7AFF] transition-colors w-full"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#E3C08D] transition-colors w-full"
                   />
                 </div>
 
@@ -112,7 +112,7 @@ export default function ApplyPage() {
                   <input
                     type="text"
                     placeholder="@yourusername"
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#2D7AFF] transition-colors w-full"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#E3C08D] transition-colors w-full"
                   />
                 </div>
 
@@ -124,9 +124,9 @@ export default function ApplyPage() {
                   <select
                     required
                     defaultValue=""
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#2D7AFF] transition-colors w-full appearance-none"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#E3C08D] transition-colors w-full appearance-none"
                   >
-                    <option value="" disabled style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <option value="" disabled style={{ color: "#7A756D" }}>
                       Select a range
                     </option>
                     <option value="0-5k">$0–$5K</option>
@@ -146,7 +146,7 @@ export default function ApplyPage() {
                     type="text"
                     required
                     placeholder="e.g. fitness, personal finance, e-commerce"
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#2D7AFF] transition-colors w-full"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#E3C08D] transition-colors w-full"
                   />
                 </div>
 
@@ -169,14 +169,14 @@ export default function ApplyPage() {
                         <div
                           className={`w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center transition-colors ${
                             hasOffer === val
-                              ? "border-[#2D7AFF]"
+                              ? "border-[#E3C08D]"
                               : "border-[rgba(255,255,255,0.25)]"
                           }`}
                           style={{ width: "18px", height: "18px", minWidth: "18px" }}
                         >
                           {hasOffer === val && (
                             <div
-                              className="rounded-full bg-[#2D7AFF]"
+                              className="rounded-full bg-[#E3C08D]"
                               style={{ width: "8px", height: "8px" }}
                             />
                           )}
@@ -196,7 +196,7 @@ export default function ApplyPage() {
                     required
                     rows={4}
                     placeholder="Tell us about your brand, what you create, and your goals…"
-                    className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#2D7AFF] transition-colors w-full resize-none"
+                    className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-lg px-4 py-3 text-white placeholder:text-white/35 focus:outline-none focus:border-[#E3C08D] transition-colors w-full resize-none"
                   />
                 </div>
 
@@ -213,12 +213,12 @@ export default function ApplyPage() {
       </section>
 
       {/* ── What Happens Next ── */}
-      <section className="py-[120px] border-t border-[rgba(255,255,255,0.08)]">
+      <section className="py-[120px] border-t border-[rgba(255,255,255,0.07)]">
         <div className="max-w-content mx-auto px-6">
           <AnimatedSection className="text-center mb-14">
             <SectionLabel>The Process</SectionLabel>
-            <h2 className="mt-4 text-3xl md:text-4xl font-bold">After You Apply</h2>
-            <p className="mt-4 max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.55)" }}>
+            <h2 className="mt-4 text-3xl md:text-4xl">After You Apply</h2>
+            <p className="mt-4 max-w-lg mx-auto" style={{ color: "#B5B1AC" }}>
               Here&apos;s exactly what to expect after you hit submit.
             </p>
           </AnimatedSection>
@@ -226,15 +226,15 @@ export default function ApplyPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step) => (
               <AnimatedSection key={step.number}>
-                <div className="bg-[#11131A] border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 h-full card-hover">
+                <div className="bg-[#121110] border border-[rgba(255,255,255,0.07)] rounded-2xl p-8 h-full card-hover">
                   <div
-                    className="w-11 h-11 rounded-full bg-[#2D7AFF]/15 flex items-center justify-center mb-5"
+                    className="w-11 h-11 rounded-full bg-[#E3C08D]/15 flex items-center justify-center mb-5"
                     style={{ minWidth: "44px" }}
                   >
-                    <span className="text-sm font-bold text-[#2D7AFF]">{step.number}</span>
+                    <span className="text-sm text-[#E3C08D]">{step.number}</span>
                   </div>
                   <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#B5B1AC" }}>
                     {step.description}
                   </p>
                 </div>

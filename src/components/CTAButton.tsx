@@ -12,6 +12,9 @@ interface CTAButtonProps {
   onClick?: () => void;
 }
 
+const shared =
+  "inline-flex items-center justify-center rounded-full px-9 py-4 text-[14px] font-medium uppercase tracking-[0.16em]";
+
 export default function CTAButton({
   href,
   children,
@@ -21,10 +24,7 @@ export default function CTAButton({
   external,
   onClick,
 }: CTAButtonProps) {
-  const base =
-    variant === "primary"
-      ? "inline-flex items-center justify-center bg-accent text-black font-semibold px-7 py-3.5 rounded-full hover:bg-accent-glow transition-all duration-300 text-sm tracking-wide animate-glow-pulse"
-      : "inline-flex items-center justify-center bg-transparent border border-white/20 text-white font-semibold px-7 py-3.5 rounded-full hover:border-accent hover:text-accent transition-all duration-300 text-sm tracking-wide";
+  const base = variant === "primary" ? `${shared} btn-gold` : `${shared} btn-ghost`;
 
   if (href && external) {
     return (
