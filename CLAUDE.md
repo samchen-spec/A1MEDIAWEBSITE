@@ -109,6 +109,14 @@ Small and soft-square, not pills. Two nested boxes — the outer's 1.5px padding
 A gold conic gradient rotates around the ring via `@property --ring-angle`. `.btn-quiet` is
 the ghost variant at the same footprint. Label is 18px/400.
 
+### Section treatment
+
+Sections are deliberately **not** uniform. Each gets its own eyebrow colour (gold, cyan,
+green, violet via the `ACCENT` map), its own heading size (54 / 46 / 44 / 30px, not one
+scale), and its own alignment: Why A1 and the FAQ are left-aligned, the rest centred. Body
+copy alternates between `#D2CEC9` and the quieter `#8A857D`. Keep adding variety when you
+add a section; a single repeated treatment is what makes a page look generated.
+
 ### Card art
 
 `src/components/Infographics.tsx`:
@@ -118,9 +126,13 @@ the ghost variant at the same footprint. Label is 18px/400.
   replaced rendered their labels at about 5px.
 - `ToolStack` — the tool roster, as full-colour brand marks in circular chips. Edit `TOOLS`
   when the stack changes.
-- `TeamStack` — the placed sales seats, as ringed monogram circles. Deliberately anonymous:
-  don't put client or founder photos here.
-- `PipelineLoop` — the animated Why A1 diagram.
+`src/components/PillarIcons.tsx` — `HelpIcon`, `FundIcon`, `LaunchIcon`. 64px, filled, one
+colour each (cyan / gold / green), each animating on its own loop. The Why A1 section has no
+diagram: the icons carry the motion.
+
+`src/components/TeamStack.tsx` — the placed sales seats. A seat with `src: null` renders a
+monogram, so the card looks finished with no photos in place and the browser never requests
+a file that isn't there. See `public/team/README.md`. Only real staff photos go here.
 
 `src/components/BrandLogos.tsx` holds the brand marks as inline SVG in their own colours.
 They are the **only** place on the site that isn't gold, and that is on purpose. Nominative
@@ -135,10 +147,16 @@ use only: they identify the products, nothing more.
   `e.defaultPrevented` and you get a hard hash jump.
 - Don't pass an `offset` to `lenis.scrollTo` — it already honours the section's
   `scroll-mt-24`, and passing both lands the heading twice as far down.
-- `AnimatedSection` fades up 24px over 0.8s, `once: true`, with per-card stagger via `delay`.
+- `AnimatedSection` takes a `variant` (`up` / `left` / `right` / `scale` / `fade`) and runs
+  with **`once: false`**, so sections reveal every time they enter the viewport in either
+  scroll direction. That is deliberate: it is what makes the page feel alive going back up.
+  It also means a full-page screenshot captures off-screen sections as blank — verify by
+  screenshotting viewport-by-viewport down the scroll, not with `fullPage`.
 - `.aurora` is the drifting gold wash behind the hero and final CTA.
-- `.flow-dot` / `.flow-pulse` drive `PipelineLoop`. Each dot's travel distance arrives as
-  `--flow-dist` on the element, so one keyframe serves every segment.
+- `.ico-*` keyframes drive the three Why A1 glyphs; `.tick-path` draws the capability ticks
+  in on a cascade, each pill passing its own `--tick-delay`.
+- `.aurora` is two blurred pseudo-element blobs drifting on 34s and 47s periods. The periods
+  don't divide evenly, which is what stops it reading as a pulse.
 - Everything animated is switched off under `prefers-reduced-motion`.
 
 ## Site Structure
@@ -158,10 +176,12 @@ Hero → Statement → How It Works (bento) → Why A1 → Founders → Portfoli
 - **Why A1** — the animated `PipelineLoop`, then Help · Fund · Launch as three columns with
   40px **filled** glyphs. Hairline icons vanish next to a 28px heading; keep them filled.
 - **Founders** — photo left / bulleted accomplishments right, one row each.
-- **Portfolio** — live client landing pages, **one per row** so each gets read rather than
-  scanned. Screenshots live in `/public/portfolio/` and are captured from the live pages at
-  1440×900, then resized to 1800px wide JPEG. Recapture them when a client's page changes.
-  No revenue figures anywhere: don't invent them.
+- **Portfolio** — live client landing pages, **one per row**, capped at 880px so they read as
+  a showcase rather than a wall. **Brand name only** underneath, and **no outbound links**:
+  sending traffic off the page is the one thing this section shouldn't do. Screenshots live
+  in `/public/portfolio/`, captured at 1440×900 with the VSL playing so the creator is on
+  screen and consent banners dismissed, then resized to 1600px JPEG. Recapture when a
+  client's page changes. No revenue figures anywhere: don't invent them.
 - **FAQ** — accordion in the 760px `max-w-prose` column.
 
 The Maths, Launch Roadmap and Who This Is For were cut when the site moved to this
@@ -180,8 +200,9 @@ backgrounds only.
 
 ### Header
 
-Floating rounded-full bar. The centred nav shows at `lg` and up; below that it collapses to
-the hamburger panel. The ring CTA shows from `md` up.
+**Logo only**, top-left, absolutely positioned over the hero. There is no nav bar and no
+header CTA: the page is meant to be scrolled, and the section links live in the footer.
+Don't reintroduce a nav here without a reason.
 
 ## Copy Rules
 - **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.

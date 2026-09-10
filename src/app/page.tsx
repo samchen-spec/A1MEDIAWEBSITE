@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import CTAButton from "@/components/CTAButton";
 import AnimatedSection from "@/components/AnimatedSection";
 import FounderPhoto from "@/components/FounderPhoto";
-import {
-  GrowthChart, StrategyCard, RevenueCurve, ToolStack, TeamStack, PipelineLoop,
-} from "@/components/Infographics";
+import { GrowthChart, StrategyCard, RevenueCurve, ToolStack } from "@/components/Infographics";
+import { HelpIcon, FundIcon, LaunchIcon } from "@/components/PillarIcons";
+import TeamStack from "@/components/TeamStack";
 import { CAL_LINK } from "@/lib/site";
 
 // ─── How it works ───────────────────────────────────────────────────────────────
@@ -61,33 +61,17 @@ const pillars = [
   {
     title: "Help",
     body: "We work with you on the content that actually drives buyers, and script the long-form so the engine stops depending on your best week.",
-    icon: (
-      <>
-        <rect x="4" y="22" width="7" height="14" rx="2" />
-        <rect x="16.5" y="14" width="7" height="22" rx="2" />
-        <rect x="29" y="4" width="7" height="32" rx="2" />
-      </>
-    ),
+    Icon: HelpIcon,
   },
   {
     title: "Fund",
     body: "No retainer, no setup fee, no media budget from you. Our capital goes into the ad account and we take a share of what comes back out.",
-    icon: (
-      <>
-        <path d="M6 9h21a5 5 0 0 1 5 5v1H10a4 4 0 0 0 0 8h22v10a5 5 0 0 1-5 5H6a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4Z" />
-        <circle cx="30" cy="19" r="3" />
-      </>
-    ),
+    Icon: FundIcon,
   },
   {
     title: "Launch",
     body: "Offer locked, funnel built, sales team placed and tracking wired up, live to your audience inside the first week.",
-    icon: (
-      <>
-        <path d="M20 2c6 5 9 11 9 18l-9 7-9-7c0-7 3-13 9-18Zm0 10a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
-        <path d="M13 31l-4 7 7-2Zm14 0l4 7-7-2Z" />
-      </>
-    ),
+    Icon: LaunchIcon,
   },
 ];
 
@@ -119,31 +103,14 @@ const founders = [
 ];
 
 // ─── Portfolio ──────────────────────────────────────────────────────────────────
-// Live landing pages we built and run. One per row so each one gets read rather
-// than scanned. Screenshots are captured from the live pages.
+// Offers we built. Name only, no outbound links: this is a showcase, not a
+// directory, and sending traffic off the page is the one thing it shouldn't do.
+// Screenshots are captured from the live pages with the creator on screen.
 
 const portfolio = [
-  {
-    brand: "Ancestor Maxxing",
-    niche: "Testosterone coaching",
-    blurb: "Masterclass funnel: long-form VSL, opt-in and booking flow, built end to end and running on paid.",
-    image: "/portfolio/ancestormaxxing.jpg",
-    href: "https://ancestormaxxing.com/masterclass",
-  },
-  {
-    brand: "Millionaire PT Blueprint",
-    niche: "Personal training",
-    blurb: "Free-training opt-in with a scarcity-led offer, wired to a closer team and a tracked pipeline.",
-    image: "/portfolio/prestige-fitness.jpg",
-    href: "https://www.prestigefitnesscoaching.com/opt-in",
-  },
-  {
-    brand: "Abundance Of Women",
-    niche: "Dating coaching",
-    blurb: "Full brand and offer build for Zaki: positioning, VSL, application and scheduler on one page.",
-    image: "/portfolio/abundance-of-women.jpg",
-    href: "https://www.abundanceofwomen.com/",
-  },
+  { brand: "Ancestor Maxxing", image: "/portfolio/ancestormaxxing.jpg" },
+  { brand: "Millionaire PT Blueprint", image: "/portfolio/prestige-fitness.jpg" },
+  { brand: "Abundance Of Women", image: "/portfolio/abundance-of-women.jpg" },
 ];
 
 // ─── FAQ ────────────────────────────────────────────────────────────────────────
@@ -160,10 +127,37 @@ const faqItems = [
 
 // ─── Pieces ─────────────────────────────────────────────────────────────────────
 
-function PillarIcon({ children }: { children: React.ReactNode }) {
+/* Per-section accent. Giving each band its own eyebrow colour is what stops the
+   page reading as one long template. */
+const ACCENT = {
+  gold: "#E3C08D",
+  cyan: "#1ABCFE",
+  green: "#6FCF7F",
+  violet: "#A259FF",
+} as const;
+
+function Eyebrow({ tone, children }: { tone: keyof typeof ACCENT; children: React.ReactNode }) {
   return (
-    <svg viewBox="0 0 40 40" className="h-10 w-10" fill="currentColor" aria-hidden>
+    <p className="text-[17px] leading-[1.4]" style={{ color: ACCENT[tone] }}>
       {children}
+    </p>
+  );
+}
+
+/* Draws itself in on a loop, cascading across the row via --tick-delay. */
+function Tick({ delay }: { delay: number }) {
+  return (
+    <svg viewBox="0 0 20 20" className="h-[18px] w-[18px] shrink-0" fill="none" aria-hidden>
+      <circle cx="10" cy="10" r="9" stroke="rgba(227,192,141,0.28)" strokeWidth="1.2" />
+      <path
+        className="tick-path"
+        d="M5.6 10.4 8.7 13.5 14.4 7"
+        stroke="#E3C08D"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ ["--tick-delay" as string]: `${delay}s` }}
+      />
     </svg>
   );
 }
@@ -253,16 +247,17 @@ export default function HomePage() {
       {/* ══ 3. HOW IT WORKS — BENTO ═══════════════════════════════════════ */}
       <section id="how-it-works" className="scroll-mt-24 px-6 py-8">
         <div className="plate mx-auto max-w-content px-6 py-24 md:px-12">
-          <AnimatedSection>
-            <h2 className="mx-auto max-w-[840px] text-center text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
-              What you&apos;ll gain by <span className="accent-italic text-gold">partnering</span> with us
+          <AnimatedSection className="text-center">
+            <Eyebrow tone="cyan">What partnering actually gets you</Eyebrow>
+            <h2 className="mx-auto mt-5 max-w-[840px] text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
+              Everything behind the brand, <span className="accent-italic text-gold">handled</span>
             </h2>
           </AnimatedSection>
 
           {/* Row A — art top, text bottom */}
           <div className="mx-auto mt-14 grid max-w-inner gap-8 md:grid-cols-3">
             {bento.map((card, i) => (
-              <AnimatedSection key={card.title} delay={i * 0.06}>
+              <AnimatedSection key={card.title} delay={i * 0.1} variant="scale">
                 <div className="panel flex h-full flex-col p-8">
                   <div className="mb-8 shrink-0">
                     {card.art === "growth" && <GrowthChart />}
@@ -281,7 +276,7 @@ export default function HomePage() {
           {/* Row B — text left, art right */}
           <div className="mx-auto mt-8 grid max-w-inner gap-8 md:grid-cols-2">
             {bentoWide.map((card, i) => (
-              <AnimatedSection key={card.title} delay={i * 0.06}>
+              <AnimatedSection key={card.title} delay={i * 0.1} variant={i === 0 ? "left" : "right"}>
                 <div className="panel flex h-full flex-col items-center gap-8 p-8 sm:flex-row">
                   <div className="flex-1">
                     <h3 className="text-balance text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
@@ -301,9 +296,9 @@ export default function HomePage() {
           {/* Row C — capability pills */}
           <AnimatedSection className="mt-12">
             <ul className="mx-auto flex max-w-[840px] flex-wrap justify-center gap-4">
-              {capabilities.map((c) => (
+              {capabilities.map((c, i) => (
                 <li key={c} className="pill">
-                  <span className="h-2.5 w-2.5 rounded-[3px] bg-accent" aria-hidden />
+                  <Tick delay={i * 0.32} />
                   {c}
                 </li>
               ))}
@@ -315,28 +310,23 @@ export default function HomePage() {
       {/* ══ 4. WHY A1 ═════════════════════════════════════════════════════ */}
       <section id="why-a1" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
-          <AnimatedSection className="text-center">
-            <h2 className="text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
+          <AnimatedSection variant="left" className="max-w-[720px]">
+            <Eyebrow tone="green">The whole model, in three words</Eyebrow>
+            <h2 className="mt-5 text-[34px] font-semibold leading-[1.1] md:text-[54px]">
               Help. Fund. <span className="accent-italic text-gold">Launch.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[660px] text-body text-[#D2CEC9]">
+            <p className="mt-5 max-w-[560px] text-body text-[#8A857D]">
               Three things a creator can&apos;t buy separately and can&apos;t do alone. We do all
               three, and we carry the risk on the third.
             </p>
-          </AnimatedSection>
-
-          <AnimatedSection className="mt-14" delay={0.06}>
-            <div className="panel overflow-hidden px-6 py-10 md:px-10">
-              <PipelineLoop />
-            </div>
           </AnimatedSection>
 
           <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-6">
             {pillars.map((p, i) => (
               <AnimatedSection key={p.title} delay={i * 0.08}>
                 <div className="px-2">
-                  <span className="text-accent"><PillarIcon>{p.icon}</PillarIcon></span>
-                  <h3 className="mt-6 text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
+                  <p.Icon />
+                  <h3 className="mt-7 text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
                     {p.title}
                   </h3>
                   <p className="mt-3 text-body text-[#D2CEC9]">{p.body}</p>
@@ -351,10 +341,11 @@ export default function HomePage() {
       <section id="founders" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
-            <h2 className="text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
+            <Eyebrow tone="violet">Who you are actually working with</Eyebrow>
+            <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
               Meet your <span className="accent-italic text-gold">dream team</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[820px] text-body text-[#D2CEC9]">
+            <p className="mx-auto mt-5 max-w-[760px] text-body text-[#8A857D]">
               Two operators, not an agency roster. Between them they&apos;ve built the offers and
               collected the cash on the other side of them, which is why we&apos;re willing to
               fund yours.
@@ -363,7 +354,7 @@ export default function HomePage() {
 
           <div className="mt-20 flex flex-col gap-20">
             {founders.map((f, i) => (
-              <AnimatedSection key={f.name} delay={i * 0.05}>
+              <AnimatedSection key={f.name} variant={i % 2 === 0 ? "left" : "right"}>
                 <div className="grid items-center gap-10 md:grid-cols-[400px_1fr] md:gap-16">
                   <div>
                     <FounderPhoto src={f.image} name={f.name} />
@@ -397,45 +388,34 @@ export default function HomePage() {
       <section id="portfolio" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
-            <h2 className="text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
+            <Eyebrow tone="gold">Live work</Eyebrow>
+            <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
               Our <span className="accent-italic text-gold">portfolio</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[660px] text-body text-[#D2CEC9]">
-              Offers we built, funded and still run. Every page below is live.
+            <p className="mx-auto mt-5 max-w-[560px] text-body text-[#8A857D]">
+              Offers we built, funded and still run.
             </p>
           </AnimatedSection>
 
-          <div className="mt-16 flex flex-col gap-16 md:gap-20">
-            {portfolio.map((item, i) => (
-              <AnimatedSection key={item.brand} delay={0.04}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <div className="panel overflow-hidden p-3 md:p-4">
+          <div className="mt-16 flex flex-col items-center gap-14 md:gap-16">
+            {portfolio.map((item) => (
+              <AnimatedSection key={item.brand} className="w-full max-w-[880px]" variant="scale">
+                <figure>
+                  <div className="panel overflow-hidden p-2.5">
                     <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-[#0C0B0A]">
                       <Image
                         src={item.image}
                         alt={`${item.brand} landing page`}
                         fill
-                        className="object-cover object-top transition-transform duration-[900ms] group-hover:scale-[1.02]"
-                        sizes="(max-width: 768px) 100vw, 1248px"
+                        className="object-cover object-top"
+                        sizes="(max-width: 900px) 100vw, 880px"
                       />
                     </div>
                   </div>
-
-                  <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between md:gap-10">
-                    <div>
-                      <h3 className="text-[24px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
-                        {item.brand}
-                      </h3>
-                      <p className="mt-1 text-body text-accent">{item.niche}</p>
-                    </div>
-                    <p className="max-w-[520px] text-body text-[#8A857D]">{item.blurb}</p>
-                  </div>
-                </a>
+                  <figcaption className="mt-5 text-center text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
+                    {item.brand}
+                  </figcaption>
+                </figure>
               </AnimatedSection>
             ))}
           </div>
@@ -445,13 +425,14 @@ export default function HomePage() {
       {/* ══ 7. FAQ ════════════════════════════════════════════════════════ */}
       <section id="faq" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
-          <AnimatedSection className="text-center">
-            <h2 className="text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
+          <AnimatedSection variant="left" className="mx-auto max-w-prose">
+            <Eyebrow tone="cyan">Before you book</Eyebrow>
+            <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] md:text-[44px]">
               Frequently asked <span className="accent-italic text-gold">questions</span>
             </h2>
           </AnimatedSection>
 
-          <div className="mx-auto mt-14 max-w-prose border-t border-white/[0.07]">
+          <div className="mx-auto mt-12 max-w-prose border-t border-white/[0.07]">
             {faqItems.map((item, i) => (
               <AccordionItem
                 key={i}

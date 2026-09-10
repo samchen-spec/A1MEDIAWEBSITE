@@ -223,57 +223,119 @@ body::after {
     color: var(--accent);
   }
 
-  /* ─── Hero aurora ────────────────────────────────────────────────────────── */
-
-  .aurora {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
-  .aurora::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -40%;
-    left: -25%;
-    width: 150%;
-    height: 170%;
-    background:
-      radial-gradient(38% 44% at 28% 30%, rgba(227, 192, 141, 0.17) 0%, transparent 68%),
-      radial-gradient(30% 38% at 70% 22%, rgba(199, 158, 88, 0.13) 0%, transparent 70%),
-      radial-gradient(45% 30% at 50% 62%, rgba(242, 220, 180, 0.07) 0%, transparent 72%);
-    filter: blur(28px);
-    animation: aurora-drift 26s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-
-  @keyframes aurora-drift {
-    0%   { transform: translate3d(-4%, -2%, 0) rotate(-4deg) scale(1.04); }
-    50%  { transform: translate3d(3%, 3%, 0) rotate(3deg) scale(1.12); }
-    100% { transform: translate3d(6%, -3%, 0) rotate(6deg) scale(1.06); }
-  }
 }
 
-/* ─── Pipeline animation (Why A1) ────────────────────────────────────────── */
+/* ─── Aurora ─────────────────────────────────────────────────────────────── */
 
-/* Each dot travels one gap of the pipeline; the distance comes in per element
-   as --flow-dist so one keyframe serves every segment. */
-@keyframes flow-dot {
-  0%   { transform: translateX(0);                  opacity: 0; }
-  14%  {                                            opacity: 1; }
-  86%  {                                            opacity: 1; }
-  100% { transform: translateX(var(--flow-dist, 0)); opacity: 0; }
+/* Three blurred blobs drifting on different periods. Because the periods don't
+   divide evenly the composite shape keeps changing, which is what makes it read
+   as flowing rather than as a pulsing gradient. */
+.aurora {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
-.flow-dot {
-  animation: flow-dot 2.6s linear infinite;
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
   will-change: transform;
 }
-
-@keyframes flow-pulse {
-  0%, 100% { opacity: 0.12; }
-  50%      { opacity: 0.5; }
+.aurora::before {
+  top: -55%;
+  left: -30%;
+  width: 110%;
+  height: 190%;
+  background:
+    radial-gradient(closest-side, rgba(242, 220, 180, 0.20), transparent 72%),
+    radial-gradient(closest-side, rgba(199, 158, 88, 0.16), transparent 70%);
+  background-size: 62% 74%, 48% 56%;
+  background-position: 22% 30%, 68% 62%;
+  background-repeat: no-repeat;
+  filter: blur(46px);
+  animation: aurora-a 34s ease-in-out infinite alternate;
 }
-.flow-pulse { animation: flow-pulse 2.6s ease-in-out infinite; }
+.aurora::after {
+  top: -35%;
+  right: -25%;
+  width: 95%;
+  height: 165%;
+  background:
+    radial-gradient(closest-side, rgba(227, 192, 141, 0.17), transparent 72%),
+    radial-gradient(closest-side, rgba(247, 234, 211, 0.10), transparent 68%);
+  background-size: 56% 66%, 40% 50%;
+  background-position: 70% 28%, 26% 70%;
+  background-repeat: no-repeat;
+  filter: blur(58px);
+  animation: aurora-b 47s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-a {
+  0%   { transform: translate3d(-6%, -3%, 0) rotate(-8deg)  scale(1.00); }
+  40%  { transform: translate3d(5%, 6%, 0)   rotate(6deg)   scale(1.16); }
+  70%  { transform: translate3d(-2%, 9%, 0)  rotate(-3deg)  scale(1.06); }
+  100% { transform: translate3d(8%, -5%, 0)  rotate(11deg)  scale(1.12); }
+}
+@keyframes aurora-b {
+  0%   { transform: translate3d(4%, 5%, 0)   rotate(6deg)   scale(1.10); }
+  35%  { transform: translate3d(-7%, -4%, 0) rotate(-9deg)  scale(1.00); }
+  75%  { transform: translate3d(3%, -8%, 0)  rotate(4deg)   scale(1.18); }
+  100% { transform: translate3d(-5%, 3%, 0)  rotate(-6deg)  scale(1.04); }
+}
+
+/* ─── Icon animation (Why A1) ─────────────────────────────────────────────── */
+
+@keyframes ico-bar {
+  0%, 100% { transform: scaleY(0.5); }
+  45%      { transform: scaleY(1); }
+}
+.ico-bar { animation: ico-bar 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+@keyframes ico-note {
+  0%, 8%    { transform: translateY(-14px); opacity: 0; }
+  26%, 68%  { transform: translateY(0); opacity: 1; }
+  86%, 100% { transform: translateY(6px); opacity: 0; }
+}
+.ico-note { animation: ico-note 3.2s ease-in-out infinite; }
+
+@keyframes ico-coin {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50%      { transform: translateX(-3px); opacity: 1; }
+}
+.ico-coin { animation: ico-coin 3.2s ease-in-out infinite; }
+
+@keyframes ico-rocket {
+  0%, 100% { transform: translateY(2px); }
+  50%      { transform: translateY(-4px); }
+}
+.ico-rocket { animation: ico-rocket 2.8s ease-in-out infinite; }
+
+@keyframes ico-flame {
+  0%, 100% { opacity: 0.4; transform: translateY(-2px) scaleY(0.75); }
+  50%      { opacity: 1;   transform: translateY(2px)  scaleY(1.2); }
+}
+.ico-flame {
+  transform-origin: 32px 46px;
+  animation: ico-flame 0.7s ease-in-out infinite;
+}
+
+/* ─── Capability ticks ────────────────────────────────────────────────────── */
+
+/* The tick draws itself in, then the row rests. Stroke length is 22 user units;
+   each pill sets its own --tick-delay so they cascade across the row. */
+@keyframes tick-draw {
+  0%       { stroke-dashoffset: 22; }
+  22%, 88% { stroke-dashoffset: 0; }
+  100%     { stroke-dashoffset: 22; }
+}
+.tick-path {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  animation: tick-draw 4.5s ease-in-out infinite;
+  animation-delay: var(--tick-delay, 0s);
+}
 
 /* ─── Motion ─────────────────────────────────────────────────────────────── */
 
@@ -281,7 +343,12 @@ body::after {
   html { scroll-behavior: auto; }
   .btn-ring::before,
   .aurora::before,
-  .flow-dot,
-  .flow-pulse { animation: none; }
-  .flow-dot { opacity: 1; }
+  .aurora::after,
+  .ico-bar,
+  .ico-note,
+  .ico-coin,
+  .ico-rocket,
+  .ico-flame,
+  .tick-path { animation: none; }
+  .tick-path { stroke-dashoffset: 0; }
 }
