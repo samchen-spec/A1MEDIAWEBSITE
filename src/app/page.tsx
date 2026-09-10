@@ -217,9 +217,8 @@ export default function HomePage() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection className="mt-10 flex flex-col items-center gap-4 sm:flex-row" delay={0.08}>
+          <AnimatedSection className="mt-10" delay={0.08}>
             <CTAButton href={CAL_LINK} external>Book a Call</CTAButton>
-            <CTAButton href="#how-it-works" variant="secondary">See How It Works</CTAButton>
           </AnimatedSection>
         </div>
       </section>
