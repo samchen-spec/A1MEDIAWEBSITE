@@ -3,13 +3,6 @@
    calendar. Swap CAL_LINK here and the whole site follows. */
 
 export const CAL_LINK = "https://calendly.com/samchen-a1media/call-60";
-export const CONTACT_EMAIL = "contact@a1media.info";
-
-/* In-page anchors used by the header and footer navigation. */
-export const SECTIONS = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#why-a1", label: "Why A1" },
-  { href: "/#founders", label: "Founders" },
-  { href: "/#portfolio", label: "Portfolio" },
-  { href: "/#faq", label: "FAQ" },
-] as const;
+/* The site is growingoffers.com. This inbox is the only a1media address that
+   should appear anywhere; the legal pages read it from here too. */
+export const CONTACT_EMAIL = "samchen@a1media.info";

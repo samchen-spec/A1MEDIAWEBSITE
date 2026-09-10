@@ -436,16 +436,16 @@ export default function HomePage() {
       </section>
 
       {/* ══ 8. FINAL CTA ══════════════════════════════════════════════════ */}
-      <section className="aurora px-6 py-28 md:py-36">
+      <section className="aurora px-6 py-32 md:py-44">
         <div className="mx-auto max-w-content text-center">
-          <AnimatedSection className="flex flex-col items-center gap-6">
-            <h2 className="max-w-[820px] text-[32px] font-semibold leading-[1.2] text-balance md:text-h2">
-              Let&apos;s find out what your audience is{" "}
-              <span className="accent-italic text-gold">really</span> worth
+          <AnimatedSection className="flex flex-col items-center gap-7">
+            <h2 className="max-w-[900px] text-[36px] font-semibold leading-[1.1] text-balance md:text-[60px]">
+              Unlock your audience&apos;s{" "}
+              <span className="accent-italic text-gold">full potential</span>
             </h2>
-            <p className="max-w-[640px] text-body text-[#D2CEC9]">
-              One call. We&apos;ll tell you what we&apos;d build, what we&apos;d fund, and whether
-              we think it works, before anyone commits to anything.
+            <p className="max-w-[560px] text-body text-[#D2CEC9]">
+              Ready to build the offer your audience is actually worth? Book a call and
+              we&apos;ll tell you what we&apos;d build and what we&apos;d fund.
             </p>
             <CTAButton href={CAL_LINK} external>Book a Call</CTAButton>
           </AnimatedSection>

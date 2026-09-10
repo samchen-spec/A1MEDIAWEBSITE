@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import SectionLabel from "@/components/SectionLabel";
+import { CONTACT_EMAIL } from "@/lib/site";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function TermsPage() {
             <div className="mt-10 max-w-3xl">
 
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                Please read these Terms of Service (&quot;Terms&quot;) carefully before using the a1media.com website (the &quot;Site&quot;) operated by A1 Media (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.
+                Please read these Terms of Service (&quot;Terms&quot;) carefully before using the growingoffers.com website (the &quot;Site&quot;) operated by A1 Media (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.
               </p>
 
               {/* 1 */}
@@ -108,7 +109,7 @@ export default function TermsPage() {
                 10. Contact Us
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                If you have questions about these Terms, contact us at: contact@a1media.com
+                If you have questions about these Terms, contact us at: {CONTACT_EMAIL}
               </p>
 
             </div>
