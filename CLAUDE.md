@@ -111,11 +111,14 @@ the ghost variant at the same footprint. Label is 18px/400.
 
 ### Section treatment
 
-Sections are deliberately **not** uniform. Each gets its own eyebrow colour (gold, cyan,
-green, violet via the `ACCENT` map), its own heading size (54 / 46 / 44 / 30px, not one
-scale), and its own alignment: Why A1 and the FAQ are left-aligned, the rest centred. Body
-copy alternates between `#D2CEC9` and the quieter `#8A857D`. Keep adding variety when you
-add a section; a single repeated treatment is what makes a page look generated.
+Sections are deliberately **not** uniform, but the variety is in **size, alignment and
+rhythm, not colour**. Each section gets its own heading size (54 / 46 / 44 / 30px, not one
+repeated scale) and its own alignment: Why A1 and the FAQ are left-aligned, the rest centred.
+Body copy alternates between `#D2CEC9` and the quieter `#8A857D`.
+
+**Eyebrows are always gold.** Per-section accent colours were tried and pulled: on a gold and
+black page, cyan / green / violet eyebrows read as three unrelated palettes rather than as
+variety. Don't reintroduce them.
 
 ### Card art
 

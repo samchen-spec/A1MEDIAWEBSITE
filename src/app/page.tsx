@@ -127,21 +127,11 @@ const faqItems = [
 
 // ─── Pieces ─────────────────────────────────────────────────────────────────────
 
-/* Per-section accent. Giving each band its own eyebrow colour is what stops the
-   page reading as one long template. */
-const ACCENT = {
-  gold: "#E3C08D",
-  cyan: "#1ABCFE",
-  green: "#6FCF7F",
-  violet: "#A259FF",
-} as const;
-
-function Eyebrow({ tone, children }: { tone: keyof typeof ACCENT; children: React.ReactNode }) {
-  return (
-    <p className="text-[17px] leading-[1.4]" style={{ color: ACCENT[tone] }}>
-      {children}
-    </p>
-  );
+/* Section eyebrow. Always gold: the page is gold on black, and per-section
+   accent colours read as three unrelated palettes rather than as variety.
+   Variety comes from size, alignment and rhythm instead. */
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-[17px] leading-[1.4] text-accent">{children}</p>;
 }
 
 /* Draws itself in on a loop, cascading across the row via --tick-delay. */
@@ -247,7 +237,7 @@ export default function HomePage() {
       <section id="how-it-works" className="scroll-mt-24 px-6 py-8">
         <div className="plate mx-auto max-w-content px-6 py-24 md:px-12">
           <AnimatedSection className="text-center">
-            <Eyebrow tone="cyan">What partnering actually gets you</Eyebrow>
+            <Eyebrow>What partnering actually gets you</Eyebrow>
             <h2 className="mx-auto mt-5 max-w-[840px] text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
               Everything behind the brand, <span className="accent-italic text-gold">handled</span>
             </h2>
@@ -310,7 +300,7 @@ export default function HomePage() {
       <section id="why-a1" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="max-w-[720px]">
-            <Eyebrow tone="green">The whole model, in three words</Eyebrow>
+            <Eyebrow>The whole model, in three words</Eyebrow>
             <h2 className="mt-5 text-[34px] font-semibold leading-[1.1] md:text-[54px]">
               Help. Fund. <span className="accent-italic text-gold">Launch.</span>
             </h2>
@@ -340,7 +330,7 @@ export default function HomePage() {
       <section id="founders" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
-            <Eyebrow tone="violet">Who you are actually working with</Eyebrow>
+            <Eyebrow>Who you are actually working with</Eyebrow>
             <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
               Meet your <span className="accent-italic text-gold">dream team</span>
             </h2>
@@ -387,7 +377,7 @@ export default function HomePage() {
       <section id="portfolio" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
-            <Eyebrow tone="gold">Live work</Eyebrow>
+            <Eyebrow>Live work</Eyebrow>
             <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
               Our <span className="accent-italic text-gold">portfolio</span>
             </h2>
@@ -425,7 +415,7 @@ export default function HomePage() {
       <section id="faq" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="mx-auto max-w-prose">
-            <Eyebrow tone="cyan">Before you book</Eyebrow>
+            <Eyebrow>Before you book</Eyebrow>
             <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] md:text-[44px]">
               Frequently asked <span className="accent-italic text-gold">questions</span>
             </h2>
