@@ -3,42 +3,43 @@
 import Image from "next/image";
 import { useState } from "react";
 
-/* The sales seats we place, as overlapping ringed avatars.
+/* The sales seats we place, as overlapping ringed avatars. Photos live in
+   /public/team/ and are mirrored from the "sales team photos" folder at the
+   repo root.
 
-   To use a real headshot: put the file in /public/team/ and set that seat's
-   `src` below. While `src` is null the avatar renders a monogram, so the card
-   is never broken and the browser never requests a file that isn't there.
+   Rings are three tints of the brand gold rather than four unrelated hues, so
+   the four still read as separate people without leaving the palette.
 
-   Use photos of people who actually work with us and have agreed to appear.
-   Don't fill these with stock portraits: the section claims these are our
-   placed staff, and strangers' faces would make that claim false. */
+   Any missing file falls back to a monogram, so the card never breaks. Only
+   people who actually work with us belong here: the card presents them as our
+   placed staff. */
 
-type Seat = { initials: string; ring: string; role: string; src: string | null };
+type Seat = { src: string; name: string; ring: string };
 
 const SEATS: Seat[] = [
-  { initials: "SD", ring: "#A259FF", role: "Setter", src: null },
-  { initials: "CL", ring: "#1ABCFE", role: "Closer", src: null },
-  { initials: "CS", ring: "#6FCF7F", role: "Support", src: null },
+  { src: "/team/mordecai.webp", name: "Mordecai", ring: "#C79E58" },
+  { src: "/team/tomas.webp", name: "Tomas", ring: "#E3C08D" },
+  { src: "/team/tommy.webp", name: "Tommy", ring: "#F2DCB4" },
+  { src: "/team/wiktor.webp", name: "Wiktor", ring: "#C79E58" },
 ];
 
-function Avatar({ src, initials, ring, role }: Seat) {
+function Avatar({ src, name, ring }: Seat) {
   const [failed, setFailed] = useState(false);
-  const showPhoto = Boolean(src) && !failed;
 
   return (
     <span
       className="relative block h-[58px] w-[58px] shrink-0 overflow-hidden rounded-full bg-[#131211]"
       style={{ boxShadow: `0 0 0 2px ${ring}` }}
-      title={role}
+      title={name}
     >
-      {!showPhoto ? (
-        <span className="flex h-full w-full items-center justify-center text-[15px] font-semibold text-[#FAFAFA]">
-          {initials}
+      {failed ? (
+        <span className="flex h-full w-full items-center justify-center text-[13px] font-semibold text-[#8A857D]">
+          {name.charAt(0)}
         </span>
       ) : (
         <Image
-          src={src as string}
-          alt={role}
+          src={src}
+          alt={name}
           fill
           sizes="58px"
           className="object-cover"
@@ -51,19 +52,12 @@ function Avatar({ src, initials, ring, role }: Seat) {
 
 export default function TeamStack() {
   return (
-    <div className="relative flex items-center" aria-label="Setters, closers and support placed into your business">
+    <div className="flex items-center" aria-label="Setters, closers and support placed into your business">
       {SEATS.map((s, i) => (
-        <span key={s.initials} style={{ marginLeft: i === 0 ? 0 : -14, zIndex: SEATS.length - i }}>
+        <span key={s.name} style={{ marginLeft: i === 0 ? 0 : -14, zIndex: SEATS.length - i }}>
           <Avatar {...s} />
         </span>
       ))}
-      {/* sits behind the stack, so it needs less overlap or the label clips */}
-      <span
-        className="ml-[-6px] flex h-[58px] w-[58px] items-center justify-center rounded-full bg-[#0C0B0A] pl-2 text-[13px] text-[#8A857D] ring-1 ring-white/[0.07]"
-        style={{ zIndex: 0 }}
-      >
-        +12
-      </span>
     </div>
   );
 }
