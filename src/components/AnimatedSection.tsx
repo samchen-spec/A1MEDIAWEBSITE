@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+/* Fade + rise on entry. Tuned against the reference: shorter travel than the
+   old 30px, longer settle, and cards stagger via `delay`. */
 export default function AnimatedSection({
   children,
   className = "",
@@ -13,10 +15,10 @@ export default function AnimatedSection({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
       className={className}
     >
       {children}

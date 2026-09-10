@@ -12,8 +12,13 @@ interface CTAButtonProps {
   onClick?: () => void;
 }
 
-const shared =
-  "inline-flex items-center justify-center rounded-full px-9 py-4 text-[14px] font-medium uppercase tracking-[0.16em]";
+/* Primary is the ring button: a 1.5px gold gradient ring (the outer box's
+   padding) around a near-black face at 10px radius. Deliberately small and
+   soft-square — see CLAUDE.md. */
+function Inner({ variant, children }: { variant: string; children: React.ReactNode }) {
+  if (variant === "secondary") return <>{children}</>;
+  return <span className="btn-ring__face">{children}</span>;
+}
 
 export default function CTAButton({
   href,
@@ -24,27 +29,29 @@ export default function CTAButton({
   external,
   onClick,
 }: CTAButtonProps) {
-  const base = variant === "primary" ? `${shared} btn-gold` : `${shared} btn-ghost`;
+  const base = variant === "primary" ? "btn-ring" : "btn-quiet";
+  const cls = `${base} ${className}`.trim();
+  const inner = <Inner variant={variant}>{children}</Inner>;
 
   if (href && external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} ${className}`}>
-        {children}
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+        {inner}
       </a>
     );
   }
 
   if (href) {
     return (
-      <Link href={href} className={`${base} ${className}`}>
-        {children}
+      <Link href={href} className={cls}>
+        {inner}
       </Link>
     );
   }
 
   return (
-    <button type={type || "button"} onClick={onClick} className={`${base} ${className}`}>
-      {children}
+    <button type={type || "button"} onClick={onClick} className={cls}>
+      {inner}
     </button>
   );
 }

@@ -4,14 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const navLinks = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#clients", label: "Clients" },
-  { href: "/#founders", label: "Founders" },
-  { href: "/#roadmap", label: "Roadmap" },
-  { href: "/#faq", label: "FAQ" },
-];
+import { CAL_LINK, SECTIONS } from "@/lib/site";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +17,7 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 md:top-6 md:px-6">
       <div className="mx-auto max-w-[1140px]">
-        <div className="relative flex items-center justify-between gap-6 rounded-full border border-white/[0.08] bg-[#121110]/85 px-5 py-3 backdrop-blur-xl md:px-7">
+        <div className="relative flex items-center justify-between gap-6 rounded-full border border-white/[0.07] bg-[#151413]/85 px-5 py-3 backdrop-blur-xl md:px-7">
           <Link href="/" className="relative z-10 shrink-0" aria-label="A1 Media — home">
             <Image
               src="/a1-logo.png"
@@ -37,28 +30,30 @@ export default function Header() {
           </Link>
 
           {/* Absolutely centred so uneven logo/CTA widths can't pull it off-axis */}
-          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <Link
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
+            {SECTIONS.map((link) => (
+              <a
                 key={link.href}
                 href={link.href}
-                className="text-[15px] text-[#B5B1AC] transition-colors duration-200 hover:text-accent"
+                className="text-[16px] text-[#D2CEC9] transition-colors duration-200 hover:text-accent"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
           <a
-            href="#schedule"
-            className="btn-gold relative z-10 hidden shrink-0 rounded-full px-6 py-2.5 text-[13px] font-medium uppercase tracking-[0.14em] md:inline-block"
+            href={CAL_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ring relative z-10 hidden shrink-0 md:inline-block"
           >
-            Schedule My Call
+            <span className="btn-ring__face !py-[5px] !text-[16px]">Book a Call</span>
           </a>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-10 flex flex-col gap-[5px] p-2 md:hidden"
+            className="relative z-10 flex flex-col gap-[5px] p-2 lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
@@ -69,24 +64,26 @@ export default function Header() {
         </div>
 
         {mobileOpen && (
-          <div className="mt-2 rounded-2xl border border-white/[0.08] bg-[#121110]/95 px-6 py-6 backdrop-blur-xl md:hidden">
+          <div className="mt-2 rounded-2xl border border-white/[0.08] bg-[#151413]/95 px-6 py-6 backdrop-blur-xl lg:hidden">
             <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
+              {SECTIONS.map((link) => (
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-[16px] text-[#B5B1AC] transition-colors hover:text-accent"
+                  className="text-[17px] text-[#D2CEC9] transition-colors hover:text-accent"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
               <a
-                href="#schedule"
+                href={CAL_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="btn-gold mt-2 rounded-full px-6 py-3 text-center text-[13px] font-medium uppercase tracking-[0.14em]"
+                className="btn-ring mt-2 text-center"
               >
-                Schedule My Call
+                <span className="btn-ring__face">Book a Call</span>
               </a>
             </nav>
           </div>

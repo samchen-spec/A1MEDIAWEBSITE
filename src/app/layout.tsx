@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { inter, playfair } from "./fonts";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "A1 Media — We Help, Fund & Launch Creators",
@@ -15,8 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased">
+        <SmoothScroll />
         <Header />
         <main>{children}</main>
         <Footer />

@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..600&display=swap');
+/* Fonts are loaded by next/font in src/app/fonts.ts and exposed here as
+   --font-inter / --font-playfair. Inter carries everything; Playfair Display
+   appears only as the italic accent phrase inside a headline. Inter's optical
+   size axis is on, so large sizes get the Display cut automatically. */
 
 /* ─── Tokens ─────────────────────────────────────────────────────────────── */
 
@@ -18,51 +21,53 @@
   --accent-light-channels: 247 234 211;
   --accent-deep-channels: 199 158 88;
 
-  /* Legacy alias */
-  --blue: #E3C08D;
-
-  /* Near-black, slightly warm */
-  --bg-primary: #0A0A0A;
-  --bg-secondary: #0D0C0B;
-  --bg-card: #121110;
-  --bg-card-hover: #171613;
+  /* Near-black, slightly warm. The card sits ~14 steps above the page so panels
+     read as surfaces without a hairline holding them together. */
+  --bg-primary: #070706;
+  --bg-secondary: #0F0E0D;
+  --bg-card: #151413;
+  --bg-card-hover: #1B1917;
 
   --text-primary: #FAFAFA;
-  --text-body: #B5B1AC;
-  --text-muted: #7A756D;
+  --text-body: #D2CEC9;
+  --text-muted: #8A857D;
+  --text-dim: #4D4A46;
 
-  --border: rgba(255, 255, 255, 0.08);
-  --rule: rgba(var(--accent-rgb), 0.35);
+  --border: rgba(255, 255, 255, 0.07);
 
   --gold-gradient: linear-gradient(180deg, #F2DCB4 0%, #DFBC82 55%, #C79E58 100%);
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 30px;
 }
 
 html {
-  scroll-behavior: smooth;
   background-color: var(--bg-primary);
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 16px;
-  letter-spacing: -0.005em;
+  font-size: 18px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display face — high-contrast serif, set tight */
-h1, h2, h3,
-.font-serif,
-.font-display {
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  font-weight: 500;
-  letter-spacing: -0.022em;
+/* Headings are Inter too — tracking stays at normal, which is what Inter wants
+   at display sizes. Don't reintroduce negative tracking here. */
+h1, h2, h3, h4 {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.2;
 }
-
-h1 strong, h2 strong, h3 strong { font-weight: 600; }
 
 /* Grain */
 body::after {
@@ -71,46 +76,29 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.03;
+  opacity: 0.028;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 @layer utilities {
   .text-body { color: var(--text-body); }
   .text-muted { color: var(--text-muted); }
-  .border-custom { border-color: var(--border); }
+  .text-dim { color: var(--text-dim); }
 
-  /* Uppercase sans eyebrow */
+  /* The accent phrase inside a headline — the only place Playfair appears. */
+  .accent-italic {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  /* Gold eyebrow. Sentence-cased at body size, the way the reference sets it —
+     not the old 12px 0.2em uppercase label. */
   .eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
     color: var(--accent);
-  }
-
-  /* Headline emphasis marks */
-  .mark-box {
-    display: inline-block;
-    background: var(--gold-gradient);
-    color: #17120A;
-    border-radius: 10px;
-    padding: 0.02em 0.28em 0.1em;
-    font-weight: 600;
-  }
-  .mark-underline {
-    text-decoration: underline;
-    text-decoration-color: rgba(var(--accent-rgb), 0.85);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 6px;
-  }
-
-  .rule-accent {
-    width: 68px;
-    height: 2px;
-    background: var(--gold-gradient);
-    border-radius: 2px;
   }
 
   .text-gold {
@@ -123,111 +111,153 @@ body::after {
   .text-balance { text-wrap: balance; }
 }
 
-/* ─── Surfaces ───────────────────────────────────────────────────────────── */
+/* Component classes live in the components layer so Tailwind utilities
+   always override them — without this, .btn-ring's `display` beats
+   `hidden md:inline-block` and the mobile header shows two CTAs. */
+@layer components {
+  /* ─── Surfaces ───────────────────────────────────────────────────────────── */
 
-.panel,
-.card-dark,
-.card-blue-glow {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  transition: border-color 0.35s ease, background-color 0.35s ease, transform 0.35s ease;
-}
-.panel:hover,
-.card-dark:hover,
-.card-blue-glow:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(var(--accent-rgb), 0.3);
-  transform: translateY(-2px);
-}
+  /* Borderless. Separation comes from the fill against the page, which is why the
+     card token has to stay well clear of --bg-primary. */
+  .panel {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    transition: background-color 0.35s ease, transform 0.35s ease;
+  }
+  .panel:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
 
-.card-hover { transition: border-color 0.3s ease, background-color 0.3s ease; }
-.card-hover:hover { border-color: rgba(var(--accent-rgb), 0.3); }
+  /* The alternating band, as an inset rounded plate at content width rather than
+     a full-bleed stripe. */
+  .plate {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+  }
 
-/* Gold pill button */
-.btn-gold {
-  background: var(--gold-gradient);
-  color: #17120A;
-  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transition: box-shadow 0.3s ease, transform 0.3s ease, filter 0.3s ease;
-}
-.btn-gold:hover {
-  box-shadow: 0 0 48px rgba(var(--accent-rgb), 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  filter: brightness(1.04);
-}
+  /* Capability pill — the "Done-For-You …" row. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1.4;
+  }
 
-.btn-ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: var(--text-primary);
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-.btn-ghost:hover {
-  border-color: rgba(var(--accent-rgb), 0.6);
-  color: var(--accent);
-}
+  /* ─── Button ─────────────────────────────────────────────────────────────── */
 
-/* Page-top / CTA wash */
-.silk-bg {
-  position: relative;
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0.03) 34%, transparent 64%),
-    var(--bg-primary);
-}
+  /* Two nested boxes: the outer's 1.5px padding is the ring, and a rotating gold
+     conic gradient sweeps around it. The inner face is near-black, radius 10px.
+     Not a pill — the reference runs 10/11.5px corners at ~127x41. */
+  @property --ring-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
 
-/* Hero video. Sized by width the way the reference page does it — the player is
-   the point, so it stays large and the fold falls where it falls. The embed box
-   is 3:2. */
-.vsl-wrap {
-  width: 100%;
-  max-width: min(1100px, calc(100vw - 96px));
-  margin-inline: auto;
-}
+  .btn-ring {
+    position: relative;
+    display: inline-block;
+    padding: 1.5px;
+    border-radius: 11.5px;
+    background: #3B3735;
+    overflow: hidden;
+    isolation: isolate;
+  }
 
-/* Polaroid frames flanking the hero video */
-.polaroid {
-  background: #F7F5F0;
-  padding: 10px 10px 34px;
-  border-radius: 3px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-}
+  .btn-ring::before {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    z-index: 0;
+    background: conic-gradient(
+      from var(--ring-angle),
+      transparent 0deg,
+      var(--accent-deep) 40deg,
+      var(--accent-glow) 90deg,
+      var(--accent) 130deg,
+      transparent 190deg,
+      transparent 360deg
+    );
+    animation: ring-spin 4.5s linear infinite;
+  }
 
-/* Form controls */
-.field {
-  width: 100%;
-  background: #0E0D0C;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  color: var(--text-primary);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  transition: border-color 0.25s ease, background-color 0.25s ease;
-}
-.field::placeholder { color: #5F5A53; }
-.field:focus {
-  outline: none;
-  border-color: rgba(var(--accent-rgb), 0.55);
-  background: #121110;
+  .btn-ring__face {
+    position: relative;
+    z-index: 1;
+    display: block;
+    border-radius: 10px;
+    background: #0C0C0C;
+    padding: 7px 18px 9px;
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    transition: background-color 0.3s ease;
+  }
+  .btn-ring:hover .btn-ring__face { background: #141312; }
+
+  @keyframes ring-spin {
+    to { --ring-angle: 360deg; }
+  }
+
+  /* Ghost variant — same footprint, no ring. */
+  .btn-quiet {
+    display: inline-block;
+    border-radius: 11.5px;
+    border: 1px solid var(--border);
+    background: transparent;
+    padding: 8.5px 19.5px 10.5px;
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.2;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-quiet:hover {
+    border-color: rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+  }
+
+  /* ─── Hero aurora ────────────────────────────────────────────────────────── */
+
+  .aurora {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .aurora::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -40%;
+    left: -25%;
+    width: 150%;
+    height: 170%;
+    background:
+      radial-gradient(38% 44% at 28% 30%, rgba(227, 192, 141, 0.17) 0%, transparent 68%),
+      radial-gradient(30% 38% at 70% 22%, rgba(199, 158, 88, 0.13) 0%, transparent 70%),
+      radial-gradient(45% 30% at 50% 62%, rgba(242, 220, 180, 0.07) 0%, transparent 72%);
+    filter: blur(28px);
+    animation: aurora-drift 26s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes aurora-drift {
+    0%   { transform: translate3d(-4%, -2%, 0) rotate(-4deg) scale(1.04); }
+    50%  { transform: translate3d(3%, 3%, 0) rotate(3deg) scale(1.12); }
+    100% { transform: translate3d(6%, -3%, 0) rotate(6deg) scale(1.06); }
+  }
 }
 
 /* ─── Motion ─────────────────────────────────────────────────────────────── */
 
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-ticker {
-  display: flex;
-  width: max-content;
-  animation: ticker 40s linear infinite;
-  will-change: transform;
-}
-
-.animate-glow-pulse { animation: none; }
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-ticker { animation: none; }
   html { scroll-behavior: auto; }
+  .btn-ring::before,
+  .aurora::before { animation: none; }
 }

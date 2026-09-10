@@ -10,10 +10,10 @@ export default function FounderPhoto({ src, name }: { src: string; name: string 
   const initials = name.split(" ").map((w) => w[0]).join("");
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121110]">
+    <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#151413]">
       {failed ? (
         <div className="flex h-full w-full items-center justify-center">
-          <span className="font-serif text-[64px] text-accent/40">{initials}</span>
+          <span className="text-[64px] font-semibold text-accent/40">{initials}</span>
         </div>
       ) : (
         <Image
