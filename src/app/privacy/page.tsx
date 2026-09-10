@@ -3,7 +3,7 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — A1 Media",
+  title: "Privacy Policy, A1 Media",
 };
 
 export default function PrivacyPage() {

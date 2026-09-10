@@ -111,10 +111,20 @@ the ghost variant at the same footprint. Label is 18px/400.
 
 ### Card art
 
-`src/components/Infographics.tsx` — `OfferArt`, `FunnelArt`, `FundingArt`. Each is drawn for
-a **300×150** viewBox because that is the size of a bento card's art well. The old
-full-width editorial diagrams rendered their labels at ~5px in that slot; don't put a
-full-width diagram in a card.
+`src/components/Infographics.tsx`:
+
+- `GrowthChart`, `StrategyCard`, `RevenueCurve` — the three bento art wells, each drawn for a
+  **300×168** viewBox. Don't put a full-width diagram in a card; the editorial ones this
+  replaced rendered their labels at about 5px.
+- `ToolStack` — the tool roster, as full-colour brand marks in circular chips. Edit `TOOLS`
+  when the stack changes.
+- `TeamStack` — the placed sales seats, as ringed monogram circles. Deliberately anonymous:
+  don't put client or founder photos here.
+- `PipelineLoop` — the animated Why A1 diagram.
+
+`src/components/BrandLogos.tsx` holds the brand marks as inline SVG in their own colours.
+They are the **only** place on the site that isn't gold, and that is on purpose. Nominative
+use only: they identify the products, nothing more.
 
 ### Motion
 
@@ -127,6 +137,9 @@ full-width diagram in a card.
   `scroll-mt-24`, and passing both lands the heading twice as far down.
 - `AnimatedSection` fades up 24px over 0.8s, `once: true`, with per-card stagger via `delay`.
 - `.aurora` is the drifting gold wash behind the hero and final CTA.
+- `.flow-dot` / `.flow-pulse` drive `PipelineLoop`. Each dot's travel distance arrives as
+  `--flow-dist` on the element, so one keyframe serves every segment.
+- Everything animated is switched off under `prefers-reduced-motion`.
 
 ## Site Structure
 
@@ -135,16 +148,20 @@ the Calendly link in a new tab. Routes: `/`, `/privacy`, `/terms`.
 
 ### Home sections, in order
 
-Hero → Statement → How It Works (bento) → Why A1 → Founders → Clients → FAQ → Final CTA.
+Hero → Statement → How It Works (bento) → Why A1 → Founders → Portfolio → FAQ → Final CTA.
 
 - **Hero** — H1, lead, ring button + ghost button. `.aurora` background.
 - **Statement** — gold eyebrow + a 44px two-tone paragraph: the problem clause is dimmed to
   `--text-dim`, the A1 clauses stay white. This is a typographic device, not motion.
 - **How It Works** — a bento on a `.plate`: three art-top/text-bottom cards, two wide
   text-only cards, then the `Done-For-You …` pill row.
-- **Why A1** — Help · Fund · Launch, three icon columns. No cards.
+- **Why A1** — the animated `PipelineLoop`, then Help · Fund · Launch as three columns with
+  40px **filled** glyphs. Hairline icons vanish next to a 28px heading; keep them filled.
 - **Founders** — photo left / bulleted accomplishments right, one row each.
-- **Clients** — 3-up photo grid. No revenue figures: don't invent them.
+- **Portfolio** — live client landing pages, **one per row** so each gets read rather than
+  scanned. Screenshots live in `/public/portfolio/` and are captured from the live pages at
+  1440×900, then resized to 1800px wide JPEG. Recapture them when a client's page changes.
+  No revenue figures anywhere: don't invent them.
 - **FAQ** — accordion in the 760px `max-w-prose` column.
 
 The Maths, Launch Roadmap and Who This Is For were cut when the site moved to this
@@ -167,6 +184,8 @@ Floating rounded-full bar. The centred nav shows at `lg` and up; below that it c
 the hamburger panel. The ring CTA shows from `md` up.
 
 ## Copy Rules
+- **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.
+  Hyphens in compounds (high-ticket, long-form, Done-For-You) are fine.
 - Lead with the three verbs: **help, fund, launch**.
 - Always be explicit that A1 pays the ad spend and takes revenue share — that is the hook.
 - Qualify hard: established organic brand only. Say who this is *not* for.

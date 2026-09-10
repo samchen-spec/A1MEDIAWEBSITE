@@ -3,7 +3,7 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — A1 Media",
+  title: "Terms of Service, A1 Media",
 };
 
 export default function TermsPage() {
@@ -44,7 +44,7 @@ export default function TermsPage() {
                 2. Intellectual Property
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                All content on the Site — including text, graphics, logos, images, and software — is the property of A1 Media or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works from any content on the Site without our prior written consent.
+                All content on the Site, including text, graphics, logos, images, and software, is the property of A1 Media or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works from any content on the Site without our prior written consent.
               </p>
 
               {/* 3 */}

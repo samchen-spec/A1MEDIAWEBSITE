@@ -10,12 +10,12 @@ export default function Footer() {
       <div className="max-w-content mx-auto px-6 pt-20 pb-14">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12">
           <div>
-            <Link href="/" className="inline-block" aria-label="A1 Media — home">
+            <Link href="/" className="inline-block" aria-label="A1 Media home">
               <Image src="/a1-logo.png" alt="A1 Media" width={245} height={170} className="h-11 w-auto" />
             </Link>
             <p className="mt-5 max-w-[380px] text-body text-[#8A857D]">
-              We help, fund and launch creators — crafting the offer, covering the ad spend, and
-              running everything behind the brand.
+              We help, fund and launch creators. We craft the offer, cover the ad spend, and run
+              everything behind the brand.
             </p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}

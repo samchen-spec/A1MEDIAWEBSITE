@@ -18,7 +18,7 @@ export default function Header() {
     <header className="fixed inset-x-0 top-4 z-50 px-4 md:top-6 md:px-6">
       <div className="mx-auto max-w-[1140px]">
         <div className="relative flex items-center justify-between gap-6 rounded-full border border-white/[0.07] bg-[#151413]/85 px-5 py-3 backdrop-blur-xl md:px-7">
-          <Link href="/" className="relative z-10 shrink-0" aria-label="A1 Media — home">
+          <Link href="/" className="relative z-10 shrink-0" aria-label="A1 Media home">
             <Image
               src="/a1-logo.png"
               alt="A1 Media"
