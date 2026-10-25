@@ -154,6 +154,10 @@ use only: they identify the products, nothing more.
   `e.defaultPrevented` and you get a hard hash jump.
 - Don't pass an `offset` to `lenis.scrollTo` — it already honours the section's
   `scroll-mt-24`, and passing both lands the heading twice as far down.
+- **Verify reveals on a freshly started dev server.** After a Fast Refresh edit,
+  framer-motion's `whileInView` can get stuck at `opacity: 0` and the section renders blank
+  even though the markup is correct. It is an HMR artifact, not a bug; restart before
+  concluding anything is broken.
 - `AnimatedSection` takes a `variant` (`up` / `left` / `right` / `scale` / `fade`) and runs
   with **`once: false`**, so sections reveal every time they enter the viewport in either
   scroll direction. That is deliberate: it is what makes the page feel alive going back up.
@@ -175,10 +179,11 @@ the Calendly link in a new tab. Routes: `/`, `/privacy`, `/terms`.
 
 Hero → Statement → How It Works (bento) → Why us → Founders → FAQ → Final CTA.
 
-- **Hero** — H1, lead, one ring button. `.aurora` background. The H1 stays generic
-  ("We build it for free. Then we fund the ads"): the webinar and the 10 to 14 days live in
-  the lead underneath, because loading them into the headline dilutes the free-plus-funded
-  hook that does the actual work.
+- **Hero** — H1, lead, one ring button. `.aurora` background. The H1 names the offer and the
+  deadline outright: "We Will Help Launch Your High-Ticket Webinar Funnel **Within 14 Days**",
+  with the deadline as the gold italic. `High-Ticket` is wrapped in `whitespace-nowrap` so the
+  compound never breaks across lines. It runs 34px on mobile up to 62px at `lg`, below the
+  72px H1 in the scale table, because the line is long.
 - **Statement** — gold eyebrow + a 44px two-tone paragraph: the problem clause is dimmed to
   `--text-dim`, the A1 clauses stay white. This is a typographic device, not motion.
 - **How It Works** — a bento on a `.plate`: three art-top/text-bottom cards, two wide

@@ -187,8 +187,10 @@ export default function HomePage() {
       <section className="aurora px-6 pb-28 pt-[150px] md:pb-32 md:pt-[200px]">
         <div className="mx-auto flex w-full max-w-content flex-col items-center text-center">
           <AnimatedSection className="flex flex-col items-center">
-            <h1 className="max-w-[1000px] text-[38px] font-semibold leading-[1.2] text-balance sm:text-[52px] md:text-[62px] lg:text-h1">
-              We build it for free. <span className="accent-italic text-gold">Then we fund the ads</span>
+            <h1 className="max-w-[1100px] text-[34px] font-semibold leading-[1.15] text-balance sm:text-[44px] md:text-[54px] lg:text-[62px]">
+              We Will Help Launch Your{" "}
+              <span className="whitespace-nowrap">High-Ticket</span> Webinar Funnel{" "}
+              <span className="accent-italic text-gold">Within 14 Days</span>
             </h1>
 
             <p className="mt-6 max-w-[640px] text-body text-[#D2CEC9]">
