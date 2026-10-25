@@ -173,7 +173,7 @@ the Calendly link in a new tab. Routes: `/`, `/privacy`, `/terms`.
 
 ### Home sections, in order
 
-Hero → Statement → How It Works (bento) → Why us → Founders → Portfolio → FAQ → Final CTA.
+Hero → Statement → How It Works (bento) → Why us → Founders → FAQ → Final CTA.
 
 - **Hero** — H1, lead, one ring button. `.aurora` background. The H1 stays generic
   ("We build it for free. Then we fund the ads"): the webinar and the 10 to 14 days live in
@@ -188,16 +188,16 @@ Hero → Statement → How It Works (bento) → Why us → Founders → Portfoli
   animated glyphs. Hairline icons vanish next to a 28px heading; keep them filled. There is
   no diagram here: the icons carry the motion.
 - **Founders** — photo left / bulleted accomplishments right, one row each.
-- **Portfolio** — live client landing pages, **one per row**, capped at 880px so they read as
-  a showcase rather than a wall. **Brand name only** underneath, and **no outbound links**:
-  sending traffic off the page is the one thing this section shouldn't do. Screenshots live
-  in `/public/portfolio/`, captured at 1440×900 with the VSL playing so the creator is on
-  screen and consent banners dismissed, then resized to 1600px JPEG. Recapture when a
-  client's page changes. No revenue figures anywhere: don't invent them.
 - **FAQ** — accordion in the 760px `max-w-prose` column.
 
 The Maths, Launch Roadmap and Who This Is For were cut when the site moved to this
 structure, along with `CeilingChart` and `WeekArc`.
+
+**There is no client proof on the page.** The Clients grid became a Portfolio of client
+landing pages, and that was removed in October 2026 along with its screenshots and the
+orphaned `/public/clients/` headshots. The only third-party faces left are the four sales
+seats in `TeamStack`. If proof comes back, it needs real assets and real figures: nothing
+on this site invents a client, a logo or a number.
 
 ### Links
 

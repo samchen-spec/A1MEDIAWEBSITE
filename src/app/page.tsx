@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import CTAButton from "@/components/CTAButton";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -102,17 +101,6 @@ const founders = [
       "Builds the objection maps our partners' teams sell from",
     ],
   },
-];
-
-// ─── Portfolio ──────────────────────────────────────────────────────────────────
-// Offers we built. Name only, no outbound links: this is a showcase, not a
-// directory, and sending traffic off the page is the one thing it shouldn't do.
-// Screenshots are captured from the live pages with the creator on screen.
-
-const portfolio = [
-  { brand: "Ancestor Maxxing", image: "/portfolio/ancestormaxxing.jpg" },
-  { brand: "Millionaire PT Blueprint", image: "/portfolio/prestige-fitness.jpg" },
-  { brand: "Abundance Of Women", image: "/portfolio/abundance-of-women.jpg" },
 ];
 
 // ─── FAQ ────────────────────────────────────────────────────────────────────────
@@ -376,45 +364,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 6. PORTFOLIO ══════════════════════════════════════════════════ */}
-      <section id="portfolio" className="scroll-mt-24 px-6 py-24">
-        <div className="mx-auto max-w-content">
-          <AnimatedSection className="text-center">
-            <Eyebrow>Live work</Eyebrow>
-            <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
-              Our <span className="accent-italic text-gold">portfolio</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-[560px] text-body text-[#8A857D]">
-              Offers we built, funded and still run.
-            </p>
-          </AnimatedSection>
-
-          <div className="mt-16 flex flex-col items-center gap-14 md:gap-16">
-            {portfolio.map((item) => (
-              <AnimatedSection key={item.brand} className="w-full max-w-[880px]" variant="scale">
-                <figure>
-                  <div className="panel overflow-hidden p-2.5">
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-[#0C0B0A]">
-                      <Image
-                        src={item.image}
-                        alt={`${item.brand} landing page`}
-                        fill
-                        className="object-cover object-top"
-                        sizes="(max-width: 900px) 100vw, 880px"
-                      />
-                    </div>
-                  </div>
-                  <figcaption className="mt-5 text-center text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
-                    {item.brand}
-                  </figcaption>
-                </figure>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ 7. FAQ ════════════════════════════════════════════════════════ */}
+      {/* ══ 6. FAQ ════════════════════════════════════════════════════════ */}
       <section id="faq" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="mx-auto max-w-prose">
@@ -438,7 +388,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 8. FINAL CTA ══════════════════════════════════════════════════ */}
+      {/* ══ 7. FINAL CTA ══════════════════════════════════════════════════ */}
       <section className="aurora px-6 py-32 md:py-44">
         <div className="mx-auto max-w-content text-center">
           <AnimatedSection className="flex flex-col items-center gap-7">
