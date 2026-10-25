@@ -12,8 +12,9 @@ import TeamStack from "@/components/TeamStack";
 import { CAL_LINK } from "@/lib/site";
 
 // ─── How it works ───────────────────────────────────────────────────────────────
-// The seven-step list compressed to five bento cards. The `wide` pair runs
-// text-left / art-right on the second row; the rest are art-top / text-bottom.
+// Five bento cards. The `wide` pair runs text-left / art-right on the second
+// row; the rest are art-top / text-bottom. The webinar is the centre of the
+// offer now: card two carries it.
 
 const bento = [
   {
@@ -22,13 +23,13 @@ const bento = [
     art: "growth" as const,
   },
   {
-    title: "We build and own the funnel",
-    body: "Pages, scripts, sequences, checkout and CRM. Attention through to payment.",
+    title: "We build and run the webinar",
+    body: "Registration page, slides, script, replay and the email sequence around it.",
     art: "strategy" as const,
   },
   {
     title: "We scale it with our own money",
-    body: "Once it converts organically, our capital goes into the ad account.",
+    body: "Once the webinar converts, our capital goes into the ad account.",
     art: "revenue" as const,
   },
 ];
@@ -47,14 +48,15 @@ const bentoWide = [
 ];
 
 const capabilities = [
+  "Done-For-You Webinars",
   "Done-For-You Funnels",
-  "Done-For-You Ads",
   "Done-For-You Offers",
+  "Done-For-You Ads",
   "Done-For-You Copywriting",
   "Done-For-You Sales Teams",
 ];
 
-// ─── Why A1 ─────────────────────────────────────────────────────────────────────
+// ─── Why us ─────────────────────────────────────────────────────────────────────
 // The three verbs from the positioning, one per column.
 
 const pillars = [
@@ -70,7 +72,7 @@ const pillars = [
   },
   {
     title: "Launch",
-    body: "Offer locked, funnel built, sales team placed and tracking wired up, live to your audience inside the first week.",
+    body: "Offer locked, webinar built, sales team placed and tracking wired up, live to your audience in 10 to 14 days.",
     Icon: LaunchIcon,
   },
 ];
@@ -117,11 +119,12 @@ const portfolio = [
 
 const faqItems = [
   { question: "How is all of this free?", answer: "There's no retainer, no setup fee and no ad budget from you. We're paid a percentage of the revenue the offer produces, so we earn after you do. The marketing, sales, operations and backend cost you nothing upfront because we're betting on the outcome rather than billing for the work." },
-  { question: "You actually pay for the ad spend?", answer: "Yes. Once the offer is proven with your organic audience, we fund the paid campaigns out of our own pocket: creative, testing and scaling. We're not asking you to risk your own money to find out whether this works." },
+  { question: "How fast is it live?", answer: "10 to 14 days from signing. That covers the offer, the webinar itself, the registration and replay pages, the email sequence and the booking flow, with the sales team placed and tracking wired up before it goes out. The only thing we need from you inside that window is the recording session and sign-off on the offer." },
+  { question: "You actually pay for the ad spend?", answer: "Yes. Once the webinar converts with your organic audience, we fund the paid campaigns out of our own pocket: creative, testing and scaling. We're not asking you to risk your own money to find out whether this works." },
   { question: "What counts as an established brand?", answer: "An audience that already knows you, watches you and responds to you, built organically over time, not bought. If you're monetising with a community, a low-ticket product or brand deals and you feel capped by it, that's the profile. If you're still building the audience, we're not the right partner yet." },
-  { question: "What if I don't have an offer yet?", answer: "Most partners don't. That's the work. We handle research, positioning, pricing, packaging and delivery, and build the offer from scratch. You bring the audience and the credibility; we build the thing they buy." },
-  { question: "Do I have to stop taking brand deals?", answer: "No. Most partners keep them. The difference is that brand deals become the smaller line on the invoice instead of the whole business, because the offer produces revenue every month whether or not a sponsor turns up." },
-  { question: "How much of my time does this take?", answer: "You keep making content and show up for the assets we need: a handful of filming sessions and sign-off on the offer. Everything else, from funnels to closers to ad management, sits with us." },
+  { question: "What if I don't have an offer yet?", answer: "Most partners don't. That's the work. We handle research, positioning, pricing, packaging and delivery, and build the offer from scratch, then build the webinar that sells it. You bring the audience and the credibility; we build the thing they buy." },
+  { question: "Do I have to stop taking brand deals?", answer: "No. Most partners keep them. The difference is that brand deals become the smaller line on the invoice instead of the whole business, because the webinar produces revenue every month whether or not a sponsor turns up." },
+  { question: "How much of my time does this take?", answer: "You keep making content, record the webinar once and sign off on the offer. That is the whole ask. The script, the slides, the pages, the sequences, the closers and the ad management all sit with us, and the recording is reusable rather than something you present live every week." },
   { question: "How selective are you?", answer: "Very, because we're spending our own capital on every partnership. We take a small number of creators at a time, and if we can't see a clear path to seven figures we'll tell you on the call rather than take you on." },
 ];
 
@@ -201,9 +204,9 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-[640px] text-body text-[#D2CEC9]">
-              A1 Media crafts established creators a high-ticket offer from start to finish, then
-              pays for the ad spend out of our own pocket. You keep making content. No retainer,
-              no setup fee.
+              GrowingOffers crafts established creators a high-ticket offer, launches it as a
+              webinar funnel in 10 to 14 days, then pays for the ad spend out of our own pocket.
+              You keep making content. No retainer, no setup fee.
             </p>
           </AnimatedSection>
 
@@ -214,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* ══ 2. STATEMENT ══════════════════════════════════════════════════ */}
-      {/* Two-tone: the problem clause dims out, the A1 clauses stay white. */}
+      {/* Two-tone: the problem clause dims out, our clauses stay white. */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-content text-center">
           <AnimatedSection>
@@ -296,8 +299,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 4. WHY A1 ═════════════════════════════════════════════════════ */}
-      <section id="why-a1" className="scroll-mt-24 px-6 py-24">
+      {/* ══ 4. WHY US ═════════════════════════════════════════════════════ */}
+      <section id="why-us" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="max-w-[720px]">
             <Eyebrow>The whole model, in three words</Eyebrow>

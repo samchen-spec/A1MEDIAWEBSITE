@@ -4,7 +4,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
-  title: "Terms of Service, A1 Media",
+  title: "Terms of Service, GrowingOffers",
 };
 
 export default function TermsPage() {
@@ -29,7 +29,7 @@ export default function TermsPage() {
             <div className="mt-10 max-w-3xl">
 
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                Please read these Terms of Service (&quot;Terms&quot;) carefully before using the growingoffers.com website (the &quot;Site&quot;) operated by A1 Media (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.
+                Please read these Terms of Service (&quot;Terms&quot;) carefully before using the growingoffers.com website (the &quot;Site&quot;) operated by GrowingOffers (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.
               </p>
 
               {/* 1 */}
@@ -45,7 +45,7 @@ export default function TermsPage() {
                 2. Intellectual Property
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                All content on the Site, including text, graphics, logos, images, and software, is the property of A1 Media or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works from any content on the Site without our prior written consent.
+                All content on the Site, including text, graphics, logos, images, and software, is the property of GrowingOffers or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works from any content on the Site without our prior written consent.
               </p>
 
               {/* 3 */}
@@ -53,7 +53,7 @@ export default function TermsPage() {
                 3. No Guarantees of Results
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                A1 Media provides marketing, offer creation, funnel building, and paid acquisition services to its partners. While we have a strong track record, we do not guarantee specific financial outcomes, revenue figures, or business results. Past performance of other partnerships does not guarantee future results. Individual outcomes depend on a variety of factors including niche, audience, market conditions, and the effort contributed by the partner.
+                GrowingOffers provides marketing, offer creation, webinar and funnel building, and paid acquisition services to its partners. While we have a strong track record, we do not guarantee specific financial outcomes, revenue figures, or business results. Past performance of other partnerships does not guarantee future results. Individual outcomes depend on a variety of factors including niche, audience, market conditions, and the effort contributed by the partner.
               </p>
 
               {/* 4 */}
@@ -69,7 +69,7 @@ export default function TermsPage() {
                 5. Limitation of Liability
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                To the fullest extent permitted by law, A1 Media shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Site or any services discussed on the Site. Our total liability shall not exceed the amount you have paid to us, if any, in the twelve months preceding the claim.
+                To the fullest extent permitted by law, GrowingOffers shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Site or any services discussed on the Site. Our total liability shall not exceed the amount you have paid to us, if any, in the twelve months preceding the claim.
               </p>
 
               {/* 6 */}
@@ -77,7 +77,7 @@ export default function TermsPage() {
                 6. Indemnification
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                You agree to indemnify and hold harmless A1 Media, its officers, directors, employees, and agents from any claims, losses, liabilities, damages, costs, or expenses (including legal fees) arising from your use of the Site or violation of these Terms.
+                You agree to indemnify and hold harmless GrowingOffers, its officers, directors, employees, and agents from any claims, losses, liabilities, damages, costs, or expenses (including legal fees) arising from your use of the Site or violation of these Terms.
               </p>
 
               {/* 7 */}
@@ -85,7 +85,7 @@ export default function TermsPage() {
                 7. Third-Party Links
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                The Site may contain links to third-party websites or services not owned or controlled by A1 Media. We have no control over and assume no responsibility for the content, policies, or practices of any third-party sites.
+                The Site may contain links to third-party websites or services not owned or controlled by GrowingOffers. We have no control over and assume no responsibility for the content, policies, or practices of any third-party sites.
               </p>
 
               {/* 8 */}

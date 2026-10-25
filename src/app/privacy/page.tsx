@@ -4,7 +4,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy, A1 Media",
+  title: "Privacy Policy, GrowingOffers",
 };
 
 export default function PrivacyPage() {
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <div className="mt-10 max-w-3xl">
 
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                A1 Media (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website growingoffers.com (the &quot;Site&quot;). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our Site or submit an application. Please read this policy carefully. If you disagree with its terms, please discontinue use of the Site.
+                GrowingOffers (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website growingoffers.com (the &quot;Site&quot;). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our Site or submit an application. Please read this policy carefully. If you disagree with its terms, please discontinue use of the Site.
               </p>
 
               {/* 1 */}

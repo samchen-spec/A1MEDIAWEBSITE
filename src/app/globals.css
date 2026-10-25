@@ -285,7 +285,7 @@ body::after {
   100% { transform: translate3d(-5%, 3%, 0)  rotate(-6deg)  scale(1.04); }
 }
 
-/* ─── Icon animation (Why A1) ─────────────────────────────────────────────── */
+/* ─── Icon animation (Why us) ─────────────────────────────────────────────── */
 
 @keyframes ico-bar {
   0%, 100% { transform: scaleY(0.5); }

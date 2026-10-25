@@ -1,9 +1,12 @@
-# CLAUDE.md — A1 Media Style Guide
+# CLAUDE.md — GrowingOffers Style Guide
 
 ## Brand Identity
-- **Brand Name:** A1 Media (site: growingoffers.com)
+- **Brand Name:** GrowingOffers (site: growingoffers.com). One word, camel-cased in prose;
+  the logo sets it as `GO` over a `GROWINGOFFERS` wordmark. Rebranded from A1 Media in
+  October 2026, so treat any surviving "A1" as a bug.
 - **Positioning:** We help, fund & launch creators. We craft an established creator a
-  high-ticket offer from start to finish, then pay for the ad spend ourselves to scale it.
+  high-ticket offer, launch it as a **webinar funnel in 10 to 14 days**, then pay for the
+  ad spend ourselves to scale it.
 - **Audience:** Creators with an established organic brand who are currently selling a Skool
   community, a low-ticket course, or taking brand deals — not beginners building an audience.
 - **Tone:** Editorial, plain-spoken, confident. Short declarative sentences. No hype stack,
@@ -133,9 +136,10 @@ variety. Don't reintroduce them.
 colour each (cyan / gold / green), each animating on its own loop. The Why A1 section has no
 diagram: the icons carry the motion.
 
-`src/components/TeamStack.tsx` — the placed sales seats. A seat with `src: null` renders a
-monogram, so the card looks finished with no photos in place and the browser never requests
-a file that isn't there. See `public/team/README.md`. Only real staff photos go here.
+`src/components/TeamStack.tsx` — the placed sales seats, four real headshots in
+`/public/team/`, mirrored from the `sales team photos/` folder at the repo root. A seat whose
+file is missing falls back to a monogram. Only real staff photos go here: the card presents
+them as our placed staff, so stock portraits would make that claim false.
 
 `src/components/BrandLogos.tsx` holds the brand marks as inline SVG in their own colours.
 They are the **only** place on the site that isn't gold, and that is on purpose. Nominative
@@ -169,15 +173,20 @@ the Calendly link in a new tab. Routes: `/`, `/privacy`, `/terms`.
 
 ### Home sections, in order
 
-Hero → Statement → How It Works (bento) → Why A1 → Founders → Portfolio → FAQ → Final CTA.
+Hero → Statement → How It Works (bento) → Why us → Founders → Portfolio → FAQ → Final CTA.
 
-- **Hero** — H1, lead, ring button + ghost button. `.aurora` background.
+- **Hero** — H1, lead, one ring button. `.aurora` background. The H1 stays generic
+  ("We build it for free. Then we fund the ads"): the webinar and the 10 to 14 days live in
+  the lead underneath, because loading them into the headline dilutes the free-plus-funded
+  hook that does the actual work.
 - **Statement** — gold eyebrow + a 44px two-tone paragraph: the problem clause is dimmed to
   `--text-dim`, the A1 clauses stay white. This is a typographic device, not motion.
 - **How It Works** — a bento on a `.plate`: three art-top/text-bottom cards, two wide
-  text-only cards, then the `Done-For-You …` pill row.
-- **Why A1** — the animated `PipelineLoop`, then Help · Fund · Launch as three columns with
-  40px **filled** glyphs. Hairline icons vanish next to a 28px heading; keep them filled.
+  text-and-art cards, then the `Done-For-You …` pill row. Card two is the webinar, which is
+  the centre of the offer; don't demote it back to a generic "funnel" card.
+- **Why us** (`#why-us`) — Help · Fund · Launch as three columns with 64px **filled**,
+  animated glyphs. Hairline icons vanish next to a 28px heading; keep them filled. There is
+  no diagram here: the icons carry the motion.
 - **Founders** — photo left / bulleted accomplishments right, one row each.
 - **Portfolio** — live client landing pages, **one per row**, capped at 880px so they read as
   a showcase rather than a wall. **Brand name only** underneath, and **no outbound links**:
@@ -192,14 +201,20 @@ structure, along with `CeilingChart` and `WeekArc`.
 
 ### Links
 
-`src/lib/site.ts` is the single source of truth: `CAL_LINK`, `CONTACT_EMAIL`, and `SECTIONS`
-(the in-page anchors shared by the header and footer navs).
+`src/lib/site.ts` is the single source of truth: `CAL_LINK` and `CONTACT_EMAIL`. There is no
+`SECTIONS` list any more, because neither the header nor the footer carries a nav. Section
+ids stay on the markup for deep links.
+
+`CONTACT_EMAIL` is still an `@a1media.info` address, left over from the rebrand. It only
+appears in the privacy and terms pages. Swap it when the new mailbox exists.
 
 ### Assets
 
 Founder headshots at `/public/founders/`; `FounderPhoto` falls back to a gold monogram when
-a file is missing. The brand mark `/public/a1-logo.png` is white on transparency — dark
-backgrounds only.
+a file is missing. The brand mark is `/public/growingoffers-logo.png`: a stacked `GO` over the wordmark, keyed
+to transparency from the supplied black-background source, so it sits on any dark band. It
+needs more height than a single-line logo because of the stack: below about 44px the
+wordmark stops reading, hence `h-12 md:h-14` in the header.
 
 ### Header
 
@@ -211,6 +226,9 @@ Don't reintroduce a nav here without a reason.
 - **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.
   Hyphens in compounds (high-ticket, long-form, Done-For-You) are fine.
 - Lead with the three verbs: **help, fund, launch**.
-- Always be explicit that A1 pays the ad spend and takes revenue share — that is the hook.
+- Always be explicit that we pay the ad spend and take revenue share: that is the hook.
+- The **10 to 14 day** launch window and the **webinar** are the offer. Say both early.
+  Spell the range out in words, never as "10-14", so it survives the no-dashes rule.
 - Qualify hard: established organic brand only. Say who this is *not* for.
-- Never promise guaranteed results; the footer disclaimer stands.
+- Never promise guaranteed results. Note the footer disclaimer was removed at the owner's
+  direction in October 2026, so the copy itself has to stay measured.
