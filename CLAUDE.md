@@ -172,8 +172,13 @@ use only: they identify the products, nothing more.
 
 ## Site Structure
 
-Informational only — no VSL, no form, no quiz. Every CTA is a `Book a Call` button opening
-the Calendly link in a new tab. Routes: `/`, `/privacy`, `/terms`.
+The marketing pages are informational only — no VSL, no quiz, and no form. Every CTA is a
+`Book a Call` button opening the Calendly link in a new tab. Routes: `/`, `/privacy`,
+`/terms`, `/onboarding`.
+
+`/onboarding` and `/admin` are the exceptions and are deliberately not linked from anywhere:
+one is a private URL sent to clients after they sign, the other is behind a password. Both
+carry `robots: noindex`. Don't add either to a nav or a footer.
 
 ### Home sections, in order
 
@@ -212,6 +217,57 @@ ids stay on the markup for deep links.
 
 `CONTACT_EMAIL` is still an `@a1media.info` address, left over from the rebrand. It only
 appears in the privacy and terms pages. Swap it when the new mailbox exists.
+
+### Onboarding form
+
+`/onboarding` is a one-question-per-screen form, about 36 screens, defined entirely by
+`QUESTIONS` in **`src/lib/onboarding.ts`**. Add a question there and the form, the
+validation, the Google Sheet header and the Discord transcript all follow. Nothing about the
+question set lives in the components.
+
+- **Two tracks.** The first question forks on whether the client already sells an offer.
+  Each question carries `tracks`, and `questionsFor(track)` is what the form walks. Questions
+  tagged with both are asked either way.
+- **`minChars`** is on the answers the build depends on (the method, the objections, the
+  audience's own words). It is the one thing stopping a one-word answer becoming generic
+  creative, so don't lower it to make the form faster to finish. `allowNone` lets a client
+  past it by typing "none" where having nothing is a legitimate answer.
+- **One tab per track**, `Has an offer` (39 columns) and `Building first offer` (38), so no
+  row carries empty columns belonging to the other track. `sheetColumns(track)` builds both
+  the header and the row, which is what keeps them from drifting apart; `allSheetColumns()`
+  is the union, used only for the dashboard's CSV export. Neither tab has a Track column:
+  the tab it sits on already says, and `readSubmissions` tags each row from the tab it came
+  off. Nothing in the spreadsheet is set up by hand. The first submission of each kind
+  creates its tab, writes the header and freezes the top row.
+- **The sheet is the record, Discord is the alert.** A Sheets failure returns 502 so the
+  form can retry with the answers still in localStorage; a Discord failure only logs. Don't
+  flip that around.
+- Progress is saved to localStorage under `growingoffers.onboarding.v1` and cleared on
+  success. A 36-screen form does not get finished in one sitting.
+- Discord gets a summary embed plus the full transcript as a `.md` attachment. It cannot get
+  the answers as embed fields: Discord caps a field at 1024 characters and an embed at 6000,
+  and rejects the whole payload silently when either is passed.
+- Env vars are in `.env.example`. With none set, the route logs a warning and still returns
+  200, so the form works in development without credentials.
+
+### Admin dashboard
+
+`/admin` reads the submissions back out of the same Google Sheet the form writes to, which
+is why there is no database anywhere in this project. `src/lib/sheets.ts` is the one Sheets
+client: `appendRow` for the form, `readSubmissions` for the dashboard.
+
+- **Auth is a password and a signed cookie** (`src/lib/admin-auth.ts`), no dependency and no
+  user table. The HMAC key is derived from `ADMIN_PASSWORD` itself, so there is no second
+  secret to set and changing the password invalidates every live session. Password checks
+  are timing-safe and a wrong one costs a fixed 500ms, which is the only rate limiting
+  available without shared state.
+- **The gate is in the page, not in middleware**, so the session check and the sheet read
+  happen in one request with nothing unprotected in between. Verified: no cookie, a garbage
+  cookie, a forged signature and a correctly-signed but expired token are all refused.
+- **Columns are matched to the sheet by header label, not by position.** Inserting a column
+  by hand in Google Sheets shifts nothing; renaming a header drops that one field.
+- The detail view renders from `QUESTIONS` rather than from the row, so answers appear in
+  the order they were asked, under their own section headings, with empty ones skipped.
 
 ### Assets
 
