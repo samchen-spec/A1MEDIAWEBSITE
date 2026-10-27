@@ -4,7 +4,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CTAButton from "@/components/CTAButton";
 
-export default function AdminLogin({ configured }: { configured: boolean }) {
+export default function AdminLogin({
+  configured,
+  title = "Admin",
+  purpose = "see form submissions",
+}: {
+  configured: boolean;
+  title?: string;
+  purpose?: string;
+}) {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -43,13 +51,13 @@ export default function AdminLogin({ configured }: { configured: boolean }) {
     <div className="mx-auto flex min-h-[100svh] max-w-[440px] flex-col justify-center px-6 py-32">
       <p className="eyebrow">GrowingOffers</p>
       <h1 className="mt-4 text-[34px] font-semibold leading-[1.2] text-[#FAFAFA]">
-        Admin
+        {title}
       </h1>
 
       {configured ? (
         <>
           <p className="mt-4 text-muted">
-            Enter the admin password to see form submissions.
+            Enter the admin password to {purpose}.
           </p>
           <div className="mt-7">
             <input

@@ -11,6 +11,7 @@ import {
   type Track,
 } from "@/lib/onboarding";
 import type { Submission } from "@/lib/store";
+import AdminTabs from "@/components/admin/AdminTabs";
 
 const TRACK_LABELS: Record<Track, string> = {
   "has-offer": "Has an offer",
@@ -103,6 +104,7 @@ export default function SubmissionsView({
 
   return (
     <div className="mx-auto max-w-content px-6 py-28 md:px-10">
+      <AdminTabs active="submissions" />
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="eyebrow">GrowingOffers</p>
