@@ -8,7 +8,6 @@ import FounderPhoto from "@/components/FounderPhoto";
 import {
   GrowthChart, StrategyCard, RevenueCurve, ToolStack, WebinarMaths,
 } from "@/components/Infographics";
-import { HelpIcon, FundIcon, LaunchIcon } from "@/components/PillarIcons";
 import TeamStack from "@/components/TeamStack";
 import { CAL_LINK } from "@/lib/site";
 
@@ -90,28 +89,6 @@ const capabilities = [
   "Done-For-You Ads",
   "Done-For-You Copywriting",
   "Done-For-You Sales Teams",
-];
-
-// ─── The whole model ────────────────────────────────────────────────────────────
-// Help, launch, scale: one per column. The icon components keep their old names
-// (Help / Fund / Launch); only the words on them changed.
-
-const pillars = [
-  {
-    title: "Help",
-    body: "We work with you on the content that actually brings in buyers, and script the long-form so your sales stop depending on your best week.",
-    Icon: HelpIcon,
-  },
-  {
-    title: "Launch",
-    body: "Offer locked, webinar built, sales team placed and tracking wired up. You’re live to your audience in 10 to 14 days.",
-    Icon: LaunchIcon,
-  },
-  {
-    title: "Scale",
-    body: "We run it live until the pitch is sharp, then grow it with ads and turn it into an automated webinar that sells while you post.",
-    Icon: FundIcon,
-  },
 ];
 
 // ─── Three options ──────────────────────────────────────────────────────────────
@@ -226,6 +203,17 @@ function Cross() {
   );
 }
 
+/* The owner asked for a CTA under every section, so it is one component used
+   nine times rather than nine copies of the button. The hero and the close
+   already end on their own button and don't take one. */
+function CTARow() {
+  return (
+    <AnimatedSection variant="fade" className="mt-16 flex justify-center">
+      <CTAButton href={CAL_LINK} external>{CTA_LABEL}</CTAButton>
+    </AnimatedSection>
+  );
+}
+
 function AccordionItem({ question, answer, isOpen, onToggle }: { question: string; answer: string; isOpen: boolean; onToggle: () => void }) {
   return (
     <div className="border-b border-white/[0.07]">
@@ -285,12 +273,6 @@ export default function HomePage() {
               Your audience trusts you more than any brand you’ve ever promoted.
               <br />
               So why is the brand the one getting paid for it?
-            </p>
-
-            <p className="mt-5 max-w-[640px] text-body text-[#D2CEC9]">
-              We build your high-ticket offer, launch it as a live webinar, and our closers
-              sign up everyone who wants in. You show up for a couple of hours. We do the
-              other 99%.
             </p>
           </AnimatedSection>
 
@@ -408,6 +390,8 @@ export default function HomePage() {
             </AnimatedSection>
           </div>
         </div>
+
+          <CTARow />
       </section>
 
       {/* ══ 3. NOT ANOTHER GURU ═══════════════════════════════════════════ */}
@@ -491,6 +475,8 @@ export default function HomePage() {
             </AnimatedSection>
           </div>
         </div>
+
+          <CTARow />
       </section>
 
       {/* ══ 4. EVERYTHING BEHIND THE BRAND — BENTO ════════════════════════ */}
@@ -564,39 +550,11 @@ export default function HomePage() {
             </p>
           </AnimatedSection>
         </div>
+
+          <CTARow />
       </section>
 
-      {/* ══ 5. THE WHOLE MODEL ════════════════════════════════════════════ */}
-      <section id="why-us" className="scroll-mt-24 px-6 py-24">
-        <div className="mx-auto max-w-content">
-          <AnimatedSection variant="left" className="max-w-[720px]">
-            <Eyebrow>The whole model, in three words</Eyebrow>
-            <h2 className="mt-5 text-[34px] font-semibold leading-[1.1] md:text-[54px]">
-              Help. Launch. <span className="accent-italic text-gold">Scale.</span>
-            </h2>
-            <p className="mt-5 max-w-[560px] text-body text-[#8A857D]">
-              Three things you can’t buy separately and can’t do alone. We do all three with
-              you. (We tried four words. Nobody remembered the fourth.)
-            </p>
-          </AnimatedSection>
-
-          <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-6">
-            {pillars.map((p, i) => (
-              <AnimatedSection key={p.title} delay={i * 0.08}>
-                <div className="px-2">
-                  <p.Icon />
-                  <h3 className="mt-7 text-[22px] font-medium leading-[1.4] text-[#FAFAFA] md:text-h3">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-body text-[#D2CEC9]">{p.body}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ 6. YOUR THREE OPTIONS ═════════════════════════════════════════ */}
+      {/* ══ 5. YOUR THREE OPTIONS ═════════════════════════════════════════ */}
       <section id="options" className="scroll-mt-24 px-6 py-8">
         <div className="plate mx-auto max-w-content px-6 py-24 md:px-12">
           <AnimatedSection className="text-center">
@@ -641,9 +599,11 @@ export default function HomePage() {
             </p>
           </AnimatedSection>
         </div>
+
+          <CTARow />
       </section>
 
-      {/* ══ 7. MEET THE TEAM ══════════════════════════════════════════════ */}
+      {/* ══ 6. MEET THE TEAM ══════════════════════════════════════════════ */}
       <section id="founders" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
@@ -690,9 +650,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+
+          <CTARow />
       </section>
 
-      {/* ══ 8. WHO THIS IS FOR ════════════════════════════════════════════ */}
+      {/* ══ 7. WHO THIS IS FOR ════════════════════════════════════════════ */}
       <section id="who-its-for" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection className="text-center">
@@ -747,9 +709,11 @@ export default function HomePage() {
             </p>
           </AnimatedSection>
         </div>
+
+          <CTARow />
       </section>
 
-      {/* ══ 9. FAQ ════════════════════════════════════════════════════════ */}
+      {/* ══ 8. FAQ ════════════════════════════════════════════════════════ */}
       <section id="faq" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="mx-auto max-w-prose">
@@ -772,9 +736,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+
+          <CTARow />
       </section>
 
-      {/* ══ 10. CLOSE ═════════════════════════════════════════════════════ */}
+      {/* ══ 9. CLOSE ═════════════════════════════════════════════════════ */}
       <section className="aurora px-6 py-32 md:py-44">
         <div className="mx-auto max-w-content text-center">
           <AnimatedSection className="flex flex-col items-center gap-7">

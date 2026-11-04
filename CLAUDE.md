@@ -149,8 +149,10 @@ variety. Don't reintroduce them.
   widths that collapse to `w-full` below `sm`, because a 52% row cannot hold "buy a $3,000
   offer" at 375px. Edit `FUNNEL` to change the numbers, and change the copy above it to match.
 `src/components/PillarIcons.tsx` — `HelpIcon`, `FundIcon`, `LaunchIcon`. 64px, filled, one
-colour each (cyan / gold / green), each animating on its own loop. The Why A1 section has no
-diagram: the icons carry the motion.
+colour each (cyan / gold / green), each animating on its own loop. **Currently unused:** they
+carried the Help · Launch · Scale columns, and that section was cut in November 2026 at the
+owner's direction. The file and its `.ico-*` keyframes are kept for when a three-column block
+comes back; nothing else on the page imports them.
 
 `src/components/TeamStack.tsx` — the placed sales seats, four real headshots in
 `/public/team/`, mirrored from the `sales team photos/` folder at the repo root. A seat whose
@@ -199,10 +201,14 @@ carry `robots: noindex`. Don't add either to a nav or a footer.
 
 ### Home sections, in order
 
-Hero → Golden Goose → Not Another Guru → Everything Behind The Brand (bento) → The Whole
-Model → Your Three Options → Meet The Team → Who This Is For → FAQ → Close.
+Hero → Golden Goose → Not Another Guru → Everything Behind The Brand (bento) →
+Your Three Options → Meet The Team → Who This Is For → FAQ → Close.
 
-- **Hero** — H1, a gold parenthetical, two lead paragraphs, one ring button. `.aurora`
+**Every section ends on a `Talk To Our Advisors` button**, rendered by the `CTARow` component
+and placed outside the section's `.plate` where it has one, so it sits on the page background.
+The hero and the close carry their own button and don't take a `CTARow`.
+
+- **Hero** — H1, a gold parenthetical, one lead paragraph, one ring button. `.aurora`
   background. The H1 is the long direct-response line: "Turn The Audience You Already Have
   Into A "WAIT... WE SOLD HOW MANY?" High-Ticket Webinar **In 14 Days** Instead Of Months!",
   with the deadline as the gold italic. `High-Ticket` is wrapped in `whitespace-nowrap` so the
@@ -221,10 +227,6 @@ Model → Your Three Options → Meet The Team → Who This Is For → FAQ → C
   art-top/text-bottom cards, two wide text-and-art cards, the `Done-For-You …` pill row, then
   the "not a course, not an agency" closing line. Card two is the webinar, which is the centre
   of the offer; don't demote it back to a generic "funnel" card.
-- **The Whole Model** (`#why-us`) — Help · Launch · Scale as three columns with 64px
-  **filled**, animated glyphs (`HelpIcon`, `LaunchIcon`, `FundIcon` in that order; the
-  component names predate the reposition). Hairline icons vanish next to a 28px heading; keep
-  them filled. There is no diagram here: the icons carry the motion.
 - **Your Three Options** (`#options`) — three cards on a `.plate`. Option 3 is ours and is the
   only one with `ring-accent/30` and full-brightness text.
 - **Meet The Team** — photo left / bulleted accomplishments right, one row each, each closing
@@ -322,7 +324,9 @@ Don't reintroduce a nav here without a reason.
 ## Copy Rules
 - **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.
   Hyphens in compounds (high-ticket, long-form, Done-For-You) are fine.
-- Lead with the three verbs: **help, launch, scale**.
+- The three verbs **help, launch, scale** describe the model but no longer appear as a
+  section: the Help · Launch · Scale block was cut in November 2026. Don't put it back
+  without being asked.
 - **Webinar only.** No other offer or funnel type appears on the site, not even to rule it
   out: no call funnels, no VSLs, no organic Instagram funnels.
 - Frame everything as **win-win**: profit share, aligned incentives, shared upside, partners
