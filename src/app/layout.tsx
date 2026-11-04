@@ -8,7 +8,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 export const metadata: Metadata = {
   title: "GrowingOffers | Done-For-You High-Ticket Webinar Funnels",
   description:
-    "We build and run done-for-you high-ticket webinar funnels for established creators, live within 14 days. Paid on profit share, so we only win when you do.",
+    "We build established creators a high-ticket offer and launch it as a webinar funnel in 10 to 14 days. You teach for 2 hours. We do the other 99%.",
 };
 
 export default function RootLayout({

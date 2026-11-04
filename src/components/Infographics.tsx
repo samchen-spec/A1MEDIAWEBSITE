@@ -84,12 +84,12 @@ export function StrategyCard() {
   );
 }
 
-/* ── 03 · Launch to shared upside ─────────────────────────────────────────── */
+/* ── 03 · Ads live, every click tracked ───────────────────────────────────── */
 
 export function RevenueCurve() {
   return (
     <svg viewBox="0 0 300 168" fill="none" className="h-auto w-full" role="img"
-         aria-label="Revenue climbing after launch, with the upside shared">
+         aria-label="Ads live, with every click tracked">
       <defs>
         <linearGradient id="curveStroke" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor={GOLD} stopOpacity="0.35" />
@@ -121,9 +121,70 @@ export function RevenueCurve() {
       <circle cx="258" cy="28" r="18" fill="url(#dotGlow)" />
       <circle cx="258" cy="28" r="5" fill={GROWTH} />
 
-      <text x="24" y="150" fill={INK_DIM} style={micro}>Launch</text>
-      <text x="276" y="150" textAnchor="end" fill={GROWTH} style={{ ...micro, fontWeight: 600 }}>Shared upside</text>
+      <text x="24" y="150" fill={INK_DIM} style={micro}>Ads live</text>
+      <text x="276" y="150" textAnchor="end" fill={GROWTH} style={{ ...micro, fontWeight: 600 }}>Tracking every click</text>
     </svg>
+  );
+}
+
+/* ── The maths, as a funnel ───────────────────────────────────────────────────
+   HTML, not SVG, and deliberately so. As an SVG on a 720-wide viewBox its
+   labels scaled with the box and rendered at 5px on a phone, which is the same
+   trap the editorial card art fell into. Real text scales with the page, so the
+   taper is percentage widths that collapse to full width below `sm`. The
+   numbers are the worked example in the copy. */
+
+const FUNNEL = [
+  { n: "100", label: "show up live", w: "w-full" },
+  { n: "25", label: "book a call", w: "w-full sm:w-[82%]" },
+  { n: "19", label: "turn up to the call", w: "w-full sm:w-[66%]" },
+  { n: "7", label: "buy a $3,000 offer", w: "w-full sm:w-[52%]" },
+];
+
+function Chevron() {
+  return (
+    <svg viewBox="0 0 14 8" className="my-1 h-2 w-3.5 shrink-0" fill="none" aria-hidden>
+      <path d="M1 1 L7 6.5 L13 1" stroke={GOLD_DIM} strokeWidth="1.6"
+            strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function WebinarMaths() {
+  return (
+    <figure className="m-0 flex flex-col items-center">
+      {FUNNEL.map((row, i) => {
+        const last = i === FUNNEL.length - 1;
+        return (
+          <div key={row.n} className="flex w-full flex-col items-center">
+            <div
+              className={`flex items-center justify-center gap-3 rounded-[14px] px-5 py-3 ${row.w} ${
+                last
+                  ? "bg-gradient-to-r from-accent/[0.16] to-[#6FCF7F]/[0.16]"
+                  : "bg-[#1F1D1B]"
+              }`}
+            >
+              <span
+                className={`text-[22px] font-semibold leading-none sm:text-[26px] ${
+                  last ? "text-[#6FCF7F]" : "text-accent"
+                }`}
+              >
+                {row.n}
+              </span>
+              <span className={`text-[15px] ${last ? "text-[#D2CEC9]" : "text-[#8A857D]"}`}>
+                {row.label}
+              </span>
+            </div>
+            {!last && <Chevron />}
+          </div>
+        );
+      })}
+
+      <figcaption className="mt-6 text-center text-[15px] text-[#8A857D] sm:text-[16px]">
+        7 &#215; $3,000 = <span className="font-semibold text-[#6FCF7F]">$21,000</span> from one
+        webinar
+      </figcaption>
+    </figure>
   );
 }
 
