@@ -12,31 +12,31 @@ import { CAL_LINK } from "@/lib/site";
 
 // ─── How it works ───────────────────────────────────────────────────────────────
 // Five bento cards. The `wide` pair runs text-left / art-right on the second
-// row; the rest are art-top / text-bottom. The webinar is the centre of the
-// offer now: card two carries it.
+// row; the rest are art-top / text-bottom. The webinar is the whole offer:
+// card two carries it, and nothing on the page sells any other funnel type.
 
 const bento = [
   {
     title: "We craft the high-ticket offer",
-    body: "Research, positioning, price, promise and delivery, built end to end.",
+    body: "Research, positioning, price, promise and delivery, built around what your audience already wants from you.",
     art: "growth" as const,
   },
   {
-    title: "We build and run the webinar",
-    body: "Registration page, slides, script, replay and the email sequence around it.",
+    title: "We write and build the webinar",
+    body: "Script, slides, sign-up and confirmation pages, and the reminder emails and SMS that get people in the room.",
     art: "strategy" as const,
   },
   {
-    title: "We scale it with our own money",
-    body: "Once the webinar converts, our capital goes into the ad account.",
+    title: "We fill it and scale it",
+    body: "We write and run the ads that fill every webinar, then keep optimising as the numbers come in.",
     art: "revenue" as const,
   },
 ];
 
 const bentoWide = [
   {
-    title: "We run the whole stack",
-    body: "Design, docs, automations, ad accounts and checkout. All of it under your brand, none of it your problem.",
+    title: "We run the tech behind it",
+    body: "Pages, automations, tracking and checkout, all under your brand. None of it becomes your problem.",
     art: "tools" as const,
   },
   {
@@ -47,32 +47,33 @@ const bentoWide = [
 ];
 
 const capabilities = [
-  "Done-For-You Webinars",
-  "Done-For-You Funnels",
   "Done-For-You Offers",
+  "Done-For-You Webinar Scripts",
+  "Done-For-You Slides",
+  "Done-For-You Pages",
+  "Done-For-You Reminders",
   "Done-For-You Ads",
-  "Done-For-You Copywriting",
-  "Done-For-You Sales Teams",
 ];
 
 // ─── Why us ─────────────────────────────────────────────────────────────────────
-// The three verbs from the positioning, one per column.
+// Build, launch, share: one per column. The icon components keep their old
+// names (Help / Fund / Launch); only the words on them changed.
 
 const pillars = [
   {
-    title: "Help",
-    body: "We work with you on the content that actually drives buyers, and script the long-form so the engine stops depending on your best week.",
+    title: "Build",
+    body: "Your high-ticket offer, the webinar script and slides, the sign-up and confirmation pages, the reminder emails and SMS, and the ads. All done for you, in your voice.",
     Icon: HelpIcon,
   },
   {
-    title: "Fund",
-    body: "No retainer, no setup fee, no media budget from you. Our capital goes into the ad account and we take a share of what comes back out.",
-    Icon: FundIcon,
+    title: "Launch",
+    body: "Live within 14 days. You sign off on the offer and record the webinar. We handle everything around it, then stay on it, improving the numbers as they come in.",
+    Icon: LaunchIcon,
   },
   {
-    title: "Launch",
-    body: "Offer locked, webinar built, sales team placed and tracking wired up, live to your audience in 10 to 14 days.",
-    Icon: LaunchIcon,
+    title: "Share",
+    body: "We're paid on profit share, so we only win when you win. Your targets are our targets, and every decision on your offer, webinar and ads is one we have a stake in.",
+    Icon: FundIcon,
   },
 ];
 
@@ -86,7 +87,7 @@ const founders = [
     points: [
       "Generated $1,000,000 in client revenue in the past 12 months",
       "Been in the info space for 2+ years",
-      "Builds the offer, the funnel and the content engine end to end",
+      "Builds the offer and the webinar end to end",
       "Runs media buying across the portfolio's ad accounts",
     ],
   },
@@ -106,14 +107,15 @@ const founders = [
 // ─── FAQ ────────────────────────────────────────────────────────────────────────
 
 const faqItems = [
-  { question: "How is all of this free?", answer: "There's no retainer, no setup fee and no ad budget from you. We're paid a percentage of the revenue the offer produces, so we earn after you do. The marketing, sales, operations and backend cost you nothing upfront because we're betting on the outcome rather than billing for the work." },
-  { question: "How fast is it live?", answer: "10 to 14 days from signing. That covers the offer, the webinar itself, the registration and replay pages, the email sequence and the booking flow, with the sales team placed and tracking wired up before it goes out. The only thing we need from you inside that window is the recording session and sign-off on the offer." },
-  { question: "You actually pay for the ad spend?", answer: "Yes. Once the webinar converts with your organic audience, we fund the paid campaigns out of our own pocket: creative, testing and scaling. We're not asking you to risk your own money to find out whether this works." },
-  { question: "What counts as an established brand?", answer: "An audience that already knows you, watches you and responds to you, built organically over time, not bought. If you're monetising with a community, a low-ticket product or brand deals and you feel capped by it, that's the profile. If you're still building the audience, we're not the right partner yet." },
-  { question: "What if I don't have an offer yet?", answer: "Most partners don't. That's the work. We handle research, positioning, pricing, packaging and delivery, and build the offer from scratch, then build the webinar that sells it. You bring the audience and the credibility; we build the thing they buy." },
-  { question: "Do I have to stop taking brand deals?", answer: "No. Most partners keep them. The difference is that brand deals become the smaller line on the invoice instead of the whole business, because the webinar produces revenue every month whether or not a sponsor turns up." },
-  { question: "How much of my time does this take?", answer: "You keep making content, record the webinar once and sign off on the offer. That is the whole ask. The script, the slides, the pages, the sequences, the closers and the ad management all sit with us, and the recording is reusable rather than something you present live every week." },
-  { question: "How selective are you?", answer: "Very, because we're spending our own capital on every partnership. We take a small number of creators at a time, and if we can't see a clear path to seven figures we'll tell you on the call rather than take you on." },
+  { question: "Why a webinar?", answer: "Because a high-ticket offer needs room to make its case. A webinar gives your audience time with you, in your voice, before they're asked to buy. It teaches, builds trust and sells in one place, and it's the only thing we build." },
+  { question: "How fast is it live?", answer: "Within 14 days of signing. That covers the offer, the script, the slides, the sign-up and confirmation pages, the reminder emails and SMS, and the ads, with tracking wired up before it goes out. Inside that window we need two things from you: sign-off on the offer and the recording session." },
+  { question: "Why profit share?", answer: "Because it puts us on the same side of the table. We're paid on a share of the profit the webinar makes, so the only way we win is if you do. You get partners who are invested in the result, not a vendor who's finished once the work is handed over." },
+  { question: "Who is this for?", answer: "Established creators with an audience that already knows them, watches them and trusts them, built over time rather than bought. Fitness creators on Instagram and YouTube are the closest fit. If you're monetising with a community, a low-ticket product or brand deals and feel capped by it, that's the profile. If you're still building the audience, we're not the right partner yet." },
+  { question: "What if I don't have an offer yet?", answer: "That's where we start. We handle the research, positioning, pricing, packaging and delivery, build the offer from scratch, then build the webinar that sells it. You bring the audience and the credibility; we build the thing they buy." },
+  { question: "How much of my time does this take?", answer: "You keep making content, sign off on the offer and record the webinar once. That's the whole ask. The script, the slides, the pages, the reminders, the closers and the ads all sit with us, and the recording is reusable rather than something you present live every week." },
+  { question: "What happens after launch?", answer: "We stay in it. We run the ads, watch the numbers and keep improving the offer, the webinar and the follow-up. A webinar that stalls after launch is our problem as much as yours, because we're paid from what it makes." },
+  { question: "Do I have to stop taking brand deals?", answer: "No, keep them. The aim is for brand deals to become the smaller line on the invoice rather than the whole business, with a webinar that sells every month whether or not a sponsor turns up." },
+  { question: "How selective are you?", answer: "Very. Our upside depends on yours, so we take on a small number of creators at a time, and if we can't see a clear path to a webinar that sells, we'll tell you on the call rather than take you on." },
 ];
 
 // ─── Pieces ─────────────────────────────────────────────────────────────────────
@@ -188,15 +190,15 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-content flex-col items-center text-center">
           <AnimatedSection className="flex flex-col items-center">
             <h1 className="max-w-[1100px] text-[34px] font-semibold leading-[1.15] text-balance sm:text-[44px] md:text-[54px] lg:text-[62px]">
-              We Will Help Launch Your{" "}
+              We Build And Launch Your{" "}
               <span className="whitespace-nowrap">High-Ticket</span> Webinar Funnel{" "}
               <span className="accent-italic text-gold">Within 14 Days</span>
             </h1>
 
             <p className="mt-6 max-w-[640px] text-body text-[#D2CEC9]">
-              GrowingOffers crafts established creators a high-ticket offer, launches it as a
-              webinar funnel in 10 to 14 days, then pays for the ad spend out of our own pocket.
-              You keep making content. No retainer, no setup fee.
+              For established creators. We craft your high-ticket offer, write and build the
+              webinar around it, and run it for you. We&apos;re paid on profit share, so we only
+              win when you do.
             </p>
           </AnimatedSection>
 
@@ -211,15 +213,15 @@ export default function HomePage() {
       <section className="px-6 py-24">
         <div className="mx-auto max-w-content text-center">
           <AnimatedSection>
-            <p className="eyebrow">Where the money comes from</p>
+            <p className="eyebrow">Partners, not a vendor</p>
             <p className="mx-auto mt-8 max-w-[900px] text-[28px] font-medium leading-[1.2] text-balance sm:text-[34px] md:text-statement">
-              <span className="text-[#FAFAFA]">We only get paid after you do.</span>{" "}
+              <span className="text-[#FAFAFA]">We don&apos;t build it and walk away.</span>{" "}
               <span className="text-dim">
-                No retainer, no setup fee, no media budget out of your pocket. The part that
-                normally costs a creator thousands a month before anything works.
+                Most agencies are paid to deliver the work, and what happens after the handover
+                is your problem.
               </span>{" "}
               <span className="text-[#FAFAFA]">
-                Our capital goes into the ad account, and we take a share of what comes back out.
+                We share the profit, so we share the goal.
               </span>
             </p>
           </AnimatedSection>
@@ -232,7 +234,7 @@ export default function HomePage() {
           <AnimatedSection className="text-center">
             <Eyebrow>What partnering actually gets you</Eyebrow>
             <h2 className="mx-auto mt-5 max-w-[840px] text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
-              Everything behind the brand, <span className="accent-italic text-gold">handled</span>
+              Everything behind the webinar, <span className="accent-italic text-gold">handled</span>
             </h2>
           </AnimatedSection>
 
@@ -293,13 +295,13 @@ export default function HomePage() {
       <section id="why-us" className="scroll-mt-24 px-6 py-24">
         <div className="mx-auto max-w-content">
           <AnimatedSection variant="left" className="max-w-[720px]">
-            <Eyebrow>The whole model, in three words</Eyebrow>
+            <Eyebrow>The whole partnership, in three words</Eyebrow>
             <h2 className="mt-5 text-[34px] font-semibold leading-[1.1] md:text-[54px]">
-              Help. Fund. <span className="accent-italic text-gold">Launch.</span>
+              Build. Launch. <span className="accent-italic text-gold">Share.</span>
             </h2>
             <p className="mt-5 max-w-[560px] text-body text-[#8A857D]">
-              Three things a creator can&apos;t buy separately and can&apos;t do alone. We do all
-              three, and we carry the risk on the third.
+              We build it, we launch it, and we share in what it makes. That last part is why
+              the first two get done properly.
             </p>
           </AnimatedSection>
 
@@ -325,12 +327,12 @@ export default function HomePage() {
           <AnimatedSection className="text-center">
             <Eyebrow>Who you are actually working with</Eyebrow>
             <h2 className="mt-5 text-[30px] font-semibold leading-[1.2] text-balance md:text-[46px]">
-              Meet your <span className="accent-italic text-gold">dream team</span>
+              Meet your <span className="accent-italic text-gold">partners</span>
             </h2>
             <p className="mx-auto mt-5 max-w-[760px] text-body text-[#8A857D]">
               Two operators, not an agency roster. Between them they&apos;ve built the offers and
-              collected the cash on the other side of them, which is why we&apos;re willing to
-              fund yours.
+              collected the cash on the other side of them, and that experience sits on your
+              side of the table.
             </p>
           </AnimatedSection>
 
@@ -395,12 +397,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-content text-center">
           <AnimatedSection className="flex flex-col items-center gap-7">
             <h2 className="max-w-[900px] text-[36px] font-semibold leading-[1.1] text-balance md:text-[60px]">
-              Unlock your audience&apos;s{" "}
-              <span className="accent-italic text-gold">full potential</span>
+              Launch your webinar with a partner{" "}
+              <span className="accent-italic text-gold">who&apos;s invested</span>
             </h2>
             <p className="max-w-[560px] text-body text-[#D2CEC9]">
-              Ready to build the offer your audience is actually worth? Book a call and
-              we&apos;ll tell you what we&apos;d build and what we&apos;d fund.
+              Book a call. We&apos;ll look at your audience and tell you the offer and the
+              webinar we&apos;d build around it.
             </p>
             <CTAButton href={CAL_LINK} external>Book a Call</CTAButton>
           </AnimatedSection>

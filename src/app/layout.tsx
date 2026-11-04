@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "GrowingOffers | Webinar Funnels For Established Creators",
+  title: "GrowingOffers | Done-For-You High-Ticket Webinar Funnels",
   description:
-    "We craft established creators a high-ticket offer and launch it as a webinar funnel in 10 to 14 days, then pay for the ad spend ourselves to scale it. No retainers. Revenue share only.",
+    "We build and run done-for-you high-ticket webinar funnels for established creators, live within 14 days. Paid on profit share, so we only win when you do.",
 };
 
 export default function RootLayout({
