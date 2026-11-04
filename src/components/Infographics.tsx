@@ -57,7 +57,7 @@ export function GrowthChart() {
 export function StrategyCard() {
   return (
     <svg viewBox="0 0 300 168" fill="none" className="h-auto w-full" role="img"
-         aria-label="A tailored offer strategy delivered to you">
+         aria-label="Your webinar, live within 14 days">
       <rect x="0.5" y="0.5" width="299" height="167" rx="14" fill="#0C0B0A" stroke="rgba(255,255,255,0.06)" />
 
       {/* stacked card behind */}
@@ -72,8 +72,8 @@ export function StrategyCard() {
 
       <circle cx="84" cy="64" r="3" fill={GROWTH} />
       <text x="92" y="67" fill={GROWTH} style={{ ...micro, letterSpacing: "0.1em", fontWeight: 600 }}>NEW</text>
-      <text x="84" y="82" fill="#FAFAFA" style={{ ...cap, fontSize: 13, fontWeight: 600 }}>Your offer, built</text>
-      <text x="196" y="82" fill={INK_DIM} style={micro}>Day 1</text>
+      <text x="84" y="82" fill="#FAFAFA" style={{ ...cap, fontSize: 13, fontWeight: 600 }}>Webinar, live</text>
+      <text x="196" y="82" fill={INK_DIM} style={micro}>Day 14</text>
 
       {/* dashed queue behind */}
       {[0, 1, 2].map((i) => (
@@ -84,12 +84,12 @@ export function StrategyCard() {
   );
 }
 
-/* ── 03 · Where the money moves ───────────────────────────────────────────── */
+/* ── 03 · Launch to shared upside ─────────────────────────────────────────── */
 
 export function RevenueCurve() {
   return (
     <svg viewBox="0 0 300 168" fill="none" className="h-auto w-full" role="img"
-         aria-label="Our capital goes into ads and revenue comes back out">
+         aria-label="Revenue climbing after launch, with the upside shared">
       <defs>
         <linearGradient id="curveStroke" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor={GOLD} stopOpacity="0.35" />
@@ -121,8 +121,8 @@ export function RevenueCurve() {
       <circle cx="258" cy="28" r="18" fill="url(#dotGlow)" />
       <circle cx="258" cy="28" r="5" fill={GROWTH} />
 
-      <text x="24" y="150" fill={INK_DIM} style={micro}>We fund the spend</text>
-      <text x="276" y="150" textAnchor="end" fill={GROWTH} style={{ ...micro, fontWeight: 600 }}>You get paid first</text>
+      <text x="24" y="150" fill={INK_DIM} style={micro}>Launch</text>
+      <text x="276" y="150" textAnchor="end" fill={GROWTH} style={{ ...micro, fontWeight: 600 }}>Shared upside</text>
     </svg>
   );
 }

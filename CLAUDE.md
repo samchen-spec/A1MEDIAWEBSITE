@@ -4,15 +4,20 @@
 - **Brand Name:** GrowingOffers (site: growingoffers.com). One word, camel-cased in prose;
   the logo sets it as `GO` over a `GROWINGOFFERS` wordmark. Rebranded from A1 Media in
   October 2026, so treat any surviving "A1" as a bug.
-- **Positioning:** We help, fund & launch creators. We craft an established creator a
-  high-ticket offer, launch it as a **webinar funnel in 10 to 14 days**, then pay for the
-  ad spend ourselves to scale it.
-- **Audience:** Creators with an established organic brand who are currently selling a Skool
+- **Positioning:** We build, launch and share. We build and run done-for-you **high-ticket
+  webinar funnels** for established creators: we craft the offer, write and build the webinar
+  (script, slides, sign-up and confirmation pages, reminder emails and SMS, ads) and get it
+  **live within 14 days**. We are paid on **profit share**, so we only win when the creator
+  wins. Partners, not a vendor. Repositioned in November 2026 from the earlier
+  "help, fund, launch" model, where we paid the ad spend; that claim is retired.
+- **Audience:** Creators with an established brand who are currently selling a Skool
   community, a low-ticket course, or taking brand deals — not beginners building an audience.
+  The dream client is a fitness creator on Instagram or YouTube.
 - **Tone:** Editorial, plain-spoken, confident. Short declarative sentences. No hype stack,
-  no exclamation marks, no "unlock/supercharge" language. The funding claim carries the pitch.
-- **Voice:** Direct and specific about money and risk. British-English spellings (monetise,
-  optimise) are used throughout.
+  no exclamation marks, no "unlock/supercharge" language. The partnership claim (aligned
+  incentives, shared upside) carries the pitch.
+- **Voice:** Direct and plain about how we work together, silent on fees. British-English
+  spellings (monetise, optimise) are used throughout.
 
 ## Brand Colors
 
@@ -185,7 +190,7 @@ carry `robots: noindex`. Don't add either to a nav or a footer.
 Hero → Statement → How It Works (bento) → Why us → Founders → FAQ → Final CTA.
 
 - **Hero** — H1, lead, one ring button. `.aurora` background. The H1 names the offer and the
-  deadline outright: "We Will Help Launch Your High-Ticket Webinar Funnel **Within 14 Days**",
+  deadline outright: "We Build And Launch Your High-Ticket Webinar Funnel **Within 14 Days**",
   with the deadline as the gold italic. `High-Ticket` is wrapped in `whitespace-nowrap` so the
   compound never breaks across lines. It runs 34px on mobile up to 62px at `lg`, below the
   72px H1 in the scale table, because the line is long.
@@ -194,8 +199,9 @@ Hero → Statement → How It Works (bento) → Why us → Founders → FAQ → 
 - **How It Works** — a bento on a `.plate`: three art-top/text-bottom cards, two wide
   text-and-art cards, then the `Done-For-You …` pill row. Card two is the webinar, which is
   the centre of the offer; don't demote it back to a generic "funnel" card.
-- **Why us** (`#why-us`) — Help · Fund · Launch as three columns with 64px **filled**,
-  animated glyphs. Hairline icons vanish next to a 28px heading; keep them filled. There is
+- **Why us** (`#why-us`) — Build · Launch · Share as three columns with 64px **filled**,
+  animated glyphs (`HelpIcon`, `LaunchIcon`, `FundIcon` in that order; the component names
+  predate the reposition). Hairline icons vanish next to a 28px heading; keep them filled. There is
   no diagram here: the icons carry the motion.
 - **Founders** — photo left / bulleted accomplishments right, one row each.
 - **FAQ** — accordion in the 760px `max-w-prose` column.
@@ -286,10 +292,15 @@ Don't reintroduce a nav here without a reason.
 ## Copy Rules
 - **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.
   Hyphens in compounds (high-ticket, long-form, Done-For-You) are fine.
-- Lead with the three verbs: **help, fund, launch**.
-- Always be explicit that we pay the ad spend and take revenue share: that is the hook.
-- The **10 to 14 day** launch window and the **webinar** are the offer. Say both early.
-  Spell the range out in words, never as "10-14", so it survives the no-dashes rule.
-- Qualify hard: established organic brand only. Say who this is *not* for.
+- Lead with the three verbs: **build, launch, share**.
+- **Webinar only.** No other offer or funnel type appears on the site, not even to rule it
+  out: no call funnels, no VSLs, no organic Instagram funnels.
+- Frame everything as **win-win**: profit share, aligned incentives, shared upside, partners
+  not a vendor. "We only win when you win" is the hook.
+- **Say nothing about fees or who pays for what.** No upfront payments, setup fees or
+  retainers, and nothing about who funds the ad spend or the software. Never imply the
+  creator pays nothing. Profit share is the only money line.
+- **Live within 14 days** and the **webinar** are the offer. Say both early.
+- Qualify hard: established brand only. Say who this is *not* for.
 - Never promise guaranteed results. Note the footer disclaimer was removed at the owner's
   direction in October 2026, so the copy itself has to stay measured.

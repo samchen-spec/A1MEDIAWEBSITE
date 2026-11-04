@@ -21,7 +21,7 @@ export default function TermsPage() {
               Terms of Service
             </h1>
             <p className="mt-3 text-sm" style={{ color: "#D2CEC9" }}>
-              Last Updated: March 2026
+              Last Updated: November 2026
             </p>
           </AnimatedSection>
 
@@ -53,7 +53,7 @@ export default function TermsPage() {
                 3. No Guarantees of Results
               </h2>
               <p className="leading-relaxed mb-4" style={{ color: "#D2CEC9" }}>
-                GrowingOffers provides marketing, offer creation, webinar and funnel building, and paid acquisition services to its partners. While we have a strong track record, we do not guarantee specific financial outcomes, revenue figures, or business results. Past performance of other partnerships does not guarantee future results. Individual outcomes depend on a variety of factors including niche, audience, market conditions, and the effort contributed by the partner.
+                GrowingOffers provides offer creation, high-ticket webinar building and paid advertising management to its partners. While we have a strong track record, we do not guarantee specific financial outcomes, revenue figures, or business results. Past performance of other partnerships does not guarantee future results. Individual outcomes depend on a variety of factors including niche, audience, market conditions, and the effort contributed by the partner.
               </p>
 
               {/* 4 */}
