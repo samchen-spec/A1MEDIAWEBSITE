@@ -195,9 +195,11 @@ The marketing pages are informational only — no VSL, no quiz, and no form. Eve
 `CTA_LABEL` at the top of `src/app/page.tsx`, so it is set in one place. Routes: `/`, `/privacy`,
 `/terms`, `/onboarding`.
 
-`/onboarding` and `/admin` are the exceptions and are deliberately not linked from anywhere:
-one is a private URL sent to clients after they sign, the other is behind a password. Both
-carry `robots: noindex`. Don't add either to a nav or a footer.
+`/onboarding`, `/admin`, `/goals` and `/upload` are the exceptions and are deliberately not
+linked from anywhere: the first is a private URL sent to clients after they sign, the other
+three are behind the admin password. All carry `robots: noindex`. Don't add any of them to a
+nav or a footer. The three password-protected ones link to each other through `AdminTabs`,
+which is the only nav they get.
 
 ### Home sections, in order
 
@@ -306,6 +308,42 @@ client: `appendRow` for the form, `readSubmissions` for the dashboard.
   by hand in Google Sheets shifts nothing; renaming a header drops that one field.
 - The detail view renders from `QUESTIONS` rather than from the row, so answers appear in
   the order they were asked, under their own section headings, with empty ones skipped.
+
+### Meta ads bulk uploader
+
+`/upload` uploads dozens of Facebook and Instagram ads into one ad set through the Meta
+Marketing API, instead of building them one at a time in Ads Manager. Three screens behind
+the admin password: the wizard, `/upload/history`, `/upload/settings`.
+`META-APP-SETUP.md` is the setup guide, and step 5 of it (publish the Meta app) is the thing
+that actually goes wrong.
+
+- **Behind the admin password, for a better reason than the other two pages.** The saved
+  token can spend a client's budget, so every page and every route under `/api/upload/`
+  checks the same signed cookie. The Meta token lives in the Blob store, never in the
+  environment and never in a response: `publicSettings()` is the only shape the browser
+  sees, and it carries the last eight characters and nothing else.
+- **Blob again, no database.** `src/lib/ads-store.ts` keeps settings at `ads/settings.json`
+  and one document per batch at `ads/batches/<id>/batch.json`, creatives embedded in it.
+  Same new-object-per-save trick as `goals-store.ts`, for the same reason: an overwrite is
+  cached for a minute and a reload would show the previous state.
+- **Creative files go from the browser straight into Blob**, signed by
+  `/api/upload/blob`. They cannot go through a route: Vercel caps a request body at 4.5MB
+  and these are videos. The signed token is scoped to one batch's folder, and
+  `validBlobRef()` re-checks the host and the prefix when the browser reports back where a
+  file landed.
+- **The launch is one creative per request** (`/api/upload/launch/{start,creative,finish}`),
+  walked by the wizard. Twenty videos in a single function call would not finish, and doing
+  it this way is also what gives the progress list something true to show. A creative Meta
+  refuses is recorded against that creative and the loop carries on; a creative already
+  created is never recreated, so relaunching after a partial failure cannot duplicate ads.
+- `src/lib/meta-api.ts` is the only thing that talks to Meta. More than one primary text,
+  headline or description means the creative has to be built as an `asset_feed_spec`; one of
+  each uses `link_data` or `video_data`. Videos wait for Meta to generate a thumbnail,
+  because a video creative without one fails with a message that reads like a bug here.
+  WebP, BMP and TIFF are converted to JPEG with `sharp`, since `/adimages` rejects them.
+- **The tutorial this was built from assumed Postgres, a local `uploads/` directory and
+  Replit.** None of those apply here, so there is no Drizzle, no `.replit`, and no sidebar:
+  the chrome is `AdminTabs` plus `UploaderTabs`, in the site's own gold on black.
 
 ### Assets
 
