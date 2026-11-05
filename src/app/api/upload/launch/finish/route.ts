@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import type { Batch } from "@/lib/ads";
 import { failed, signedIn, unauthorized } from "@/lib/ads-auth";
-import { updateBatch, validBatchId } from "@/lib/ads-store";
+import {
+  loadBatch,
+  removeCreativeFiles,
+  updateBatch,
+  validBatchId,
+} from "@/lib/ads-store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,12 +30,36 @@ export async function POST(request: Request) {
   }
 
   try {
-    const batch = await updateBatch(batchId, (current): Batch => {
-      const created = current.creatives.filter((c) => c.status === "created");
-      const errored = current.creatives.filter((c) => c.status === "error");
+    const current = await loadBatch(batchId);
+    if (!current) return NextResponse.json({ error: "No such batch." }, { status: 404 });
+
+    /* A creative file has done its job the moment Meta has the ad: Meta keeps
+       its own copy and nothing here reads the Blob again. Left behind, a single
+       batch of video fills a Hobby store's whole gigabyte and the next launch
+       fails on quota instead of on anything real.
+
+       Files belonging to a creative that failed stay where they are, because
+       relaunching the batch retries exactly those and has to read them. They go
+       on the next finish, once their ad exists. */
+    const spent = current.creatives.filter(
+      (c) => c.status === "created" && !c.fileRemoved,
+    );
+    const urls = spent
+      .flatMap((c) => [c.url, c.thumbnailUrl])
+      .filter((u): u is string => Boolean(u));
+    const removed = await removeCreativeFiles(urls);
+
+    const batch = await updateBatch(batchId, (cur): Batch => {
+      const created = cur.creatives.filter((c) => c.status === "created");
+      const errored = cur.creatives.filter((c) => c.status === "error");
 
       return {
-        ...current,
+        ...cur,
+        creatives: removed
+          ? cur.creatives.map((c) =>
+              c.status === "created" ? { ...c, fileRemoved: true } : c,
+            )
+          : cur.creatives,
         adsCreated: created.length,
         adsErrored: errored.length,
         errorLog: errored.map((c) => `${c.adName}: ${c.error ?? "failed"}`),

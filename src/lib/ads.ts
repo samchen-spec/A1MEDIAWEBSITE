@@ -114,6 +114,11 @@ export interface Creative {
   /* Optional custom video thumbnail, same storage. */
   thumbnailUrl: string | null;
   thumbnailPathname: string | null;
+  /* Set once the ad exists in Meta and the Blob copy has been deleted. Meta
+     holds the media from then on, so `url` above is dead and nothing may read
+     it. Absent on every batch written before the cleanup existed, which is why
+     it is optional rather than a boolean that has to be backfilled. */
+  fileRemoved?: boolean;
   adName: string;
   metaAdId: string | null;
   metaCreativeId: string | null;

@@ -171,6 +171,7 @@ function normalizeCreative(raw: unknown): Creative | null {
     metaCreativeId: str(c.metaCreativeId),
     status:
       c.status === "created" || c.status === "error" ? c.status : "pending",
+    fileRemoved: c.fileRemoved === true,
     error: str(c.error),
   };
 }
@@ -259,6 +260,20 @@ export async function saveBatch(batch: Batch): Promise<void> {
     addRandomSuffix: true,
   });
   await pruneStale(prefix, saved.url);
+}
+
+/* Cleanup, and deliberately silent: by the time this runs the ads are already
+   live in Meta, so a Blob that refuses to delete is a storage bill rather than
+   anything the person can act on. Returns whether the files actually went, so
+   the batch is only marked as cleaned when they did. */
+export async function removeCreativeFiles(urls: string[]): Promise<boolean> {
+  if (!urls.length) return false;
+  try {
+    await del(urls);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /* Read, change, write. Every caller is a single request acting on one batch and
