@@ -4,20 +4,25 @@
 - **Brand Name:** GrowingOffers (site: growingoffers.com). One word, camel-cased in prose;
   the logo sets it as `GO` over a `GROWINGOFFERS` wordmark. Rebranded from A1 Media in
   October 2026, so treat any surviving "A1" as a bug.
-- **Positioning:** We build, launch and share. We build and run done-for-you **high-ticket
+- **Positioning:** We help, launch and scale. We build and run done-for-you **high-ticket
   webinar funnels** for established creators: we craft the offer, write and build the webinar
   (script, slides, sign-up and confirmation pages, reminder emails and SMS, ads) and get it
-  **live within 14 days**. We are paid on **profit share**, so we only win when the creator
-  wins. Partners, not a vendor. Repositioned in November 2026 from the earlier
-  "help, fund, launch" model, where we paid the ad spend; that claim is retired.
+  **live in 10 to 14 days**. We are paid out of the creator's **profit**, with no monthly
+  retainer, so we only win when the creator wins. Partners, not a vendor. The earlier
+  "help, fund, launch" model, where we paid the ad spend, is retired; **Fund** became
+  **Scale** in November 2026.
 - **Audience:** Creators with an established brand who are currently selling a Skool
   community, a low-ticket course, or taking brand deals — not beginners building an audience.
   The dream client is a fitness creator on Instagram or YouTube.
-- **Tone:** Editorial, plain-spoken, confident. Short declarative sentences. No hype stack,
-  no exclamation marks, no "unlock/supercharge" language. The partnership claim (aligned
-  incentives, shared upside) carries the pitch.
-- **Voice:** Direct and plain about how we work together, silent on fees. British-English
-  spellings (monetise, optimise) are used throughout.
+- **Tone:** Direct-response, spoken, confident, and funny on purpose. The page talks to one
+  creator in the second person, in short paragraphs, and lands a dry aside after the heavy
+  lines ("Your neighbour thinks you're brilliant, by the way"). This replaced the earlier
+  editorial register in November 2026 at the owner's direction: **the hero headline carries
+  an exclamation mark and the asides are deliberate, so don't flatten them back out.** Still
+  no "unlock/supercharge" language and no stacked hype adjectives: the jokes do that work.
+- **Voice:** Plain about how we work together. Profit share and "no monthly retainer" are the
+  only money lines; everything else about fees stays off the page. British-English spellings
+  (monetise, optimise, dialled) are used throughout.
 
 ## Brand Colors
 
@@ -137,9 +142,17 @@ variety. Don't reintroduce them.
   replaced rendered their labels at about 5px.
 - `ToolStack` — the tool roster, as full-colour brand marks in circular chips. Edit `TOOLS`
   when the stack changes.
+- `WebinarMaths` — the 100 → 25 → 19 → 7 funnel under "Here's Why That Beats A Brand Deal".
+  **HTML, not SVG, and it has to stay that way.** Drawn first on a 720x300 viewBox, its
+  labels scaled with the box and came out at 5.3px on a phone, the same trap the editorial
+  card art fell into. As real text they stay at 15px everywhere. The taper is percentage
+  widths that collapse to `w-full` below `sm`, because a 52% row cannot hold "buy a $3,000
+  offer" at 375px. Edit `FUNNEL` to change the numbers, and change the copy above it to match.
 `src/components/PillarIcons.tsx` — `HelpIcon`, `FundIcon`, `LaunchIcon`. 64px, filled, one
-colour each (cyan / gold / green), each animating on its own loop. The Why A1 section has no
-diagram: the icons carry the motion.
+colour each (cyan / gold / green), each animating on its own loop. **Currently unused:** they
+carried the Help · Launch · Scale columns, and that section was cut in November 2026 at the
+owner's direction. The file and its `.ico-*` keyframes are kept for when a three-column block
+comes back; nothing else on the page imports them.
 
 `src/components/TeamStack.tsx` — the placed sales seats, four real headshots in
 `/public/team/`, mirrored from the `sales team photos/` folder at the repo root. A seat whose
@@ -178,7 +191,8 @@ use only: they identify the products, nothing more.
 ## Site Structure
 
 The marketing pages are informational only — no VSL, no quiz, and no form. Every CTA is a
-`Book a Call` button opening the Calendly link in a new tab. Routes: `/`, `/privacy`,
+**`Talk To Our Advisors`** button opening the Calendly link in a new tab. The label lives in
+`CTA_LABEL` at the top of `src/app/page.tsx`, so it is set in one place. Routes: `/`, `/privacy`,
 `/terms`, `/onboarding`.
 
 `/onboarding` and `/admin` are the exceptions and are deliberately not linked from anywhere:
@@ -187,27 +201,45 @@ carry `robots: noindex`. Don't add either to a nav or a footer.
 
 ### Home sections, in order
 
-Hero → Statement → How It Works (bento) → Why us → Founders → FAQ → Final CTA.
+Hero → Golden Goose → Not Another Guru → Everything Behind The Brand (bento) →
+Your Three Options → Meet The Team → Who This Is For → FAQ → Close.
 
-- **Hero** — H1, lead, one ring button. `.aurora` background. The H1 names the offer and the
-  deadline outright: "We Build And Launch Your High-Ticket Webinar Funnel **Within 14 Days**",
+**Every section ends on a `Talk To Our Advisors` button**, rendered by the `CTARow` component
+and placed outside the section's `.plate` where it has one, so it sits on the page background.
+The hero and the close carry their own button and don't take a `CTARow`.
+
+- **Hero** — H1, a gold parenthetical, one lead paragraph, one ring button. `.aurora`
+  background. The H1 is the long direct-response line: "Turn The Audience You Already Have
+  Into A "WAIT... WE SOLD HOW MANY?" High-Ticket Webinar **In 14 Days** Instead Of Months!",
   with the deadline as the gold italic. `High-Ticket` is wrapped in `whitespace-nowrap` so the
-  compound never breaks across lines. It runs 34px on mobile up to 62px at `lg`, below the
-  72px H1 in the scale table, because the line is long.
-- **Statement** — gold eyebrow + a 44px two-tone paragraph: the problem clause is dimmed to
-  `--text-dim`, the A1 clauses stay white. This is a typographic device, not motion.
-- **How It Works** — a bento on a `.plate`: three art-top/text-bottom cards, two wide
-  text-and-art cards, then the `Done-For-You …` pill row. Card two is the webinar, which is
-  the centre of the offer; don't demote it back to a generic "funnel" card.
-- **Why us** (`#why-us`) — Build · Launch · Share as three columns with 64px **filled**,
-  animated glyphs (`HelpIcon`, `LaunchIcon`, `FundIcon` in that order; the component names
-  predate the reposition). Hairline icons vanish next to a 28px heading; keep them filled. There is
-  no diagram here: the icons carry the motion.
-- **Founders** — photo left / bulleted accomplishments right, one row each.
+  compound never breaks across lines. It runs 30px on mobile up to 54px at `lg`, well below
+  the 72px H1 in the scale table, because the line is very long.
+- **Golden Goose** (`#golden-goose`) — the brand-deal argument, as prose in the 760px
+  `max-w-prose` column under a centred heading, turning on "You do it on a webinar." It then
+  carries two sub-blocks: **How A Webinar Actually Works**, six numbered steps on a `.plate`
+  in a two-column `<ol>`, and **Here's Why That Beats A Brand Deal**, the `WebinarMaths`
+  funnel in a panel. This replaced the 44px two-tone Statement paragraph, so the `statement`
+  type token in the scale table is currently unused.
+- **Not Another Guru** (`#not-a-guru`) — prose, then a two-column panel comparison. The
+  `Gurus` column stays dimmed with `Cross` glyphs; ours takes `ring-accent/25` and animated
+  `Tick`s. The dimming is the point: nothing should draw the eye to the column we rule out.
+- **Everything Behind The Brand** (`#how-it-works`) — a bento on a `.plate`: three
+  art-top/text-bottom cards, two wide text-and-art cards, the `Done-For-You …` pill row, then
+  the "not a course, not an agency" closing line. Card two is the webinar, which is the centre
+  of the offer; don't demote it back to a generic "funnel" card.
+- **Your Three Options** (`#options`) — three cards on a `.plate`. Option 3 is ours and is the
+  only one with `ring-accent/30` and full-brightness text.
+- **Meet The Team** — photo left / bulleted accomplishments right, one row each, each closing
+  on a one-line quip in muted text.
+- **Who This Is For** (`#who-its-for`) — two panels, `This is for you` ringed in gold against a
+  dimmed `This isn't for you`. The qualifying numbers (30,000+ followers, 5,000 to 10,000
+  views) appear here and in the FAQ, and must stay the same in both.
 - **FAQ** — accordion in the 760px `max-w-prose` column.
+- **Close** — `.aurora` again, the "So... What's It Going To Be?" headline, four short
+  paragraphs and the last ring button.
 
-The Maths, Launch Roadmap and Who This Is For were cut when the site moved to this
-structure, along with `CeilingChart` and `WeekArc`.
+The Launch Roadmap stayed cut, along with `CeilingChart` and `WeekArc`. The Maths and Who
+This Is For came back in November 2026, as `WebinarMaths` and the two-panel block.
 
 **There is no client proof on the page.** The Clients grid became a Portfolio of client
 landing pages, and that was removed in October 2026 along with its screenshots and the
@@ -292,15 +324,22 @@ Don't reintroduce a nav here without a reason.
 ## Copy Rules
 - **No em or en dashes anywhere in user-facing copy.** Use a full stop, a comma or a colon.
   Hyphens in compounds (high-ticket, long-form, Done-For-You) are fine.
-- Lead with the three verbs: **build, launch, share**.
+- The three verbs **help, launch, scale** describe the model but no longer appear as a
+  section: the Help · Launch · Scale block was cut in November 2026. Don't put it back
+  without being asked.
 - **Webinar only.** No other offer or funnel type appears on the site, not even to rule it
   out: no call funnels, no VSLs, no organic Instagram funnels.
 - Frame everything as **win-win**: profit share, aligned incentives, shared upside, partners
   not a vendor. "We only win when you win" is the hook.
-- **Say nothing about fees or who pays for what.** No upfront payments, setup fees or
-  retainers, and nothing about who funds the ad spend or the software. Never imply the
-  creator pays nothing. Profit share is the only money line.
-- **Live within 14 days** and the **webinar** are the offer. Say both early.
-- Qualify hard: established brand only. Say who this is *not* for.
+- **Two money lines, and no others:** we make our real money out of the creator's profit,
+  and there is **no monthly retainer**. Nothing about upfront payments, setup fees, or who
+  funds the ad spend or the software, and never imply the creator pays nothing.
+- **Live in 10 to 14 days** and the **webinar** are the offer. Say both early. Spell the range
+  out in words, never as "10-14", so it survives the no-dashes rule.
+- Qualify hard: established creator only (30,000+ followers, 5,000 to 10,000 average views).
+  Say who this is *not* for.
+- **The webinar maths is an illustration, not a result.** The 100 → 25 → 19 → 7 funnel and the
+  $21,000 are a worked example introduced by "Say 100 people show up live", and the copy has
+  to keep framing it that way. The only real figures on the page are the founders' own.
 - Never promise guaranteed results. Note the footer disclaimer was removed at the owner's
   direction in October 2026, so the copy itself has to stay measured.
