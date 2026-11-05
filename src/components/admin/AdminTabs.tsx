@@ -4,7 +4,6 @@ import Link from "next/link";
    all sit behind the same admin session. Nothing here is ever linked from the
    marketing site. */
 const PAGES = [
-  { href: "/goals", label: "Goals", key: "goals" },
   { href: "/admin", label: "Submissions", key: "submissions" },
   { href: "/upload", label: "Uploader", key: "uploader" },
 ] as const;

@@ -7,7 +7,7 @@ import UploadWizard from "@/components/ads/UploadWizard";
 import { ADMIN_COOKIE, isConfigured, verifySessionToken } from "@/lib/admin-auth";
 import { NO_SETTINGS, loadSettings, publicSettings, storeConfigured } from "@/lib/ads-store";
 
-/* Behind the same admin password as /admin and /goals, and for a better reason
+/* Behind the same admin password as /admin, and for a better reason
    than either: the saved token can spend a client's ad budget. The gate is in
    the page rather than in middleware so the session check and the settings read
    happen in one request, with nothing unprotected in between.

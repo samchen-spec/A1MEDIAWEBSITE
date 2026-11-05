@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin-auth";
 import { MetaError } from "@/lib/meta-api";
 
-/* The uploader sits behind the same admin session as /admin and /goals. It has
+/* The uploader sits behind the same admin session as /admin. It has
    to: a token with ads_management on a client's account is money, and /upload
    is a public URL. */
 
