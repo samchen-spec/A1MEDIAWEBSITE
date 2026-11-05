@@ -1,10 +1,12 @@
 import Link from "next/link";
 
-/* The two password-protected pages, so either one is a click from the other.
-   Both sit behind the same admin session. */
+/* The password-protected pages, so each one is a click from the others. They
+   all sit behind the same admin session. Nothing here is ever linked from the
+   marketing site. */
 const PAGES = [
   { href: "/goals", label: "Goals", key: "goals" },
   { href: "/admin", label: "Submissions", key: "submissions" },
+  { href: "/upload", label: "Uploader", key: "uploader" },
 ] as const;
 
 export default function AdminTabs({ active }: { active: (typeof PAGES)[number]["key"] }) {
