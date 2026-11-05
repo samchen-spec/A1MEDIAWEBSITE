@@ -14,9 +14,18 @@ export interface Submission {
   answers: Answers;
 }
 
+/* Three ways the Blob SDK can authenticate, and the site has to recognise all
+   of them or it reports no store while the store is sitting right there.
+   BLOB_READ_WRITE_TOKEN is the classic one. BLOB_STORE_ID is the OIDC
+   connection Vercel now makes by default: there the credential arrives on each
+   request as an `x-vercel-oidc-token` header, never as an environment
+   variable, so checking the environment for a token finds nothing in
+   production even though every read and write would have worked. */
 export function storeConfigured(): boolean {
   return Boolean(
-    process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN,
+    process.env.BLOB_READ_WRITE_TOKEN ||
+      process.env.BLOB_STORE_ID ||
+      process.env.VERCEL_OIDC_TOKEN,
   );
 }
 
