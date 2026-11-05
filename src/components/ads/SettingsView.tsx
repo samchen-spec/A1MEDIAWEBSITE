@@ -218,8 +218,13 @@ export default function SettingsView({ initial }: { initial: PublicSettings }) {
       </section>
 
       <p className="mt-8 text-[15px] text-text-dim">
-        If the lists come back empty, the Meta app is almost certainly still in
-        development mode. It has to be published before it can create ads.
+        If a list comes back empty, the system user has not been given that
+        asset yet. Assign the ad account and the page to it in Business
+        settings, with full control, then reload this page.
+      </p>
+      <p className="mt-3 text-[15px] text-text-dim">
+        Development mode does not stop these lists loading. It stops ads being
+        created, so publish the Meta app before the first launch.
       </p>
     </div>
   );
